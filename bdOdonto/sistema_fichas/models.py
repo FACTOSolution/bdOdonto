@@ -150,6 +150,8 @@ class ficha_diagnostico(models.Model):
     lingua = models.TextField()
     palato = models.TextField()
     orofaringe = models.TextField()
+    percussao = models.TextField()
+    exames_complementares = models.TextField()
 
     
     def publish(self):
