@@ -1,6 +1,6 @@
 #coding: utf-8
 import pymysql
-con = pymysql.connect('localhost','root', 'factos1048576') # conecta no servidor
+con = pymysql.connect('localhost','root', '33554432') # conecta no servidor
 con.select_db('odonto') # seleciona o banco de dados
 cursor = con.cursor()
 #cursor.execute("INSERT INTO ALUNO values ('CARALHACILDO', 20159007758,'RenatoAlmeida','minhasenha')")
