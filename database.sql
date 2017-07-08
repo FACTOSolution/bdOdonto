@@ -70,7 +70,7 @@ cpf
 char(11),
 genero
 varchar(10),
-nasc
+data
 date,
 telefone
 numeric(11),
@@ -78,7 +78,7 @@ nasc
 date,
 profissao
 varchar(20),
-nomep,
+nomep
 varchar(50),
 nomem
 varchar(50),
@@ -319,7 +319,7 @@ p32
 boolean,
 p33
 boolean,
-p34,
+p34
 boolean,
 p35
 boolean,
@@ -403,11 +403,32 @@ varchar(20),
 foreign key (codeA) references ATENDIMENTO (code)
 )
 
-CREATE TABLE FICHA_TURMA (
-codeF
-int,
-codeT
-char(7),
-foreign key (codeF) references FICHAS (code),
-foreign key (codeT) references TURMA (code)
-);
+CREATE TABLE FICHA_PPR (
+codeA
+int
+NOT NULL,
+p1
+varchar(20),
+p2
+varchar(100),
+p3
+varchar(100),
+p4
+varchar(20),
+p5
+varchar(20),
+p6
+varchar(100),
+p7
+varchar(100),
+p8
+varchar(20),
+foreign key (codeA) references ATENDIMENTO (code)
+)
+
+CREATE TABLE FICHA_EXEMPLO (
+codeA
+int
+NOT NULL,
+foreign key (codeA) references ATENDIMENTO (code)
+)
