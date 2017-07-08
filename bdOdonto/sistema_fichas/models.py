@@ -1,7 +1,45 @@
 from django.db import models
 from django.utils import timezone
 
+class paciente(models.Model):
+	cpf = models.PositiveIntegerField(primary_key=True)
+	nome = models.CharField(max_length=200)
+	endereco = models.CharField(max_length=200)
+	bairro = models.CharField(max_length=200)
+	cidade = models.CharField(max_length=200)
+	estado = models.CharField(max_length=200)
+	cep = models.PositiveIntegerField()
+	tel = models.PositiveIntegerField()
+	cel = models.PositiveIntegerField()
+	email  = models.EmailField(blank = True,null=True)
+	estado_civil = models.CharField(max_length=200)
+	data_nasc = models.DateTimeField()
+	idade = models.PositiveIntegerField()
+	cor = models.CharField(max_length=200)
+	SEXOS = (
+		('M','M'),
+		('F','F'),
+		)
+	sexo = models.CharField(max_length=1,choices=SEXOS)
+	rg = models.PositiveIntegerField()
+	naturalidade = models.CharField(max_length=200)
+	nacionalidade = models.CharField(max_length=200)
+	profissao_atual = models.CharField(max_length=200,blank = True,null=True)
+	profissao_anterior = models.CharField(max_length=200,blank = True,null=True)
+	endereco_profissional = models.CharField(max_length=200,blank = True, null = True)
+	bairro_profissional = models.CharField(max_length=200,blank = True, null = True)
+	cep_profissional = models.PositiveIntegerField(blank = True, null = True)
+	
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.cpf
+	
+
+
 class ficha_diagnostico(models.Model):
+	#aluno = models.ForeignKey('aluno.cpf').
     paciente = models.ForeignKey('paciente.cpf')
     numero = models.PositiveIntegerField(primary_key=True)
     data = models.DateTimeField(default=timezone.now)
@@ -101,9 +139,19 @@ class ficha_diagnostico(models.Model):
     dentes_sensiveis = models.BooleanField()
     dentes_sensiveis = models.BooleanField()
 
-    
-    
+    face = models.TextField()
+    atm = models.TextField()
+    m_mastigatorios = models.TextField()
+    g_salivares = models.TextField()
+    g_linfaticos = models.TextField()
+    labios = models.TextField()
+    mucosa_j = models.TextField()
+    soalho_boca = models.TextField()
+    lingua = models.TextField()
+    palato = models.TextField()
+    orofaringe = models.TextField()
 
+    
     def publish(self):
         self.save()
 
