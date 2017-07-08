@@ -1,6 +1,6 @@
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
  
- 
+
 def read_db_config(filename='config.ini', section='mysql'):
     """ Read database configuration file and return a dictionary object
     :param filename: name of the configuration file

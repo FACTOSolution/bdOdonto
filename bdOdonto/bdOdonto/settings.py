@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from python_mysql_dbconfig import read_db_config()
+from .python_mysql_dbconfig import read_db_config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'bdOdonto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-db_config = read_db_config()
+db_config = read_db_config("config.ini", "mysql")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
