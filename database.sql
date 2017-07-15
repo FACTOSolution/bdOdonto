@@ -567,6 +567,32 @@ int,
 foreign key (codeA) references ATENDIMENTO (code)
 )
 
+
+CREATE TABLE FICHA_URGENCIA (
+codeA
+int
+NOT NULL,
+p1
+varchar(50),
+p2
+varchar(50),
+p3
+varchar(50),
+p4
+varchar(50),
+p5
+varchar(20),
+p6
+varchar(50),
+p7
+varchar(50),
+p8
+varchar(50),
+p9
+varchar(20),
+foreign key (codeA) references ATENDIMENTO (code)
+)
+
 CREATE TABLE FICHA_EXEMPLO (
 codeA
 int
