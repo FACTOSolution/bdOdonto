@@ -1,6 +1,43 @@
 from django.db import models
 from django.utils import timezone
 
+class aluno (models.Model):
+	nome = models.CharField(max_length=50)
+	matricula = models.PositiveIntegerField(primary_key=True)
+	login = models.CharField(max_length=20)
+	senha = models.CharField(max_length=20)
+
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.matricula
+
+class professor (models.Model):
+	nome = models.CharField(max_length=50)
+	code = models.PositiveIntegerField(primary_key=True)
+	login = models.CharField(max_length=20)
+	senha = models.CharField(max_length=20)
+
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.code
+
+
+class turma (models.Model):
+	code = models.CharField(max_length=7, primary_key=True)
+	nome = models.CharField(max_length=30)
+	prof = models.ForeignKey('professor.code')
+	#ficha = models.ForeignKey('ficha.code')
+
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.code
+
 class paciente(models.Model):
 	cpf = models.PositiveIntegerField(primary_key=True)
 	nome = models.CharField(max_length=200)
@@ -40,7 +77,7 @@ class paciente(models.Model):
 
 class ficha_diagnostico(models.Model):
 	#aluno = models.ForeignKey('aluno.cpf').
-    paciente = models.ForeignKey('paciente.cpf')
+    #paciente = models.ForeignKey('paciente')
     numero = models.PositiveIntegerField(primary_key=True)
     data = models.DateTimeField(default=timezone.now)
 
