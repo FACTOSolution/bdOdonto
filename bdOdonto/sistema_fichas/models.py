@@ -18,6 +18,17 @@ class professor (models.Model):
 	code = models.PositiveIntegerField(primary_key=True)
 	login = models.CharField(max_length=20)
 	senha = models.CharField(max_length=20)
+	turmas = models.ManyToManyField(turma)
+
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.code
+
+class fichas(models.Models):
+	code = models.PositiveIntegerField(primary_key=True)
+	nome = models.CharField(max_length=50)
 
 	def publish(self):
         self.save()
@@ -29,14 +40,28 @@ class professor (models.Model):
 class turma (models.Model):
 	code = models.CharField(max_length=7, primary_key=True)
 	nome = models.CharField(max_length=30)
-	prof = models.ForeignKey('professor.code')
-	#ficha = models.ForeignKey('ficha.code')
+	ficha = models.ManyToManyField(fichas)
+	alunos = models.ManyToManyField(aluno,through='turma_aluno')
 
 	def publish(self):
         self.save()
 
     def __str__(self):
         return self.code
+
+class turma_aluno (models.Model):
+	turma = models.ForeignKey(turma, on_delete=models.CASCADE)
+	aluno = models.ForeignKey(aluno, on_delete=models.CASCADE)
+	code = models.CharField(max_length=7, primary_key=True)
+	periodo = models.CharField(max_length=6)
+
+	def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.code
+
+
 
 class paciente(models.Model):
 	cpf = models.PositiveIntegerField(primary_key=True)
@@ -66,6 +91,8 @@ class paciente(models.Model):
 	endereco_profissional = models.CharField(max_length=200,blank = True, null = True)
 	bairro_profissional = models.CharField(max_length=200,blank = True, null = True)
 	cep_profissional = models.PositiveIntegerField(blank = True, null = True)
+
+	turma_aluno = models.ManyToManyField(turma_aluno, through = "atendimento")
 	
 	def publish(self):
         self.save()
@@ -73,6 +100,12 @@ class paciente(models.Model):
     def __str__(self):
         return self.cpf
 	
+class Atendimentos (models.Model):
+	data = models.DateTimeField()
+	code = models.CharField(max_length=7, primary_key=True)
+	tipo_ficha = models.ForeignKey(fichas, on_delete=models.CASCADE)
+	paciente = models.ForeignKey(paciente, on_delete=models.CASCADE)
+	turma_aluno = models.ForeignKey(turma_aluno, on_delete=models.CASCADE)
 
 
 class ficha_diagnostico(models.Model):
