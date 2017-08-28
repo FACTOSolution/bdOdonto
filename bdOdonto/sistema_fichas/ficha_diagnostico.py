@@ -1,3 +1,5 @@
+from django.db import models
+
 class Ficha_Diagnostico(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
 
