@@ -300,8 +300,9 @@ class Ficha_Ortodontia(models.Model):
     maxila = models.CharField(max_length=15,choices= (NORMAL,('Prostruida','Prostruída'),('Retruida','Retruída')))
     angulo_nasolabial = models.CharField(max_length=15,choices= (NORMAL,('Fechado','Fechado'),('Aberto','Aberto')))
     posicao_labio_superior = models.CharField(max_length=15,choices= (NORMAL,('Curto','Curto'),('Longo','Longo')))
-    posicao_labio_inferior = models.CharField(max_length=15,choices= (NORMAL,('Eversao','Eversão'))
+    posicao_labio_inferior = models.CharField(max_length=15,choices= (NORMAL,('Eversao','Eversão')))
     mandibula = models.CharField(max_length=15,choices= (NORMAL,('Prostruida','Prostruída'),('Retruida','Retruída')))
     qtd_mento = models.CharField(max_length=15,choices= (NORMAL,('Deficiente','Deficiente'),('Proeminente','Proeminente')))
     sulco_mentolabial = models.CharField(max_length=15,choices= ESCS)
     observacoes_perfil = models.TextField()
+    
