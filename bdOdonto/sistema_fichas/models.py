@@ -1,3 +1,5 @@
+#coding: latin-1
+
 from django.db import models
 from django.utils import timezone
 
@@ -223,3 +225,83 @@ class Ficha_Diagnostico(models.Model):
 
     def __str__(self):
         return self.numero
+
+class Ficha_Ortodontia(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+
+    queixa = models.CharField(max_length=200)
+
+    CORES = (
+    	('Branca','Branca'),
+    	('Negra','Negra'),
+    	('Amarela','Amarela'),
+    	('Parda','Parda')
+    	)
+
+    cor = models.CharField(max_length=10,choices=CORES)
+
+    OP_D = (
+    	('Nao relata','Não relata'),
+    	('Habituais','Habituais'),
+    	('Outras','Outras')
+    	)
+
+    doencas = models.CharField(max_length=10,choices=OP_D)
+
+    alergias = models.BooleanField()
+    def_alergias = models.CharField(max_length= 20, blank=True,null=True)
+    operacao = models.BooleanField()
+    estado_saude = models.CharField(max_length=15,choices= (('Bom','Bom'),('Regular','Regular'),('Deficiente','Deficiente')))
+    traumatismo = models.BooleanField()
+    data_traumatismo = models.CharField(max_length=10,blank=True,null=True)
+    vontade_correcao = models.CharField(max_length=15,choices= (('Sim','Sim'),('Nao','Não'),('Nao sabe','Não sabe')))
+    aparelho = models.BooleanField()
+    tempo_aparelho = models.CharField(max_length=10,blank=True,null=True)
+    observacoes_anamnese = models.TextField()
+
+
+    NORMAL = ('Normal','Normal')
+    psicologico = models.CharField(max_length=15,choices= (NORMAL,('Extrovertido','Extrovertido'),('Introvertido','Introvertido')))
+    simetria_facial = models.BooleanField()
+    tipo_facial = models.CharField(max_length=16,choices= (('Dolicofacial','Dólicofacial'),('Mesofacial','Mesofacial'),('Braquifacial','Braquifacial')))
+    selamento_labial_frontal = models.BooleanField()
+    ESCS = (
+    	NORMAL,
+    	('Diminuido','Diminuído'),
+    	('Aumentado','Aumentado')
+    	)
+    relacao_ls = models.CharField(max_length=15,choices= ESCS)
+    espessura = models.CharField(max_length=15,choices= ESCS)
+    tonicidade_labial = models.CharField(max_length=15,choices= ESCS)
+    tonicidade_mentoniano = models.CharField(max_length=15,choices= ESCS)
+    zigomatico = models.CharField(max_length=15,choices= ESCS)
+    observacoes_frontal = models.TextField()
+
+    simetria_sorriso = models.BooleanField()
+    qtd_gengiva_incisos = models.CharField(max_length=15,choices= ESCS)
+    corredor_bucal = models.CharField(max_length=15,choices= ESCS)
+    observacoes_frontal_sorrindo = models.TextField()
+
+    PERF = (
+    	("Reto","Reto"),
+    	('Concavo','Côncavo'),
+    	('Convexo','Convexo')
+    	)
+    perfil = models.CharField(max_length=15,choices= PERF)
+
+    DIMS = (
+    	("1/3 faciais proporcionais","1/3 faciais proporcionais"),
+    	("1/3 inf. aumentado","1/3 inf. aumentado"),
+    	("1/3 inf. diminuido","1/3 inf. diminuido")
+    	)
+    dimensao = models.CharField(max_length=30,choices= DIMS)
+    nariz = models.CharField(max_length=15,choices= (NORMAL,('Pequeno','Pequeno'),('Grande','Grande')))
+    selamento_labial_perfil = models.BooleanField()
+    maxila = models.CharField(max_length=15,choices= (NORMAL,('Prostruida','Prostruída'),('Retruida','Retruída')))
+    angulo_nasolabial = models.CharField(max_length=15,choices= (NORMAL,('Fechado','Fechado'),('Aberto','Aberto')))
+    posicao_labio_superior = models.CharField(max_length=15,choices= (NORMAL,('Curto','Curto'),('Longo','Longo')))
+    posicao_labio_inferior = models.CharField(max_length=15,choices= (NORMAL,('Eversao','Eversão'))
+    mandibula = models.CharField(max_length=15,choices= (NORMAL,('Prostruida','Prostruída'),('Retruida','Retruída')))
+    qtd_mento = models.CharField(max_length=15,choices= (NORMAL,('Deficiente','Deficiente'),('Proeminente','Proeminente')))
+    sulco_mentolabial = models.CharField(max_length=15,choices= ESCS)
+    observacoes_perfil = models.TextField()
