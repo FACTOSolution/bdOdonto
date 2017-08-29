@@ -218,7 +218,6 @@ class Ficha_Diagnostico(models.Model):
     orofaringe = models.TextField()
     percussao = models.TextField()
     exames_complementares = models.TextField()
-
     
     def publish(self):
         self.save()
@@ -274,7 +273,7 @@ class Ficha_Ortodontia(models.Model):
     espessura = models.CharField(max_length=15,choices= ESCS)
     tonicidade_labial = models.CharField(max_length=15,choices= ESCS)
     tonicidade_mentoniano = models.CharField(max_length=15,choices= ESCS)
-    zigomatico = models.CharField(max_length=15,choices= ESCS)
+    zigomatico_frontal = models.CharField(max_length=15,choices= ESCS)
     observacoes_frontal = models.TextField()
 
     simetria_sorriso = models.BooleanField()
@@ -298,6 +297,7 @@ class Ficha_Ortodontia(models.Model):
     nariz = models.CharField(max_length=15,choices= (NORMAL,('Pequeno','Pequeno'),('Grande','Grande')))
     selamento_labial_perfil = models.BooleanField()
     maxila = models.CharField(max_length=15,choices= (NORMAL,('Prostruida','Prostruída'),('Retruida','Retruída')))
+    zigomatico_perfil = models.CharField(max_length=15,choices= (NORMAL,('Ausente','Ausente'),('Proeminente','Proeminente')))
     angulo_nasolabial = models.CharField(max_length=15,choices= (NORMAL,('Fechado','Fechado'),('Aberto','Aberto')))
     posicao_labio_superior = models.CharField(max_length=15,choices= (NORMAL,('Curto','Curto'),('Longo','Longo')))
     posicao_labio_inferior = models.CharField(max_length=15,choices= (NORMAL,('Eversao','Eversão')))
@@ -306,3 +306,95 @@ class Ficha_Ortodontia(models.Model):
     sulco_mentolabial = models.CharField(max_length=15,choices= ESCS)
     observacoes_perfil = models.TextField()
     
+    respiracao = models.CharField(max_length=15,choices= (('Nasal','Nasal'),('Bucal','Bucal'),('Naso-Bucal','Naso-Bucal')))
+    degluticao = models.CharField(max_length=15,choices= (NORMAL,('Atipica','Atípica')))
+    fonacao = models.CharField(max_length=15,choices= (NORMAL,('Atipica','Atípica')))
+    habitos = models.CharField(max_length=25,choices= (('Nao relata','Não relata'),('Succao','Sucção'),('Interposicao labial','Interposição labial'),('Interposicao','Interposição'),('Onicofagia','Onicofagia'),('Outros','Outros')))
+    habitos_outros = models.CharField(max_length=20)
+    atm = models.TextField()
+    observacoes_funcional = models.TextField()
+
+    dentadura = models.CharField(max_length=25,choices= (('Decidua','Decídua'),('Mista(1o Transit.)','Mista(1o Transit.)'),('Mista(2o Transit.)','Mista(2o Transit.)'),('Mista(Intertransit.)','Mista(Intertransit.)'),('Permanente','Permanente'),('Arco Tipo I','Arco Tipo I'),('Arco Tipo II','Arco Tipo II')))
+    erupcao_dentaria = models.CharField(max_length=15,choices= (NORMAL,('Precoce','Precoce'),('Tardia','Tardia')))
+    arco_superior = models.CharField(max_length=15,choices= (NORMAL,('Amplo','Amplo'),('Atrésico','Atrésico')))
+    arco_inferior = models.CharField(max_length=15,choices= (NORMAL,('Amplo','Amplo'),('Atrésico','Atrésico')))
+    linha_med_sup = models.CharField(max_length=20,choices= (NORMAL,('Desvio p/ direita','Desvio p/ direita'),('Desvio p/ esquerda','Desvio p/ esquerda')))
+    linha_med_inf = models.CharField(max_length=20,choices= (NORMAL,('Desvio p/ direita','Desvio p/ direita'),('Desvio p/ esquerda','Desvio p/ esquerda')))
+    trespasse_horizontal = models.CharField(max_length=15,choices= (NORMAL,('Aumentado','Aumentado'),('Negativo','Negativo')))
+    trespasse_vertical = models.CharField(max_length=17,choices= (NORMAL,('Aumentado','Aumentado'),('Topo','Topo'),('Mordida aberta','Mordida aberta'),('Dentoalveolar','Dentoalveolar'),('Esquelética','Esquelética')))
+    mordida_cruzada = models.CharField(max_length=17,choices= (('Ausente','Ausente'),('Anterior','Anterior'),('Unilateral Verdadeira','Unilateral Verdadeira'),('Unilateral Funcional','Unilateral Funcional'),('Bilateral','Bilateral'),('Localizada','Localizada')))
+    spee_sup= models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
+    spee_inf= models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
+    CLASSES = (
+    	("Classe I","Classe I"),
+    	("Classe II","Classe II"),
+    	("Classe III","Classe III"),
+    	)
+    relacao_caninos_dir = models.CharField(max_length=15,choices= CLASSES)
+    relacao_caninos_esq = models.CharField(max_length=15,choices= CLASSES)
+    relacao_molares_dir = models.CharField(max_length=15,choices= CLASSES)
+    relacao_molares_esq = models.CharField(max_length=15,choices= CLASSES)
+    angle = models.CharField(max_length=15,choices= (("Classe I","Classe I"),("Classe II, 1a","Classe II, 1a"),("Classe II, 2a","Classe II, 2a"),("Classe III","Classe III"),("Subdiv. direita","Subdiv. direita"),("Subdiv. esquerda","Subdiv. esquerda")))
+    andrews = models.CharField(max_length=15,choices= (("Classe I","Classe I"),("Classe II","Classe II"),("Classe III","Classe III"),("1/4","1/4"),("1/2","1/2"),("3/4","3/4"),("Total","Total")))
+    diagnostico = models.CharField(max_length=20,choices= (('Oclusão normal','Oclusão normal'),('Má oclusão','Má oclusão')))
+    observacoes_oclusal = models.TextField()
+
+    odontograma = models.ForeignKey(Odontograma, on_delete=models.CASCADE)
+    observacoes_odontograma = models.TextField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.numero
+
+class Ficha_Periodontia(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+
+    ESCS = (
+    	('Sim','Sim'),
+    	('Não','Não'),
+    	('Não sei','Não sei')
+    	)
+
+    sangramento_gengiva = models.CharField(max_length=10,choices= ESCS)
+    tratamento_gengiva = models.CharField(max_length=10,choices= ESCS)
+    hemorragia_extrac_dentes = models.CharField(max_length=10,choices= ESCS)
+    aparelho_ortodontico = models.BooleanField()
+    alergia_anestesia = models.CharField(max_length=10,choices= ESCS)
+    alergia_antibioticos = models.CharField(max_length=10,choices= ESCS)
+    alergia_sulfas = models.CharField(max_length=10,choices= ESCS)
+    alergia_aspirina = models.CharField(max_length=10,choices= ESCS)
+    alergia_outros = models.CharField(max_length=20,blank=True,null=True)
+    alergia_nao_medicamentos = models.CharField(max_length=10,choices= ESCS)
+    quais_alergias = models.CharField(max_length=20,blank=True,null=True)
+    cuidados_medicos = models.BooleanField()
+    motivo_cuidados_medicos = models.CharField(max_length=20,blank=True,null=True)
+    medicamentos = models.BooleanField()
+    quais_medicamentos = models.CharField(max_length=20,blank=True,null=True) = models.CharField(max_length=20,blank=True,null=True)
+    febre_reumatica = models.CharField(max_length=10,choices= ESCS)
+    doencas_cardiovasculares = models.CharField(max_length=10,choices= ESCS)
+    diabetes = models.CharField(max_length=10,choices= ESCS)
+    tonturas = models.CharField(max_length=10,choices= ESCS)
+    anemia = models.CharField(max_length=10,choices= ESCS)
+    acamado = models.CharField(max_length=10,choices= ESCS)
+    inchaco_dor_juntas = models.CharField(max_length=10,choices= ESCS)
+    ulcera = models.CharField(max_length=10,choices= ESCS)
+    figado = models.CharField(max_length=10,choices= ESCS)
+    tuberculose = models.CharField(max_length=10,choices= ESCS)
+    sangramento_excessivo = models.CharField(max_length=10,choices= ESCS)
+    operacao = models.CharField(max_length=10,choices= ESCS)
+    qual_operacao = models.CharField(max_length=20,blank=True,null=True)
+    variacao_peso = models.CharField(max_length=15,choices= (('Aumentou','Aumentou'),('Diminuiu','Diminuiu'),('Sem mudanças','Sem mudanças')))
+    radioterapia = models.CharField(max_length=10,choices= ESCS)
+    regiao_radioterapia = models.CharField(max_length=20,blank=True,null=True)
+    tempo_radioterapia = models.CharField(max_length=20,blank=True,null=True)
+    pressao_arterial = models.CharField(max_length=10,choices= (('Alta','Alta'),('Baixa','Baixa'),('Normal','Normal')))
+    problema_menstruacao = models.CharField(max_length=10,choices= ESCS)
+    gravida = models.CharField(max_length=10,choices= ESCS)
+    fumante = models.BooleanField()
+    tempo_abandono_tabagismo = models.CharField(max_length=20,blank=True,null=True)
+    cigs_dia = models.PositiveIntegerField(blank=True,null=True)
+    doenca_infec = models.CharField(max_length=10,choices= ESCS)
+    qual_doenca_infec = models.CharField(max_length=20,blank=True,null=True)
+    drogas_ilicitas = models.BooleanField()
