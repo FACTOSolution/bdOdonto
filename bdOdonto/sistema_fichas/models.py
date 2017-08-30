@@ -398,3 +398,38 @@ class Ficha_Periodontia(models.Model):
     doenca_infec = models.CharField(max_length=10,choices= ESCS)
     qual_doenca_infec = models.CharField(max_length=20,blank=True,null=True)
     drogas_ilicitas = models.BooleanField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.numero
+
+class Ficha_Urgencia(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    
+    historia_clinica = models.CharField(max_length=60)
+    medicamentos = models.CharField(max_length=60)
+    motivo = models.CharField(max_length=60)
+    diagnostico_provavel = models.CharField(max_length=20)
+    atend = models.CharField(max_length=15,choices= (('Estágio III','Estágio III'),('Estágio IV','Estágio IV'),('Outro','Outro')))
+    atend_outro = models.CharField(max_length=20,blank=True,null=True)
+    procedimento = models.CharField(max_length=60)
+    encaminhamento = models.CharField(max_length=60,blank=True,null=True)
+    prescricoes = models.CharField(max_length=60,blank=True,null=True)
+    ESCS = (
+    	('Endodontia','Endodontia'),
+    	('Prótese','Prótese'),
+    	('Periodontia','Periodontia'),
+        ('Dentística','Dentística'),
+        ('Cirurgia','Cirurgia'),
+        ('Outro','Outro')
+    	)
+    especialidade = models.CharField(max_length=15,choices= ESCS)
+    especialidade_outro = models.CharField(max_length=20,blank=True,null=True)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.numero
