@@ -1,0 +1,36 @@
+div#selectors {
+    display: block;
+    margin: auto;
+    width: 20%;
+    padding-bottom: 20px;
+}
+
+#Circle {
+    display: inline-table;
+    margin: auto;
+    width: 20%;
+}
+
+#Line {
+    display: inline-table;
+    margin: auto;
+    width: 20%;
+}
+
+#Axis {
+    display: inline-table;
+    margin: auto;
+    width: 20%;
+}
+
+#Options {
+    display: inline;
+    margin: auto;
+    width: 20%;
+}
+
+canvas#canvas {
+    display: block;
+    margin: auto;
+    padding: 5px;
+}
