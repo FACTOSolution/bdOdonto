@@ -222,9 +222,6 @@ class Ficha_Diagnostico(models.Model):
     def publish(self):
         self.save()
 
-    def __str__(self):
-        return self.numero
-
 class Ficha_Ortodontia(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
 
@@ -345,9 +342,6 @@ class Ficha_Ortodontia(models.Model):
     def publish(self):
         self.save()
 
-    def __str__(self):
-        return self.numero
-
 class Ficha_Periodontia(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
 
@@ -402,9 +396,6 @@ class Ficha_Periodontia(models.Model):
     def publish(self):
         self.save()
 
-    def __str__(self):
-        return self.numero
-
 class Ficha_Urgencia(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
     
@@ -431,5 +422,18 @@ class Ficha_Urgencia(models.Model):
     def publish(self):
         self.save()
 
-    def __str__(self):
-        return self.numero
+class Ficha_PPR(models.Model):
+	atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+
+    class_kennedy_sup = models.TextField()
+    tratamento_previo_sup = models.TextField()
+    planejamento_protese_sup = models.TextField()
+    observacoes_sup = models.TextField()
+
+    class_kennedy_inf = models.TextField()
+    tratamento_previo_inf = models.TextField()
+    planejamento_protese_inf = models.TextField()
+    observacoes_inf = models.TextField()
+
+    def publish(self):
+        self.save()
