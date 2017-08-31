@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Teste Canvas</title>
+<link rel="stylesheet" href="canvas_styles.css">
+</head>
+<body>
+<p>Teste Canvas</p>
+<div id="selectors">
+    <div id="Circle">
+        <button id="buttonCircle" type="button" onclick="buttonRedCircle()">Circulo Vermelho</button>
+        <button id="buttonCircle" type="button" onclick="buttonBlueCircle()">Circulo Azul</button>
+    </div>
+    <div id="Line">
+        <button id="buttonLine" type="button" onclick="buttonRedLine()">Linha Vermelha</button>
+        <button id="buttonLine" type="button" onclick="buttonBlueLine()">Linha Azul</button>
+    </div>
+    <div id="Axis">
+        <button id="buttonAxis" type="button" onclick="buttonRedAxis()">Marcar X Vermelho</button>
+        <button id="buttonAxis" type="button" onclick="buttonBlueAxis()">Marcar X Azul</button>
+    </div>
+    <div id="Options">
+	<button id="buttonClear" type="button" onclick="buttonClear()">Limpar</button>
+        <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar</button>
+    </div>
+</div>
+<canvas id="canvas" width="515" height="500"></canvas>
+<p id="demo"> Mouse X and Y Coordinates.</p>
+<p id="points"> Points.</p>
+<div id="download"></div>
+
+
+<script>
+var drawing_type = "";
+var points = {};
+var arrayPoints = [];
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var img = new Image();
+json = JSON.stringify(points);
+img.onload = function(){
+    ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
+};
+img.src = "Periodontia.png";
+
+function buttonRedCircle(){
+    drawing_type = "redcircle";
+}
+
+function buttonBlueCircle(){
+    drawing_type = "bluecircle";
+}
+
+function buttonRedLine(){
+    drawing_type = "redline";
+}
+
+function buttonBlueLine(){
+    drawing_type = "blueline";
+}
+
+function buttonRedAxis(){
+    drawing_type = "redaxis";
+} 
+
+function buttonBlueAxis(){
+    drawing_type = "blueaxis";
+}
+
+function buttonClear(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
+}
+
+function buttonSave(){
+    var dataImageURL = canvas.toDataURL();
+    img.src = dataImageURL;
+    document.getElementById("buttonSave").href = dataImageURL;
+}
+function drawRedAxis(x, y){
+    ctx.strokeStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(x, y + 15);
+    ctx.lineTo(x + 2, y - 8);
+    ctx.moveTo(x - 2, y - 8);
+    ctx.lineTo(x + 4, y + 20);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawBlueAxis(x, y){
+    ctx.strokeStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(x, y + 15);
+    ctx.lineTo(x + 2, y - 8);
+    ctx.moveTo(x - 2, y - 8);
+    ctx.lineTo(x + 4, y + 20);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawRedLine(x, y){
+    ctx.strokeStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(x, y + 15);
+    ctx.lineTo(x + 2, y - 8);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawBlueLine(x, y){
+    ctx.strokeStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(x, y + 15);
+    ctx.lineTo(x + 2, y - 8);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function drawRedCircle(x, y){
+    ctx.strokeStyle = '#FF0000';
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2*Math.PI);
+    ctx.stroke();
+}
+
+function drawBlueCircle(x, y){
+    ctx.strokeStyle = '#0000FF';
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2*Math.PI);
+    ctx.stroke();
+}
+
+canvas.onmousedown = function(event) {
+    var x = event.pageX - 505;
+    var y = event.pageY - 198;
+    switch(drawing_type){
+        case "redcircle":
+            drawRedCircle(x, y);
+            break;
+        case "bluecircle":
+            drawBlueCircle(x, y);
+            break;
+        case "redline":
+            drawRedLine(x, y);
+            break;
+        case "blueline":
+            drawBlueLine(x, y);
+            break;
+        case "redaxis":
+            drawRedAxis(x, y);
+            break;
+        case "blueaxis":
+            drawBlueAxis(x, y);
+            break;
+        default:
+            alert("Opcao nao especificada");
+    }
+
+    document.getElementById("demo").innerHTML = "X=" + event.pageX + " Y=" + event.pageY;
+    points.drawing_text = [event.pageX, event.pageY];
+    json = JSON.stringify(points);
+}
+
+json = JSON.stringify(points);
+var url = URL.createObjectURL(new Blob([json], {type: "application/json"}));
+var a = document.createElement('a');
+a.download = 'backup.json';
+a.href = url;
+a.textContent = "Download";
+document.getElementById('download').appendChild(a);
+document.getElementById('points').innerHTML = JSON.stringify(points);
+</script> 
+</body>
+</html>
+
