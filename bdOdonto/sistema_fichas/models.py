@@ -428,6 +428,74 @@ class Ficha_Urgencia(models.Model):
     especialidade = models.CharField(max_length=15,choices= ESCS)
     especialidade_outro = models.CharField(max_length=20,blank=True,null=True)
 
+class Ficha_Endodontia(models.Model):
+    ESCS = (('Sim','Sim'),('Não','Não'),('Não sei','Não sei'))
+
+    #ANAMNESE
+    em_tratamento_med = models.CharField(max_length=15,choices= ESCS)
+    quanto_tempo = models.CharField(max_length=10,blank=True,null=True)
+    alguma_cirurgia = models.CharField(max_length=50,blank=True,null=True)
+    diabetes = models.CharField(max_length=15,choices= ESCS)
+    febre_reumatica = models.CharField(max_length=15,choices= ESCS)
+    alteracoes_sanguineas = models.CharField(max_length=15,choices= ESCS)
+    doencas_cardiovasculares= models.CharField(max_length=15,choices= ESCS)
+    problemas_hemorragicos = models.CharField(max_length=15,choices= ESCS)
+    hipertensao = models.CharField(max_length=15,choices= ESCS)
+    marcapasso = models.CharField(max_length=15,choices= ESCS)
+    gravida = models.CharField(max_length=15,choices= ESCS)
+    tempo_gravidez = models.CharField(max_length=10, blank=True, null=True)
+    hepatite = models.CharField(max_length=15,choices= ESCS)
+    tempo_hepatite = models.CharField(max_length=10, blank=True, null=True)
+    tipo_hepatite = models.CharField(max_length=15,blank = True, null = True)
+    uso_de_medicamento = models.CharField(max_length=50, blank=True, null=True)
+    uso_continuo_de_medicamento = models.CharField(max_length=50, blank=True, null=True)
+    alergia = models.CharField(max_length=15,choices= ESCS)
+    outras_informacoes = models.CharField(max_length=100, blank=True, null=True)
+
+    #HISTORIA DENTAL
+    historia_dental = models.CharField(max_length=100, blank=True, null=True)
+    caracteristicas_da_dor = models.CharField(max_length=60, blank=True, null=True) 
+    uso_analgesicos = models.BooleanField()
+    uso_antiinflamatorios = models.BooleanField()
+    uso_antibiotico = models.BooleanField()
+    dente = models.PositiveIntegerField()
+
+    #EXAME CLÍNICO
+    dor_frio = models.BooleanField()
+    dor_calor = models.BooleanField()
+    dor_percussao_vertical= models.BooleanField()
+    dor_percusao_horizontal = models.BooleanField()
+    dor_palpacao_apical = models.BooleanField()
+
+    #EXAME RADIOGRAFICO
+        #CAMARA PULPAR
+    camara_normal= models.BooleanField()
+    camara_calcificada= models.BooleanField()
+    camara_com_perfuracao= models.BooleanField()
+    camara_com_reabsorcao_interna= models.BooleanField()
+        #CANAL RADICULAR
+    canal_amplo = models.BooleanField()
+    canal_atresiado = models.BooleanField()
+    canal_ja_manipulado = models.BooleanField()
+    canal_obturacao_deficiente = models.BooleanField()
+    canal_rizogenese_incompleta = models.BooleanField()
+    canal_instrumento_fraturado = models.BooleanField()
+    canal_fratura_radicular = models.BooleanField()
+    canal_sobre_obturacao = models.BooleanField()
+    canal_reabsorcao_apical = models.BooleanField()
+    canal_reabsorcao_externa = models.BooleanField()
+    canal_reabsorcao_interna = models.BooleanField()
+    canal_perfuracao = models.BooleanField()
+        #PERICEMENTO
+    pericemento_normal = models.BooleanField()
+    pericemento_espessado = models.BooleanField()
+    pericemento_hipercementose = models.BooleanField()
+        #PERIÁPICE
+    periapice_osteite_rarefaciente_difusa = models.BooleanField()
+    periapice_osteite_rarefaciente_circunscrita = models.BooleanField()
+
+    diag_clinico_provavel = models.CharField(max_length=200)
+
     def publish(self):
         self.save()
 
