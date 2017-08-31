@@ -485,7 +485,37 @@ class Ficha_Endodontia(models.Model):
     periapice_osteite_rarefaciente_difusa = models.BooleanField()
     periapice_osteite_rarefaciente_circunscrita = models.BooleanField()
 
-    diag_clinico_provavel = models.CharField(max_length=200)
+    diag_clinico_provavel = models.CharField(max_length=100)
+
+class Ficha_Endodontia_Tabela(models.Model):
+    dente1 = models.PositiveIntegerField(blank = True, null = True)
+    canal1 = models.CharField(max_length = 20, blank = True, null = True)
+    ponto_referencia1 = models.CharField(max_length = 5, blan = True, null = True)
+    cad1 = models.PositiveIntegerField(blank = True, null = True)
+    ctp1 = models.PositiveIntegerField(blank = True, null = True)
+    crt1 = models.PositiveIntegerField(blank = True, null = True)
+    iai1 = models.PositiveIntegerField(blank = True, null = True)
+    iaf1 = models.PositiveIntegerField(blank = True, null = True)
+    im1 = models.PositiveIntegerField(blank = True, null = True)
+    dente2 = models.PositiveIntegerField(blank = True, null = True)
+    canal2 = models.CharField(max_length = 20, blank = True, null = True)
+    ponto_referencia2 = models.CharField(max_length = 5, blan = True, null = True)
+    cad2 = models.PositiveIntegerField(blank = True, null = True)
+    ctp2 = models.PositiveIntegerField(blank = True, null = True)
+    crt2 = models.PositiveIntegerField(blank = True, null = True)
+    iai2 = models.PositiveIntegerField(blank = True, null = True)
+    iaf2 = models.PositiveIntegerField(blank = True, null = True)
+    im2 = models.PositiveIntegerField(blank = True, null = True)
+    dente3 = models.PositiveIntegerField(blank = True, null = True)
+    canal3 = models.CharField(max_length = 20, blank = True, null = True)
+    ponto_referencia3 = models.CharField(max_length = 5, blan = True, null = True)
+    cad3 = models.PositiveIntegerField(blank = True, null = True)
+    ctp3 = models.PositiveIntegerField(blank = True, null = True)
+    crt3 = models.PositiveIntegerField(blank = True, null = True)
+    iai3 = models.PositiveIntegerField(blank = True, null = True)
+    iaf3 = models.PositiveIntegerField(blank = True, null = True)
+    im3 = models.PositiveIntegerField(blank = True, null = True)
+
 
     def publish(self):
         self.save()
