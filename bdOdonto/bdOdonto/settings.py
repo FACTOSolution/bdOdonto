@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
+    'sistema_fichas',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,8 @@ DATABASES = {
         'PASSWORD': db_config['password'],
         'HOST': db_config['host'],
         'PORT': '3306',
-
     }
+	
 }
 
 
@@ -110,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Fortaleza'
 
