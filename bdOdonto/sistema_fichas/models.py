@@ -437,3 +437,13 @@ class Ficha_PPR(models.Model):
 
     def publish(self):
         self.save()
+
+class Dados_Dentes(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    
+
+class Odontograma(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+
+
+		
