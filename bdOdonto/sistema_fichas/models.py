@@ -539,6 +539,56 @@ class Ficha_PPR(models.Model):
     def publish(self):
         self.save()
 
+class Ficha_Dentistica(models.Model):
+	atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+	
+	#ANAMNESE
+	motivo_consulta = models.CharField(max_length=20, blank=True, null=True)
+	ultima_consulta = models.CharField(max_length=10, blank=True, null=True)
+	escova_dentes = models.CharField(choices = (('1x','1x'),('2x','2x'),('3x','3x')))
+	horario_escovacao = models.CharField(max_length=20, blank=True, null=True)
+	usa_fio_dental = models.CharField(max_length=10, blank=True, null=True)
+	diario_alimentar = models.CharField(max_length=30, blank=True, null=True)
+	frequencia_consumo_acucar = models.CharField(choices = (('3x ao dia','3x ao dia'),('5x ao dia','5x ao dia'),('>5x ao dia','>5x ao dia')))
+	RESPOSTA = (('Junto às refeições','Junto às refeições'),('Intervalos entre refeições','Intervalos entre refeições'),('Junto às refeições e nos intervalos das mesmas','Junto às refeições e nos intervalos das mesmas') )
+	horario_consumo_acucar = models.CharField(choices=(RESPOSTA))
+	toma_medicamento = models.CharField(max_length=20, blank=True, null=True)
+	fluxo_salivar = models.CharField(max_length=10, blank=True, null=True)
+	
+	#EVIDENCIAÇÃO DE PLACA
+	flocular_pegajosa1 = models.BooleanField()
+	calcificada1 = models.BooleanField()
+	flocular_pegajosa2 = models.BooleanField()
+	calcificada2 = models.BooleanField()
+	
+	#DIAGNOSTICO DE RISCO DE CÁRIE
+	diag_risco_carie = models.CharField(choices(("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
+	
+	#PLANO DE TRATAMENTO
+		#ORIENTAÇÃO E MEDIDAS PREVENTIVAS
+	orientacao = models.BooleanField()
+	evidenciacao_de_placa = models.BooleanField()
+	provilaxia = models.BooleanField()
+		#APLICAÇÃO DE FLUOR
+	fosfato = models.BooleanField()
+	sodio = models.BooleanField()
+	fluoreto = models.BooleanField()
+		#APLICAÇÃO DE CLOREXIDINA
+	clorexidina = models.BooleanField()
+	aquosa_digluconato = models.BooleanField()
+	selamento_fissuras = models.CharField(max_length=20, blank=True, null=True)
+	remineralizacao_de_lesoes_de_carie = models.CharField(max_length=20, blank=True, null=True)
+	outra_medida = models.CharField(max_length=20, blank=True, null=True)
+		#MEDIDAS RESTAURADORAS
+	restauracoes_provisorias = models.CharField(max_length=20, blank=True, null=True)
+	tratamento_expectante = models.CharField(max_length=20, blank=True, null=True)
+	restauracoes_com_amalgama = models.CharField(max_length=20, blank=True, null=True)
+	restauracao_com_resina = models.CharField(max_length=20, blank=True, null=True)
+	radiografias = models.CharField(max_length=20, blank=True, null=True)
+	observacoes_dentistica = models.CharField(max_length=20, blank=True, null=True)
+		#NECESSIDADES DE ENCAMINHAMENTO
+	encaminhamento_para = models.CharField(max_length=20, blank=True, null=True)
+
 class Dados_Dentes(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
     
