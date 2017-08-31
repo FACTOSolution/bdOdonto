@@ -541,6 +541,7 @@ class Ficha_PPR(models.Model):
 
 class Ficha_Dentistica(models.Model):
 	atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+	
 	#ANAMNESE
 	motivo_consulta = models.CharField(max_length=20, blank=True, null=True)
 	ultima_consulta = models.CharField(max_length=10, blank=True, null=True)
@@ -586,7 +587,7 @@ class Ficha_Dentistica(models.Model):
 	radiografias = models.CharField(max_length=20, blank=True, null=True)
 	observacoes_dentistica = models.CharField(max_length=20, blank=True, null=True)
 		#NECESSIDADES DE ENCAMINHAMENTO
-		encaminhamento_para = models.CharField(max_length=20, blank=True, null=True)
+	encaminhamento_para = models.CharField(max_length=20, blank=True, null=True)
 
 class Dados_Dentes(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
