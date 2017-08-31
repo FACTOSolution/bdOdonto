@@ -420,6 +420,7 @@ class Ficha_Urgencia(models.Model):
     especialidade_outro = models.CharField(max_length=20,blank=True,null=True)
 
 class Ficha_Endodontia(models.Model):
+	atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
     ESCS = (('Sim','Sim'),('Não','Não'),('Não sei','Não sei'))
 
     #ANAMNESE
@@ -488,6 +489,8 @@ class Ficha_Endodontia(models.Model):
     diag_clinico_provavel = models.CharField(max_length=100)
 
 class Ficha_Endodontia_Tabela(models.Model):
+	atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+	
     dente1 = models.PositiveIntegerField(blank = True, null = True)
     canal1 = models.CharField(max_length = 20, blank = True, null = True)
     ponto_referencia1 = models.CharField(max_length = 5, blan = True, null = True)
