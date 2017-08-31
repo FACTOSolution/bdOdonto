@@ -42,11 +42,8 @@ nome
 varchar(30),
 prof
 numeric(11),
-ficha
-int,
 primary key (code),
-foreign key (prof) references PROFESSOR (code),
-foreign key (ficha) references FICHAS (code)
+foreign key (prof) references PROFESSOR (code)
 )
 
 CREATE TABLE TURMA_ALUNO (
