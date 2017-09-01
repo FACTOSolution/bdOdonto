@@ -287,3 +287,42 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
 			'encaminhamento',
 			)
 			
+class Ficha_DentisticaForm(forms.ModelForm):
+    
+    class Meta():
+        model = Ficha_Dentistica
+        fields = (
+            'Motivo da consulta:',
+            'Quando foi ao dentista pela ultima vez?',
+            'Quantas vezes ao dia escova os dentes?',
+            'Qual horário de escovação?',
+	    	'Usa fio dental?',
+	    	'Diário alimentar:',
+	    	'Frequência de consumo do açucar:',
+	    	'Horário do consumo de açucar:',
+	    	'Toma algum medicamento? Qual?',
+            'Sente o fluxo salivar diminuindo? Desde quando?',
+	    	'',
+	    	'',
+	    	'',
+	    	'',
+	    	'Diagnostico do risco de cárie:',
+	    	'Orientação da dieta, tecnica de higienização',
+	    	'Evidenciação de placa',
+	    	'Profilaxia',
+	    	'Flúor fosfato acidulado 1,23%',	
+	    	'FLuoreto de sódio neutro 2%',
+	    	'Solução de Fluoreto de sódio 0,5%',
+	    	'Digluconato de CLorexidina a 2%(gel)',
+	    	'SOlução aquosa de Digluconato de Clorexidina a 0,12%(diária)',
+	    	'Selamento de fóssulas e fissuras (código do dente):',
+			'Remineralização de lesões de cárie ativas em esmalte (código do dente):',	    	
+			'Outra medida (especificar):',
+	    	'Restauraçôes provissórias:',
+	    	'Tratamento expectante (código do dente):',
+			'REstaurações com Amálgama (código do dente):',
+			'Returação com resina composta (código do dente):',
+			'Radiografias (código do dente)',
+			'Observações:',
+			'Necessidade de encaminhamento',
+			)
