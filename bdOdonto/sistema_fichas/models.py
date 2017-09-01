@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Aluno (models.Model):
     nome = models.CharField(max_length=50)
-    matricula = models.PositiveIntegerField(primary_key=True)
+    matricula = models.CharField(max_length=11, primary_key=True)
     login = models.CharField(max_length=20)
     senha = models.CharField(max_length=20)
 
@@ -16,7 +16,7 @@ class Aluno (models.Model):
         return self.matricula
 
 class Tipo_Fichas(models.Model):
-    code = models.AutoField(primary_key=True)
+    code = models.PositiveIntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
 
     def publish(self):
@@ -26,7 +26,7 @@ class Tipo_Fichas(models.Model):
         return self.code
 
 class Turma (models.Model):
-    code = models.AutoField(max_length=7, primary_key=True)
+    code = models.CharField(max_length=13, primary_key=True)
     nome = models.CharField(max_length=30)
     fichas = models.ManyToManyField(Tipo_Fichas)
     alunos = models.ManyToManyField(Aluno,through='Turma_Aluno')
@@ -40,18 +40,17 @@ class Turma (models.Model):
 class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    code = models.AutoField( primary_key=True)
     periodo = models.CharField(max_length=6)
-
+    id = models.PositiveIntegerField(primary_key=True)
     def publish(self):
         self.save()
 
     def __str__(self):
-        return self.code
+        return self.id
 
 class Professor (models.Model):
     nome = models.CharField(max_length=50)
-    code = models.PositiveIntegerField(primary_key=True)
+    code = models.CharField(max_length=15, primary_key=True)
     login = models.CharField(max_length=20)
     senha = models.CharField(max_length=20)
     turmas = models.ManyToManyField(Turma)
@@ -101,16 +100,16 @@ class Paciente(models.Model):
 
 class Atendimento (models.Model):
     data = models.DateTimeField(default=timezone.now)
-    code = models.AutoField( primary_key=True)
     tipo_ficha = models.ForeignKey(Tipo_Fichas, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
+    id = models.PositiveIntegerField(primary_key=True)
 
     def publish(self):
         self.save()
 
     def __str__(self):
-        return self.code
+        return self.id
 
 class Odontograma(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
