@@ -16,7 +16,7 @@ class Aluno (models.Model):
         return self.matricula
 
 class Tipo_Fichas(models.Model):
-    code = models.PositiveIntegerField(primary_key=True)
+    code = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=50)
 
     def publish(self):
@@ -26,7 +26,7 @@ class Tipo_Fichas(models.Model):
         return self.code
 
 class Turma (models.Model):
-    code = models.CharField(max_length=7, primary_key=True)
+    code = models.AutoField(max_length=7, primary_key=True)
     nome = models.CharField(max_length=30)
     fichas = models.ManyToManyField(Tipo_Fichas)
     alunos = models.ManyToManyField(Aluno,through='Turma_Aluno')
@@ -40,7 +40,7 @@ class Turma (models.Model):
 class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    code = models.CharField(max_length=7, primary_key=True)
+    code = models.AutoField( primary_key=True)
     periodo = models.CharField(max_length=6)
 
     def publish(self):
@@ -63,7 +63,7 @@ class Professor (models.Model):
         return self.code
 
 class Paciente(models.Model):
-    cpf = models.PositiveIntegerField(primary_key=True)
+    cpf = models.CharField(max_length = 11, primary_key=True)
     nome = models.CharField(max_length=200)
     endereco = models.CharField(max_length=200)
     bairro = models.CharField(max_length=200)
@@ -101,7 +101,7 @@ class Paciente(models.Model):
 
 class Atendimento (models.Model):
     data = models.DateTimeField(default=timezone.now)
-    code = models.CharField(max_length=7, primary_key=True)
+    code = models.AutoField( primary_key=True)
     tipo_ficha = models.ForeignKey(Tipo_Fichas, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
