@@ -112,6 +112,12 @@ class Atendimento (models.Model):
     def __str__(self):
         return self.code
 
+class Odontograma(models.Model):
+    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+
+    def publish(self):
+        self.save()
+
 class Ficha_Diagnostico(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
 
@@ -225,14 +231,14 @@ class Ficha_Diagnostico(models.Model):
     percussao = models.TextField()
     exames_complementares = models.TextField()
 
-    odontograma = models.OneToOneField(Odontograma,on_delete=PROTECT)
-    necessidade_perio = models.TextField()
-    necessidade_cirurgia = models.TextField()
-    necessidade_endo = models.TextField()
-    necessidade_dentistica = models.TextField()
-    necessidade_protese = models.TextField()
+    odontograma = models.OneToOneField(Odontograma,on_delete=models.PROTECT,null=True)
+    necessidade_perio = models.TextField(null=True)
+    necessidade_cirurgia = models.TextField(null=True)
+    necessidade_endo = models.TextField(null=True)
+    necessidade_dentistica = models.TextField(null=True)
+    necessidade_protese = models.TextField(null=True)
 
-    disc = models.CharField(max_length=15,choices= (('Estágio I','Estágio I')('Estágio II','Estágio II')('Estágio III','Estágio III'),('Estágio IV','Estágio IV'),('Outro','Outro')))
+    disc = models.CharField(max_length=15, null=True, choices= (('Estágio I','Estágio I'), ('Estágio II','Estágio II'), ('Estágio III','Estágio III'), ('Estágio IV','Estágio IV'), ('Outro','Outro')))
     disc_outro = models.CharField(max_length=20,blank=True,null=True)
 
 
@@ -354,7 +360,7 @@ class Ficha_Ortodontia(models.Model):
     diagnostico = models.CharField(max_length=20,choices= (('Oclusão normal','Oclusão normal'),('Má oclusão','Má oclusão')))
     observacoes_oclusal = models.TextField()
 
-    odontograma = models.OneToOneField(Odontograma,on_delete=PROTECT)
+    odontograma = models.OneToOneField(Odontograma,on_delete=models.PROTECT)
     observacoes_odontograma = models.TextField()
 
     def publish(self):
@@ -383,7 +389,7 @@ class Ficha_Periodontia(models.Model):
     cuidados_medicos = models.BooleanField()
     motivo_cuidados_medicos = models.CharField(max_length=20,blank=True,null=True)
     medicamentos = models.BooleanField()
-    quais_medicamentos = models.CharField(max_length=20,blank=True,null=True) = models.CharField(max_length=20,blank=True,null=True)
+    quais_medicamentos = models.CharField(max_length=20,blank=True,null=True)
     febre_reumatica = models.CharField(max_length=10,choices= ESCS)
     doencas_cardiovasculares = models.CharField(max_length=10,choices= ESCS)
     diabetes = models.CharField(max_length=10,choices= ESCS)
@@ -411,7 +417,7 @@ class Ficha_Periodontia(models.Model):
     qual_doenca_infec = models.CharField(max_length=20,blank=True,null=True)
     drogas_ilicitas = models.BooleanField()
 
-    odontograma = models.OneToOneField(Odontograma,on_delete=PROTECT)
+    odontograma = models.OneToOneField(Odontograma,on_delete=models.PROTECT)
 
     def publish(self):
         self.save()
@@ -531,7 +537,7 @@ class Ficha_Endodontia_Tabela(models.Model):
     
     dente1 = models.PositiveIntegerField(blank = True, null = True)
     canal1 = models.CharField(max_length = 20, blank = True, null = True)
-    ponto_referencia1 = models.CharField(max_length = 5, blan = True, null = True)
+    ponto_referencia1 = models.CharField(max_length = 5, blank = True, null = True)
     cad1 = models.PositiveIntegerField(blank = True, null = True)
     ctp1 = models.PositiveIntegerField(blank = True, null = True)
     crt1 = models.PositiveIntegerField(blank = True, null = True)
@@ -540,7 +546,7 @@ class Ficha_Endodontia_Tabela(models.Model):
     im1 = models.PositiveIntegerField(blank = True, null = True)
     dente2 = models.PositiveIntegerField(blank = True, null = True)
     canal2 = models.CharField(max_length = 20, blank = True, null = True)
-    ponto_referencia2 = models.CharField(max_length = 5, blan = True, null = True)
+    ponto_referencia2 = models.CharField(max_length = 5, blank = True, null = True)
     cad2 = models.PositiveIntegerField(blank = True, null = True)
     ctp2 = models.PositiveIntegerField(blank = True, null = True)
     crt2 = models.PositiveIntegerField(blank = True, null = True)
@@ -549,7 +555,7 @@ class Ficha_Endodontia_Tabela(models.Model):
     im2 = models.PositiveIntegerField(blank = True, null = True)
     dente3 = models.PositiveIntegerField(blank = True, null = True)
     canal3 = models.CharField(max_length = 20, blank = True, null = True)
-    ponto_referencia3 = models.CharField(max_length = 5, blan = True, null = True)
+    ponto_referencia3 = models.CharField(max_length = 5, blank = True, null = True)
     cad3 = models.PositiveIntegerField(blank = True, null = True)
     ctp3 = models.PositiveIntegerField(blank = True, null = True)
     crt3 = models.PositiveIntegerField(blank = True, null = True)
@@ -583,13 +589,13 @@ class Ficha_Dentistica(models.Model):
     #ANAMNESE
     motivo_consulta = models.CharField(max_length=20, blank=True, null=True)
     ultima_consulta = models.CharField(max_length=10, blank=True, null=True)
-    escova_dentes = models.CharField(choices = (('1x','1x'),('2x','2x'),('3x','3x')))
+    escova_dentes = models.CharField(max_length=20, choices = (('1x','1x'),('2x','2x'),('3x','3x')))
     horario_escovacao = models.CharField(max_length=20, blank=True, null=True)
     usa_fio_dental = models.CharField(max_length=10, blank=True, null=True)
     diario_alimentar = models.CharField(max_length=30, blank=True, null=True)
-    frequencia_consumo_acucar = models.CharField(choices = (('3x ao dia','3x ao dia'),('5x ao dia','5x ao dia'),('>5x ao dia','>5x ao dia')))
+    frequencia_consumo_acucar = models.CharField(max_length=20, choices = (('3x ao dia','3x ao dia'),('5x ao dia','5x ao dia'),('>5x ao dia','>5x ao dia')))
     RESPOSTA = (('Junto às refeições','Junto às refeições'),('Intervalos entre refeições','Intervalos entre refeições'),('Junto às refeições e nos intervalos das mesmas','Junto às refeições e nos intervalos das mesmas') )
-    horario_consumo_acucar = models.CharField(choices=(RESPOSTA))
+    horario_consumo_acucar = models.CharField(max_length=20, choices=(RESPOSTA))
     toma_medicamento = models.CharField(max_length=20, blank=True, null=True)
     fluxo_salivar = models.CharField(max_length=10, blank=True, null=True)
     
@@ -600,7 +606,7 @@ class Ficha_Dentistica(models.Model):
     calcificada2 = models.BooleanField()
     
     #DIAGNOSTICO DE RISCO DE CÁRIE
-    diag_risco_carie = models.CharField(choices(("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
+    diag_risco_carie = models.CharField(max_length=20, choices = (("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
     
     #PLANO DE TRATAMENTO
         #ORIENTAÇÃO E MEDIDAS PREVENTIVAS
@@ -629,13 +635,3 @@ class Ficha_Dentistica(models.Model):
 
     def publish(self):
         self.save()
-    
-
-class Odontograma(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
-
-    def publish(self):
-        self.save()
-
-
-        
