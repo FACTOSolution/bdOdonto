@@ -599,10 +599,9 @@ class Ficha_Dentistica(models.Model):
     fluxo_salivar = models.CharField(max_length=10, blank=True, null=True)
     
     #EVIDENCIAÇÃO DE PLACA
-    flocular_pegajosa1 = models.BooleanField()
-    calcificada1 = models.BooleanField()
-    flocular_pegajosa2 = models.BooleanField()
-    calcificada2 = models.BooleanField()
+    escolha_placa = (("Flocular e pegajosa","Flocular e pegajosa"), ("Calcificada", "Calcificada"))
+    caracteristica_da_placa1 = models.CharField(choices = escolha_placa)
+    caracteristica_da_placa2 = models.CharField(choices = escolha_placa)
     
     #DIAGNOSTICO DE RISCO DE CÁRIE
     diag_risco_carie = models.CharField(max_length=20, choices = (("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
