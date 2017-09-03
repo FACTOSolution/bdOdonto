@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Teste Canvas</title>
-<link rel="stylesheet" href="canvas_styles.css">
+<link rel="stylesheet" href="/static/css/canvas_styles.css">
 </head>
 <body>
 <p>Teste Canvas</p>
@@ -41,7 +41,7 @@ json = JSON.stringify(points);
 img.onload = function(){
     ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
 };
-img.src = "Periodontia.png";
+img.src = "/static/images/Periodontia.png";
 
 function buttonRedCircle(){
     drawing_type = "redcircle";
