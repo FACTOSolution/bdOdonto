@@ -15,4 +15,4 @@ def lista_fichas_axluno(request):
 	return render(request, 'lista_fichas_aluno.html', {'fichas': ficha_lista})
 
 def odontograma(request):
-    return render(request, 'odontograma.html')
+    return render(request, 'sistema_fichas/canvas.html')
