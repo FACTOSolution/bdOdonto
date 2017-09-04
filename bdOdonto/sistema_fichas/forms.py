@@ -53,6 +53,15 @@ class Ficha_PPRForm(forms.ModelForm):
             'Observações (inferior)'
             )
 
+class Dados_DentesForm(forms.ModelForm):
+
+    class Meta:
+        model = Dados_Dentes
+        fields = '__all__'
+        labels = {
+            'placa':'I. Placa'
+        }
+
 class Ficha_PeriodontiaForm(forms.ModelForm):
     
     class Meta:
@@ -98,6 +107,41 @@ class Ficha_PeriodontiaForm(forms.ModelForm):
             'Qual(is)',
             'É ou já foi usuário de drogas ilícitas?',
             )
+
+class Ficha_Endodontia_TabelaForm(forms.ModelForm):
+
+    class Meta:
+        model = Ficha_Endodontia_Tabela
+        fields = '__all__'
+        labels = {
+            'dente1':'Dente',
+            'canal1':'Canal',
+            'ponto_referencia1':'Ponto Referência',
+            'cad1':'CAD',
+            'ctp1':'CTP',
+            'crt1':'CRT',
+            'iai1':'IAI',
+            'iaf1':'IAF',
+            'im1':'IM',
+            'dente2':'Dente',
+            'canal2':'Canal',
+            'ponto_referencia2':'Ponto Referência',
+            'cad2':'CAD',
+            'ctp2':'CTP',
+            'crt2':'CRT',
+            'iai2':'IAI',
+            'iaf2':'IAF',
+            'im2':'IM',
+            'dente3':'Dente',
+            'canal3':'Canal',
+            'ponto_referencia3':'Ponto Referência',
+            'cad3':'CAD',
+            'ctp3':'CTP',
+            'crt3':'CRT',
+            'iai3':'IAI',
+            'iaf3':'IAF',
+            'im3':'IM',
+        }
 
 class Ficha_EndodontiaForm(forms.ModelForm):
 

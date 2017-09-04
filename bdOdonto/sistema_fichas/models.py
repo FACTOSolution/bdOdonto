@@ -424,6 +424,7 @@ class Ficha_Periodontia(models.Model):
 class Dados_Dentes(models.Model):
     ficha_periodontia = models.ForeignKey(Ficha_Periodontia)
     letra = models.CharField(max_length=3)
+    dente = models.PositiveIntegerField()
     rec = models.PositiveIntegerField()
     placa = models.BooleanField()
     ps = models.PositiveIntegerField()
