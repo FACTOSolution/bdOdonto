@@ -610,7 +610,7 @@ class Ficha_Dentistica(models.Model):
         #ORIENTAÇÃO E MEDIDAS PREVENTIVAS
     orientacao = models.BooleanField()
     evidenciacao_de_placa = models.BooleanField()
-    provilaxia = models.BooleanField()
+    profilaxia = models.BooleanField()
         #APLICAÇÃO DE FLUOR
     fosfato = models.BooleanField()
     sodio = models.BooleanField()
