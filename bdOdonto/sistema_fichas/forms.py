@@ -9,6 +9,17 @@ class AlunoForm(forms.ModelForm):
         model = Aluno
         fields = '__all__'
 
+class PacienteForm(forms.ModelForm):
+    
+    class Meta:
+        model = Paciente
+        fields = '__all__'
+        labels = {
+            'tel': 'Telefone',
+            'cel': 'Celular',
+            'data_nasc': 'Data de Nascimento',
+            }
+
 class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:
