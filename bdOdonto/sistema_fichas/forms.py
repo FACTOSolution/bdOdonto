@@ -227,7 +227,8 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
     
     class Meta():
         model = Ficha_Diagnostico
-        fields = (
+        fields = '__all__'
+        labels = {
             'motivo':'Motivo da consulta',
             'historia':'Historia da doenca atual',
             'ultima_consulta':'Ultima consulta',
@@ -321,7 +322,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
             'necessidade_protese':'Necessidade de protese',
             'disc':'Encaminhamento',
             'disc_outro':'Disciplina(s)'
-            )
+            }
             
 class Ficha_DentisticaForm(forms.ModelForm):
     
