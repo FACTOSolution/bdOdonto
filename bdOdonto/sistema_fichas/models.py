@@ -222,6 +222,7 @@ class Ficha_Diagnostico(models.Model):
     g_linfaticos = models.TextField()
     labios = models.TextField()
     mucosa_j = models.TextField()
+    gengiva = models.TextField()
     soalho_boca = models.TextField()
     lingua = models.TextField()
     palato = models.TextField()
