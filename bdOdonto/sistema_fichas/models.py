@@ -100,10 +100,9 @@ class Paciente(models.Model):
 
 class Atendimento (models.Model):
     data = models.DateTimeField(default=timezone.now)
+    turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
     tipo_ficha = models.ForeignKey(Tipo_Fichas, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
-    id = models.PositiveIntegerField(primary_key=True)
 
     def publish(self):
         self.save()
@@ -600,8 +599,8 @@ class Ficha_Dentistica(models.Model):
     
     #EVIDENCIAÇÃO DE PLACA
     escolha_placa = (("Flocular e pegajosa","Flocular e pegajosa"), ("Calcificada", "Calcificada"))
-    caracteristica_da_placa1 = models.CharField(choices = escolha_placa)
-    caracteristica_da_placa2 = models.CharField(choices = escolha_placa)
+    caracteristica_da_placa1 = models.CharField(max_length=30, choices = escolha_placa)
+    caracteristica_da_placa2 = models.CharField(max_length=30, choices = escolha_placa)
     
     #DIAGNOSTICO DE RISCO DE CÁRIE
     diag_risco_carie = models.CharField(max_length=20, choices = (("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
