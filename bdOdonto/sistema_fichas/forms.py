@@ -24,7 +24,20 @@ class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_Urgencia
-        fields = ('História Clínica (condições de saúde)', 'Medicamentos em uso no momento', 'Motivo da consulta', 'Diagnóstico provável após anamnese', 'Atendimento', 'Encaminhamento ou reagendamento', 'Prescrições Medicamentosas', 'Especialidade em que se enquadrou o atendimento de urgência')
+        fields = '__all__'
+        labels = {
+        'historia_clinica':'História Clínica (condições de saúde)',
+        'medicamentos':'Medicamentos em uso no momento', 
+        'motivo': 'Motivo da consulta', 
+        'diagnostico_provavel':'Diagnóstico provável após anamnese', 
+        'atend':'Atendimento', 
+        'atend_outro':'Outro',
+        'procedimento':'Procedimento realizado'
+        'encaminhamento':'Encaminhamento ou reagendamento', 
+        'prescricoes':'Prescrições Medicamentosas', 
+        'especialidade':'Especialidade em que se enquadrou o atendimento de urgência'
+        'especialidade_outro':'Outro'
+        }
 
 class Ficha_PPRForm(forms.ModelForm):
 
