@@ -26,32 +26,34 @@ class Ficha_UrgenciaForm(forms.ModelForm):
         model = Ficha_Urgencia
         fields = '__all__'
         labels = {
-        'historia_clinica':'História Clínica (condições de saúde)',
-        'medicamentos':'Medicamentos em uso no momento', 
-        'motivo': 'Motivo da consulta', 
-        'diagnostico_provavel':'Diagnóstico provável após anamnese', 
-        'atend':'Atendimento', 
-        'atend_outro':'Outro',
-        'procedimento':'Procedimento realizado'
-        'encaminhamento':'Encaminhamento ou reagendamento', 
-        'prescricoes':'Prescrições Medicamentosas', 
-        'especialidade':'Especialidade em que se enquadrou o atendimento de urgência'
-        'especialidade_outro':'Outro'
-        }
+            'historia_clinica':'História Clínica (condições de saúde)',
+            'medicamentos':'Medicamentos em uso no momento', 
+            'motivo': 'Motivo da consulta', 
+            'diagnostico_provavel':'Diagnóstico provável após anamnese', 
+            'atend':'Atendimento', 
+            'atend_outro':'Outro',
+            'procedimento':'Procedimento realizado'
+            'encaminhamento':'Encaminhamento ou reagendamento', 
+            'prescricoes':'Prescrições Medicamentosas', 
+            'especialidade':'Especialidade em que se enquadrou o atendimento de urgência'
+            'especialidade_outro':'Outro'
+            }
 
 class Ficha_PPRForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_PPR
-        fields = ('Classificação de Kennedy (superior)', 
-            'Tratamento prévio (superior)', 
-            'Planejamento da Prótese Removível: Apoios: tipo e localização, retentores, conector maior, sela. (superior)', 
-            'Observações (superior)',
-            'Classificação de Kennedy (inferior)', 
-            'Tratamento prévio (inferior)',
-            'Planejamento da Prótese Removível: Apoios: tipo e localização, retentores, conector maior, sela. (inferior)', 
-            'Observações (inferior)'
-            )
+        fields = '__all__'
+        labels = {
+            'class_kennedy_sup':'Classificação de Kennedy (superior)', 
+            'tratamento_previo_sup':'Tratamento prévio (superior)', 
+            'planejamento_protese_sup':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (superior)', 
+            'observacoes_sup':'Observações (superior)',
+            'class_kennedy_inf':'Classificação de Kennedy (inferior)', 
+            'tratamento_previo_inf':'Tratamento prévio (inferior)',
+            'planejamento_protese_inf':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (inferior)', 
+            'observacoes_inf':'Observações (inferior)'
+            }
 
 class Dados_DentesForm(forms.ModelForm):
 
@@ -60,53 +62,56 @@ class Dados_DentesForm(forms.ModelForm):
         fields = '__all__'
         labels = {
             'placa':'I. Placa'
-        }
+            }
 
 class Ficha_PeriodontiaForm(forms.ModelForm):
     
     class Meta:
         model = Ficha_Periodontia
-        fields = ('Suas gengivas sangram quando escova os dentes?',
-            'Já fez tratamento de gengiva alguma vez?',
-            'Já utilizou aparelho ortodôntico?',
-            'É alérgico ou tem reações alérgicas a:\nAnestesia dentária',
-            'Penicilina ou outros antibióticos',
-            'Sulfas',
-            'Aspirina',
-            'Outros',
-            'É alérgico a outra substância que não sejam medicamentos?',
-            'Qual(is)',
-            'Está atualmente sob cuidados médicos?',
-            'Qual motivo?',
-            'Está tomando algum medicamento no momento?',
-            'Qual(is)',
-            'Quais das seguintes enfermidades você tem ou já teve?\nFebre Reumática',
-            'Doenças cardiovasculares',
-            'Você ou parente tem diabetes?',
-            'Tem tonturas de vez em quando?',
-            'Já foi alguma vez tratado de anemia?',
-            'Esteve acamado por longo tempo nos últimos 5 meses?',
-            'Suas juntas doem ou incham com frequência?',
-            'Já teve úlcera no estômago ou duodeno?',
-            'Tem algum problema com o fígado ou vesícula?',
-            'Já teve ou viveu com alguém que tivesse tuberculose?',
-            'Quando você se corta a ferida sangra muito?',
-            'Sofreu alguma operação nos últimos 5 anos?',
-            'Qual?',
-            'Sofreu variação de peso ultimamente?',
-            'Já fez algum tratamento radioterápico?',
-            'Qual região?',
-            'Por quanto tempo?',
-            'Tem problemas com pressão arterial?',
-            'Tem ou teve algum problema associado à sua menstruação?',
-            'Está grávida?',
-            'É fumante ou ex-fumante?',
-            'Há quanto tempo?',
-            'QUantos cig/dia?',
-            'É portador de alguma doença infecto-contagiosa?',
-            'Qual(is)',
-            'É ou já foi usuário de drogas ilícitas?',
-            )
+        fields = '__all__'
+        labels = {
+            'sangramento_gengiva':'Suas gengivas sangram quando escova os dentes?',
+            'tratamento_gengiva':'Já fez tratamento de gengiva alguma vez?',
+            'hemorragia_extrac_dentes':'Já teve hemorragia após extração dos dentes'
+            'aparelho_ortodontico':'Já utilizou aparelho ortodôntico?',
+            'alergia_anestesia':'É alérgico ou tem reações alérgicas a anestesia dentária?',
+            'alergia_antibioticos':'É alérgico ou tem reações alérgicas a penicilina ou outros antibióticos',
+            'alergia_sulfas':'É alérgico ou tem reações alérgicas a Sulfas',
+            'alergia_aspirina':'É alérgico ou tem reações alérgicas a Aspirina',
+            'alergia_outros':'É alérgico ou tem reações alérgicas a Outros medicamentos',
+            'alergia_nao_medicamentos':'É alérgico a outra substância que não sejam medicamentos?',
+            'quais_alergias':'Qual(is)',
+            'cuidados_medicos':'Está atualmente sob cuidados médicos?',
+            'motivo_cuidados_medicos':'Qual motivo?',
+            'medicamentos':'Está tomando algum medicamento no momento?',
+            'quais_medicamentos':'Qual(is)',
+            'febre_reumatica':'Você tem ou já teve Febre Reumática?',
+            'doencas_cardiovasculares':'Você tem ou já teve Doenças cardiovasculares',
+            'diabetes':'Você ou parente tem diabetes?',
+            'tonturas':'Voce tem tonturas de vez em quando?',
+            'anemia':'Já foi alguma vez tratado de anemia?',
+            'acamado':'Esteve acamado por longo tempo nos últimos 5 meses?',
+            'inchaco_dor_juntas':'Suas juntas doem ou incham com frequência?',
+            'ulcera':'Já teve úlcera no estômago ou duodeno?',
+            'figado':'Tem algum problema com o fígado ou vesícula?',
+            'tuberculose':'Já teve ou viveu com alguém que tivesse tuberculose?',
+            'sangramento_excessivo':'Quando você se corta a ferida sangra muito?',
+            'operacao':'Sofreu alguma operação nos últimos 5 anos?',
+            'qual_operacao':'Qual?',
+            'variacao_peso':'Sofreu variação de peso ultimamente?',
+            'radioterapia':'Já fez algum tratamento radioterápico?',
+            'regiao_radioterapia':'Qual região?',
+            'tempo_radioterapia':'Por quanto tempo?',
+            'pressao_arterial':'Tem problemas com pressão arterial?',
+            'problema_menstruacao':'Tem ou teve algum problema associado à sua menstruação?',
+            'gravida':'Está grávida?',
+            'fumante':'É fumante ou ex-fumante?',
+            'tempo_abandono_tabagismo':'Há quanto tempo?',
+            'cigs_dia':'Quantos cig/dia?',
+            'doenca_infec':'É portador de alguma doença infecto-contagiosa?',
+            'qual_doenca_infec':'Qual(is)',
+            'drogas_ilicitas':'É ou já foi usuário de drogas ilícitas?',
+            }
 
 class Ficha_Endodontia_TabelaForm(forms.ModelForm):
 
