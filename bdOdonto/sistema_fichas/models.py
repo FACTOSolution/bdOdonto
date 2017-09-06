@@ -343,8 +343,8 @@ class Ficha_Ortodontia(models.Model):
     trespasse_horizontal = models.CharField(max_length=15,choices= (NORMAL,('Aumentado','Aumentado'),('Negativo','Negativo')))
     trespasse_vertical = models.CharField(max_length=17,choices= (NORMAL,('Aumentado','Aumentado'),('Topo','Topo'),('Mordida aberta','Mordida aberta'),('Dentoalveolar','Dentoalveolar'),('Esquelética','Esquelética')))
     mordida_cruzada = models.CharField(max_length=17,choices= (('Ausente','Ausente'),('Anterior','Anterior'),('Unilateral Verdadeira','Unilateral Verdadeira'),('Unilateral Funcional','Unilateral Funcional'),('Bilateral','Bilateral'),('Localizada','Localizada')))
-    spee_sup= models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
-    spee_inf= models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
+    spee_sup = models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
+    spee_inf = models.CharField(max_length=15,choices= (NORMAL,('Acentuada','Acentuada')))
     CLASSES = (
         ("Classe I","Classe I"),
         ("Classe II","Classe II"),
