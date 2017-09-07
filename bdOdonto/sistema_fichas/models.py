@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils import timezone
+from django.core.validators import RegexValidator
 
 class Aluno (models.Model):
     nome = models.CharField(max_length=50)
@@ -68,27 +69,30 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=200)
     cidade = models.CharField(max_length=200)
     estado = models.CharField(max_length=200)
-    cep = models.PositiveIntegerField()
-    tel = models.PositiveIntegerField()
-    cel = models.PositiveIntegerField()
+    cep_regex = RegexValidator(regex=r'^(64)\d{3}-\d{3}$', message="CEP deve estar no formato '64XXX-XXX'.")
+    cep = models.CharField(validators=[cep_regex], blank=True, max_length=9)
+    tel_regex = RegexValidator(regex=r'^(86|89)(988|999|998|994|995|981)\d{6}$', message="Telefone deve estar no formato '869XXXXXXXX'.")
+    tel = models.CharField(validators=[tel_regex], blank=True, max_length=11)
+    cel = models.CharField(validators=[tel_regex], blank=True, max_length=11)
     email  = models.EmailField(blank = True,null=True)
     estado_civil = models.CharField(max_length=200)
     data_nasc = models.DateTimeField()
-    idade = models.PositiveIntegerField()
+    idade = models.CharField(max_length=3)
     cor = models.CharField(max_length=200)
     SEXOS = (
         ('M','M'),
         ('F','F'),
         )
     sexo = models.CharField(max_length=1,choices=SEXOS)
-    rg = models.PositiveIntegerField()
+    rg_regex = RegexValidator(regex=r'^(64)\d{3}-\d{3}$', message="CEP deve estar no formato '64XXX-XXX'.")
+    rg = models.CharField(max_length=8)
     naturalidade = models.CharField(max_length=200)
     nacionalidade = models.CharField(max_length=200)
     profissao_atual = models.CharField(max_length=200,blank = True,null=True)
     profissao_anterior = models.CharField(max_length=200,blank = True,null=True)
     endereco_profissional = models.CharField(max_length=200,blank = True, null = True)
     bairro_profissional = models.CharField(max_length=200,blank = True, null = True)
-    cep_profissional = models.PositiveIntegerField(blank = True, null = True)
+    cep_profissional = models.CharField(validators=[cep_regex], blank=True, null=True, max_length=9)
 
     turma_Aluno = models.ManyToManyField(Turma_Aluno, through = "atendimento")
 
