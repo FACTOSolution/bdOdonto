@@ -41,12 +41,12 @@ class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     periodo = models.CharField(max_length=6)
-    id = models.PositiveIntegerField(primary_key=True)
+
     def publish(self):
         self.save()
 
     def __str__(self):
-        return self.id
+        return self.turma
 
 class Professor (models.Model):
     nome = models.CharField(max_length=50)
@@ -106,9 +106,9 @@ class Atendimento (models.Model):
 
     def publish(self):
         self.save()
-
+    # __str__ Provis�rio
     def __str__(self):
-        return self.id
+        return self.paciente
 
 class Odontograma(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
@@ -240,8 +240,6 @@ class Ficha_Diagnostico(models.Model):
     disc = models.CharField(max_length=15, null=True, choices= (('Estágio I','Estágio I'), ('Estágio II','Estágio II'), ('Estágio III','Estágio III'), ('Estágio IV','Estágio IV'), ('Outro','Outro')))
     disc_outro = models.CharField(max_length=20,blank=True,null=True)
 
-
-    
     def publish(self):
         self.save()
 
@@ -277,7 +275,6 @@ class Ficha_Ortodontia(models.Model):
     aparelho = models.BooleanField()
     tempo_aparelho = models.CharField(max_length=10,blank=True,null=True)
     observacoes_anamnese = models.TextField()
-
 
     NORMAL = ('Normal','Normal')
     psicologico = models.CharField(max_length=15,choices= (NORMAL,('Extrovertido','Extrovertido'),('Introvertido','Introvertido')))
@@ -424,7 +421,7 @@ class Ficha_Periodontia(models.Model):
 class Dados_Dentes(models.Model):
     ficha_periodontia = models.ForeignKey(Ficha_Periodontia)
     letra = models.CharField(max_length=3)
-    dente = models.PositiveIntegerField()
+    dente = models.PositiveIntegerField(null=True)
     rec = models.PositiveIntegerField()
     placa = models.BooleanField()
     ps = models.PositiveIntegerField()
@@ -601,8 +598,8 @@ class Ficha_Dentistica(models.Model):
     
     #EVIDENCIAÇÃO DE PLACA
     escolha_placa = (("Flocular e pegajosa","Flocular e pegajosa"), ("Calcificada", "Calcificada"))
-    caracteristica_da_placa1 = models.CharField(max_length=30, choices = escolha_placa)
-    caracteristica_da_placa2 = models.CharField(max_length=30, choices = escolha_placa)
+    caracteristica_da_placa1 = models.CharField(max_length=30, choices = escolha_placa, null=True)
+    caracteristica_da_placa2 = models.CharField(max_length=30, choices = escolha_placa, null=True)
     
     #DIAGNOSTICO DE RISCO DE CÁRIE
     diag_risco_carie = models.CharField(max_length=20, choices = (("Alto", "Alto"), ("Médio", "Médio"), ("Baixo","Baixo")))
