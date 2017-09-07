@@ -22,6 +22,7 @@
     <div id="Options">
 	<button id="buttonClear" type="button" onclick="buttonClear()">Limpar</button>
         <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar</button>
+        <button><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></button>
     </div>
 </div>
 <canvas id="canvas" width="515" height="500"></canvas>
@@ -61,7 +62,7 @@ function buttonBlueLine(){
 
 function buttonRedAxis(){
     drawing_type = "redaxis";
-} 
+}
 
 function buttonBlueAxis(){
     drawing_type = "blueaxis";
@@ -170,7 +171,6 @@ a.href = url;
 a.textContent = "Download";
 document.getElementById('download').appendChild(a);
 document.getElementById('points').innerHTML = JSON.stringify(points);
-</script> 
+</script>
 </body>
 </html>
-
