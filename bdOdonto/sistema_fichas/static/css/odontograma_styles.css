@@ -1,8 +1,18 @@
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+h2#pagetitle {
+	margin: auto;
+	width: 10%;
+}
+
 div#selectors {
     display: block;
     margin: auto;
     width: 20%;
     padding-bottom: 20px;
+	font-size: 50%;
 }
 
 #Circle {
@@ -24,9 +34,21 @@ div#selectors {
 }
 
 #Options {
-    display: inline;
+    display: inline-table;
     margin: auto;
     width: 20%;
+}
+
+#buttonLogout {
+    display: inline-table;
+    margin: auto;
+    width: 20%;	
+}
+
+#FilledCircle {
+    display: inline-table;
+    margin: auto;
+    width: 20%;	
 }
 
 canvas#canvas {

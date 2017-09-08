@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Teste Canvas</title>
-<link rel="stylesheet" href="/static/css/canvas_styles.css">
+<title>Odontograma</title>
+<link rel="stylesheet" href="/static/css/odontograma_styles.css">
 </head>
 <body>
-<p>Teste Canvas</p>
+<h2 id="pagetitle">Odontograma</h2>
 <div id="selectors">
     <div id="Circle">
         <button id="buttonCircle" type="button" onclick="buttonRedCircle()">Circulo Vermelho</button>
@@ -19,17 +19,18 @@
         <button id="buttonAxis" type="button" onclick="buttonRedAxis()">Marcar X Vermelho</button>
         <button id="buttonAxis" type="button" onclick="buttonBlueAxis()">Marcar X Azul</button>
     </div>
-    <div id="Options">
-	<button id="buttonClear" type="button" onclick="buttonClear()">Limpar</button>
-        <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar</button>
-        <button><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></button>
+	<div id="FilledCircle">
+        <button id="buttonFilledCircle" type="button" onclick="buttonRedFilledCircle()">Preencher Vermelho</button>
+        <button id="buttonFilledCircle" type="button" onclick="buttonBlueFilledCircle()">Preencher Azul</button>
     </div>
+    <div id="Options">
+		<button id="buttonClear" type="button" onclick="buttonClear()">Limpar Alterações</button>
+        <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar Alterações</button>
+    </div>
+	<button id="buttonLogout" type="button"><a href="{% url 'logout' %}?next={{ request.path }}">Fazer Logout</a></button>
+
 </div>
 <canvas id="canvas" width="515" height="500"></canvas>
-<p id="demo"> Mouse X and Y Coordinates.</p>
-<p id="points"> Points.</p>
-<div id="download"></div>
-
 
 <script>
 var rect = document.getElementById
@@ -69,6 +70,14 @@ function buttonRedAxis(){
 
 function buttonBlueAxis(){
     drawing_type = "blueaxis";
+}
+
+function buttonRedFilledCircle(){
+    drawing_type = "redfilledcircle";
+}
+
+function buttonBlueFilledCircle(){
+    drawing_type = "bluefilledcircle";
 }
 
 function buttonClear(){
@@ -135,17 +144,36 @@ function drawBlueCircle(x, y){
     ctx.stroke();
 }
 
+function drawRedFilledCircle(x, y){
+    ctx.fillStyle = '#FF0000';
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, 2*Math.PI);
+    ctx.fill();
+}
+
+function drawBlueFilledCircle(x, y){
+    ctx.fillStyle = '#0000FF';
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, 2*Math.PI);
+    ctx.fill();
+}
 canvas.onclick = function(event) {
-    var x = event.clientX - (rect.left + window.scrollX);	
-    var y = event.clientY - (rect.top - window.scrollY);
+    var x = (event.clientX - 4) - (rect.left + window.scrollX);	
+    var y = (event.clientY - 3) - (rect.top - window.scrollY);
     switch(drawing_type){
+        case "redfilledcircle":
+            drawRedFilledCircle(x, y);
+            break;
+        case "bluefilledcircle":
+            drawBlueFilledCircle(x, y);
+            break;
         case "redcircle":
             drawRedCircle(x, y);
             break;
         case "bluecircle":
             drawBlueCircle(x, y);
             break;
-        case "redline":
+		case "redline":
             drawRedLine(x, y);
             break;
         case "blueline":
@@ -161,19 +189,9 @@ canvas.onclick = function(event) {
             alert("Opcao nao especificada");
     }
 
-    document.getElementById("demo").innerHTML = "X=" + rect.top + " Y=" + rect.left;
     points.drawing_text = [event.pageX, event.pageY];
     json = JSON.stringify(points);
 }
-
-json = JSON.stringify(points);
-var url = URL.createObjectURL(new Blob([json], {type: "application/json"}));
-var a = document.createElement('a');
-a.download = 'backup.json';
-a.href = url;
-a.textContent = "Download";
-document.getElementById('download').appendChild(a);
-document.getElementById('points').innerHTML = JSON.stringify(points);
 </script>
 </body>
 </html>
