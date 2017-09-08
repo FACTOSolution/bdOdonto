@@ -18,4 +18,4 @@ def lista_fichas_axluno(request):
 
 @login_required
 def odontograma(request):
-    return render(request, 'sistema_fichas/canvas.html')
+    return render(request, 'sistema_fichas/odontograma.html')

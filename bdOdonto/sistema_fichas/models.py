@@ -9,7 +9,7 @@ class Aluno (models.Model):
     matricula = models.CharField(max_length=11, primary_key=True)
     login = models.CharField(max_length=20)
     senha = models.CharField(max_length=20)
-
+    
     def publish(self):
         self.save()
 
@@ -30,7 +30,7 @@ class Turma (models.Model):
     code = models.CharField(max_length=13, primary_key=True)
     nome = models.CharField(max_length=30)
     fichas = models.ManyToManyField(Tipo_Fichas)
-    alunos = models.ManyToManyField(Aluno,through='Turma_Aluno')
+    alunos = models.ManyToManyField(Aluno, through='Turma_Aluno')
 
     def publish(self):
         self.save()
