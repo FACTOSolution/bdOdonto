@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-      <link rel="stylesheet" href="/static/css/style.css">
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+<link rel="stylesheet" href="/static/css/login.css">
 </head>
-<body>
   <div class="login-card">
     <h1>Login</h1><br>
   <form action="{% url 'login' %}" method="post">
@@ -14,11 +12,9 @@
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" name="login" class="login login-submit" value="login">
-    <input type="hidden" name="next" value="{% url 'bdodonto:index-view' %}" />
+    <input type="hidden" name="next" value="{% url 'sistema_fichas:index-view' %}" />
   </form>
   <div class="login-help">
     <a href="#">Criar login</a>
   </div>
-</div>
-</body>
-</html>
+{% endblock %}
