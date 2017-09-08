@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from .models import Turma, Turma_Aluno
+
+def index(request):
+    return render(request, 'sistema_fichas/base.html', {})
+
 
 @login_required
-def lista_fichas_axluno(request):
+def lista_fichas_aluno(request):
     if request.method == 'POST':
         requested_aluno = get_object_or_404(Aluno, pk=request.POST['aluno_mat'])
         requested_turma = get_object_or_404(Turma, pk=request.POST['turma_code'])
@@ -19,3 +24,6 @@ def lista_fichas_axluno(request):
 @login_required
 def odontograma(request):
     return render(request, 'sistema_fichas/odontograma.html')
+		
+		
+        
