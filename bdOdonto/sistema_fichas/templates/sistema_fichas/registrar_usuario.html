@@ -5,18 +5,13 @@
 	<title>Registrar novo usuário - BDOdonto</title>
 	<link rel="stylesheet" href="/static/css/registrar_usuario.css">
 </head>
-<div>
+<div id="div_registro">
 	<h2>Registrar-se no BDOdonto</h2>
-	{% if registered %}
-	<strong>Obrigado pelo registro!</strong>
-	<a href="{% url 'login' %}">Retorne à página de login.</a><br/>
-	{% else %}
 	<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ user_form.as_p }}
 		{{ aluno_form.as_p }}
 		<input type="submit" name="submit" value="Registrar"/>
 	</form>
-	{% endif %}
 </div>
 {% endblock %}
