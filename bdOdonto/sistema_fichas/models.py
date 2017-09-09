@@ -3,12 +3,11 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 class Aluno (models.Model):
-    nome = models.CharField(max_length=50)
-    matricula = models.CharField(max_length=11, primary_key=True)
-    login = models.CharField(max_length=20)
-    senha = models.CharField(max_length=20)
+    usuario = models.OneToOneField(User)
+    matricula = models.CharField(max_length=15, primary_key=True)
     
     def publish(self):
         self.save()

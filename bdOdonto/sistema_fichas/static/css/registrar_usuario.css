@@ -1,0 +1,35 @@
+h2 {
+	position: relative;
+	margin: auto;
+	padding-bottom: 30px;
+}
+
+strong {
+	width: 50%;
+	margin: auto;	
+}
+
+.helptext {
+	visibility: hidden;
+}
+
+#id_username:hover .helptext{
+	visibility: visible;
+}
+
+#user_form label{
+	width: 10%;
+}
+
+#user_form p > input{
+	width: 35%;
+	padding-bottom: 5px;
+}
+
+#user_form input {
+	padding-left: 10px;
+}
+
+
+
+	

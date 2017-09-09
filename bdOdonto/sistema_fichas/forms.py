@@ -1,13 +1,27 @@
 #coding: latin-1
+from django.contrib.auth.models import User
 from django import forms
 
 from .models import *
 
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+	
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'first_name', 'last_name', 'email')
+        labels = {
+            'username': 'Nome de Usu�rio',
+            'password': 'Senha',
+            'first_name': 'Nome',
+            'last_name': 'Sobrenome',
+            }
+			
 class AlunoForm(forms.ModelForm):
 
     class Meta:
         model = Aluno
-        fields = '__all__'
+        fields = ('matricula',)
 
 class PacienteForm(forms.ModelForm):
     
@@ -26,17 +40,17 @@ class Ficha_UrgenciaForm(forms.ModelForm):
         model = Ficha_Urgencia
         fields = '__all__'
         labels = {
-            'historia_clinica':'História Clínica (condições de saúde)',
-            'medicamentos':'Medicamentos em uso no momento', 
-            'motivo': 'Motivo da consulta', 
-            'diagnostico_provavel':'Diagnóstico provável após anamnese', 
-            'atend':'Atendimento', 
-            'atend_outro':'Outro',
-            'procedimento':'Procedimento realizado'
-            'encaminhamento':'Encaminhamento ou reagendamento', 
-            'prescricoes':'Prescrições Medicamentosas', 
-            'especialidade':'Especialidade em que se enquadrou o atendimento de urgência'
-            'especialidade_outro':'Outro'
+            'historia_clinica' : 'Hist�ria Cl�nica (condi��es de sa�de)',
+            'medicamentos' : 'Medicamentos em uso no momento', 
+            'motivo' : 'Motivo da consulta', 
+            'diagnostico_provavel' : 'Diagn�stico prov�vel ap�s anamnese', 
+            'atend' : 'Atendimento', 
+            'atend_outro' : 'Outro',
+            'procedimento' : 'Procedimento realizado',
+            'encaminhamento' : 'Encaminhamento ou reagendamento', 
+            'prescricoes' : 'Prescri��es Medicamentosas', 
+            'especialidade' : 'Especialidade em que se enquadrou o atendimento de urg�ncia',
+            'especialidade_outro' : 'Outro',
             }
 
 class Ficha_PPRForm(forms.ModelForm):
@@ -52,7 +66,7 @@ class Ficha_PPRForm(forms.ModelForm):
             'class_kennedy_inf':'Classificação de Kennedy (inferior)', 
             'tratamento_previo_inf':'Tratamento prévio (inferior)',
             'planejamento_protese_inf':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (inferior)', 
-            'observacoes_inf':'Observações (inferior)'
+            'observacoes_inf':'Observações (inferior)',
             }
 
 class Dados_DentesForm(forms.ModelForm):
@@ -72,7 +86,7 @@ class Ficha_PeriodontiaForm(forms.ModelForm):
         labels = {
             'sangramento_gengiva':'Suas gengivas sangram quando escova os dentes?',
             'tratamento_gengiva':'Já fez tratamento de gengiva alguma vez?',
-            'hemorragia_extrac_dentes':'Já teve hemorragia após extração dos dentes'
+            'hemorragia_extrac_dentes':'Já teve hemorragia após extração dos dentes',
             'aparelho_ortodontico':'Já utilizou aparelho ortodôntico?',
             'alergia_anestesia':'É alérgico ou tem reações alérgicas a anestesia dentária?',
             'alergia_antibioticos':'É alérgico ou tem reações alérgicas a penicilina ou outros antibióticos',
@@ -156,7 +170,7 @@ class Ficha_EndodontiaForm(forms.ModelForm):
         labels = {
             'em_tratamento':'Está em tratamento médico?',
             'quanto_tempo':'Há quanto tempo?',
-            'alguma_cirurgia':'J� foi submetido a alguma cirurgia?'
+            'alguma_cirurgia':'J� foi submetido a alguma cirurgia?',
             'diabetes':'Tem Diabetes?',
             'febre_reumatica':'Febre reumática?',
             'alteracoes_sanguineas':'Alterações Sanguíneas?',
@@ -171,8 +185,8 @@ class Ficha_EndodontiaForm(forms.ModelForm):
             'tipo_hepatite':'Tipo:',
             'uso_de_medicamento':'Faz uso de algum medicamento?',
             'uso_continuo_de_medicamento':'Faz uso continuo de algum medicamento?',
-            'alergia':'Tem alergia?'
-            'outras_informacoes':'Outras informações sobre sua saúde',
+            'alergia':'Tem alergia?',
+            'outras_informacoes':'Outras informações sobre sua sa�de',
             'historia_dental':'História Dental',
             'caracteristicas_da_dor':'Características da dor:',
             'uso_analgesicos':'Faz Uso de medicamentos Analgésicos',
@@ -204,7 +218,7 @@ class Ficha_EndodontiaForm(forms.ModelForm):
             'pericemento_espessado':'Pericemento Espessado',
             'pericemento_hipercementose':'Pericemento Hipercementose',
             'periapice_osteite_rarefaciente_difusa':'Periápice Osteíte rarefaciente difusa',
-            'periapice_osteite_rarefaciente_circunscrita':'Periápice Osteíte rarefaciente circunscrita'
+            'periapice_osteite_rarefaciente_circunscrita':'Periápice Osteíte rarefaciente circunscrita',
              }
 
 class Ficha_OrtodontiaForm(forms.ModelForm):
@@ -218,12 +232,13 @@ class Ficha_OrtodontiaForm(forms.ModelForm):
             'alergias':'Alergias',
             'def_alergias':'Quais alergias?',
             'operacao':'Operação',
-            'estado_saude':'Estado geral de saúde',
+            'estado_saude':'Estado geral de sa�de',
             'traumatismo':'Traumatismo em dentes',
-            'data_traumatismo':'Data do traumatismo'
+            'data_traumatismo':'Data do traumatismo',
             'vontade_correcao':'Tem vontade de corrigir?',
             'aparelho':'Já usou aparelho antes?',
-            'observacoes':'Observações',
+            'tempo_aparelho': 'Tempo de uso do aparelho',
+            'observacoes_anamnese':'Observa��es da anamnese',
             'psicologico':'Tipo psicológico',
             'simetria_facial':'Simetria',
             'tipo_facial':'Tipo facial',
@@ -356,7 +371,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
             'epilepsia':'Tem epilepsia?',
             'disturbio_sanguineo':'É portador de algum disturbio sanguineo?',
             'def_disturbio_sanguineo':'Qual?',
-            'outro_problema':'Tem algum outro problema de saúde não citado?',
+            'outro_problema':'Tem algum outro problema de sa�de não citado?',
             'def_outro_problema':'Qual?',
             'face':'Face',
             'atm':'ATM',
