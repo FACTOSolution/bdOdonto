@@ -6,8 +6,8 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 class Aluno (models.Model):
-    usuario = models.OneToOneField(User)
     matricula = models.CharField(max_length=15, primary_key=True)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     
     def publish(self):
         self.save()

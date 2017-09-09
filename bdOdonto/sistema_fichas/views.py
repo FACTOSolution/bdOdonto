@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from .models import *
 from .forms import *
 
@@ -31,26 +33,22 @@ def user_logout(request):
     logout(request)
 
     return HttpResponseRedirect('/accounts/login')
-
-def registrar_usuario(request):
-    registered = False
 	
+def registrar_usuario(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         aluno_form = AlunoForm(data=request.POST)
         if user_form.is_valid() and aluno_form.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
             user.set_password(user.password)
             user.save()
             aluno = aluno_form.save(commit=False)
-            aluno.user = user
+            aluno.usuario = user
             aluno.save()
-            registered = True
     else:
         user_form = UserForm()
         aluno_form = AlunoForm()
 	
     return render(request, 'sistema_fichas/registrar_usuario.html',
                   {'user_form': user_form,
-                   'aluno_form': aluno_form,
-                   'registered': registered})
+                   'aluno_form': aluno_form})

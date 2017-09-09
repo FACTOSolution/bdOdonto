@@ -5,18 +5,22 @@ from django import forms
 from .models import *
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(
+        required = True,
+        label = 'Senha',
+        max_length = 32,
+        widget = forms.PasswordInput()
+    )
 	
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'last_name', 'email')
         labels = {
             'username': 'Nome de Usuário',
-            'password': 'Senha',
             'first_name': 'Nome',
             'last_name': 'Sobrenome',
-            }
-			
+}
+
 class AlunoForm(forms.ModelForm):
 
     class Meta:
