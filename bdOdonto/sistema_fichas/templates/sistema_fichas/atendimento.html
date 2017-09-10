@@ -6,7 +6,7 @@
 </head>
 <div id="atendimento_form">
     <h2>Cadastrar novo atendimento</h2>
-		<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
+		<form id="user_form" method="post" action="{% url 'sistema_fichas:atendimento' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ atendimento_form.as_p }}
 		{{ paciente_form.as_p }}

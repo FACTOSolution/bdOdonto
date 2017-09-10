@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+#div_info {
+	padding: 10px;
+}
+
+#div_info h1 {
+	position: relative;
+	text-align: center;
+	padding-bottom: 30px;
+	font-weight: 100;
+	font-size: 2.5em;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+#div_info h4{
+	position: relative;
+	text-align: center;
+	font-weight: 100;
+}
+
+.info {
+	margin: 3% auto 0;
+	position: relative;
+	width: 35%;
+	padding: 15px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+#avancar {
+	margin: 1.5% auto 0;
+	position: relative;
+	text-align: center;
+	width: 20%;
+	padding: 8px;
+	background-color: #11FF99;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+  color: #BBFFFF;	
+}
+
+#avancar:hover {
+	color: #FFFFFF;
+	width: 20%;
+	border: 1px solid #b9b9b9;
+	border-top: 1px solid #a0a0a0;
+	box-shadow: 10px 10px 5px #888888;
+}

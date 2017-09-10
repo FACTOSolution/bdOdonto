@@ -9,7 +9,6 @@
     {% for turma in turmas %}
         <div class="turma">
 			<h4>Turma: <a href="{% url 'sistema_fichas:detalhar_turma' pk=turma.pk %}">{{ turma.nome }}</a></h4>
-            <h5>Código: {{ turma.code }}</h5>
         </div>
     {% endfor %}
 </div>

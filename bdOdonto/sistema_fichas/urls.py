@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^registro/$', views.registrar_usuario, name='registrar_usuario'),
     url(r'^turmas_aluno/$', views.listar_turmas, name='listar_turmas'),
     url(r'^detalhar_turma/(?P<pk>[0-9]+)/$', views.detalhar_turma, name='detalhar_turma'),
-    url(r'^ficha/(?P<pk>[0-9]+)/$', views.ficha, name='ficha'),
+    url(r'^info_ficha/(?P<pk>[0-9]+)/$', views.info_ficha, name='info_ficha'),
+    url(r'^atendimento/$', views.atendimento, name='atendimento'),
 ]

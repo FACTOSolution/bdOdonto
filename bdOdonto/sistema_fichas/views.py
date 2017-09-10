@@ -31,7 +31,8 @@ def odontograma(request):
 @login_required
 def user_logout(request):
     logout(request)
-
+    if request.session.has_key('turma_atual'):
+        del request.session['turma_atual']
     return HttpResponseRedirect('/accounts/login')
 	
 def registrar_usuario(request):
@@ -66,19 +67,6 @@ def ficha_diagnostico(request):
         return render(request, 'sistema_fichas/ficha_diagnostico_edit.html',
                       {'ficha': ficha})
 
-def atendimento(request):
-    if request.method == "POST":
-        form = AtendimentoForm(request.POST)
-        if form.is_valid():
-            atendimento = form.save(commit=False)
-            aluno = get_object_or_404(Aluno, pk=request.POST['user'])
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('blog:post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-
 @login_required
 def listar_turmas(request):
     aluno = Aluno.objects.filter(usuario=request.user)
@@ -109,15 +97,51 @@ def verify_url(nome_ficha):
 @login_required
 def detalhar_turma(request, pk):
     turma = get_object_or_404(Turma, pk=pk)
+    if request.session.has_key('turma_atual'):
+        del request.session['turma_atual']
     fichas = Tipo_Ficha.objects.filter(turma=turma)
+    request.session['turma_atual'] = turma.codigo
     return render(request, 'sistema_fichas/detalhar_turma.html',
                   {'fichas' : fichas},
                   {'turma': turma})
 
 @login_required
-def ficha(request, pk):
+def info_ficha(request, pk):
     ficha = get_object_or_404(Tipo_Ficha, pk=pk)
     url = verify_url(ficha.nome)
-    return render(request, url)
+    request.session['ficha_atual'] = ficha.codigo
+    turma = Turma.objects.filter(codigo=request.session['turma_atual'])
+    aluno = Aluno.objects.filter(usuario=request.user)
+    return render(request, 'sistema_fichas/info_ficha.html',
+                  {'ficha' : ficha,
+                   'turma': turma,
+                   'aluno': aluno})
 
-#def atendimento(request, ):
+@login_required
+def atendimento(request):
+    if request.method == 'POST':
+        aluno = Aluno.objects.filter(usuario=request.user)
+        turma = request.session['turma_atual']
+        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
+        ficha = get_object_or_404(Tipo_Ficha, pk=request.session['ficha_atual'])
+        atendimento_form = AtendimentoForm(request.POST)
+        paciente_form = PacienteForm(request.POST)
+        if paciente_form.is_valid() and atendimento_form.is_valid():
+            paciente = paciente_form.save(commit=False)
+            paciente.turma_aluno = turma_aluno
+            paciente.save()
+            atendimento = atendimento_form.save(commit=False)
+            atendimento.data = timezone.now()
+            atendimento.turma_aluno = turma_aluno
+            atendimento.tipo_ficha = ficha
+            atendimento.paciente = paciente
+            atendimento.save()
+        else:
+            raise ValidationError('Username with tath email or password'
+                                  + 'already exists')
+    else:
+        atendimento_form = AtendimentoForm()
+        paciente_form = PacienteForm()
+    return render(request, 'sistema_fichas/atendimento.html',
+                  {'atendimento_form': atendimento_form,
+                   'paciente_form': paciente_form})
