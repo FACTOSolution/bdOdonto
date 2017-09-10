@@ -129,4 +129,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #LOGIN_URL default url (redirect url used by @login_required decorator)
-LOGIN_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'

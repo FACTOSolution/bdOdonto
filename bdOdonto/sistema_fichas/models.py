@@ -15,27 +15,27 @@ class Aluno (models.Model):
     def __str__(self):
         return self.matricula
 
-class Tipo_Fichas(models.Model):
-    code = models.PositiveIntegerField(primary_key=True)
-    nome = models.CharField(max_length=50)
-
-    def publish(self):
-        self.save()
-
-    def __str__(self):
-        return self.code
-
 class Turma (models.Model):
-    code = models.CharField(max_length=13, primary_key=True)
+    codigo = models.CharField(max_length=13, primary_key=True)
     nome = models.CharField(max_length=30)
-    fichas = models.ManyToManyField(Tipo_Fichas)
     alunos = models.ManyToManyField(Aluno, through='Turma_Aluno')
 
     def publish(self):
         self.save()
 
     def __str__(self):
-        return self.code
+        return self.nome
+
+class Tipo_Ficha(models.Model):
+    codigo = models.PositiveIntegerField(primary_key=True)
+    nome = models.CharField(max_length=50)
+    turma = models.ManyToManyField(Turma)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.nome
 
 class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
@@ -46,11 +46,11 @@ class Turma_Aluno (models.Model):
         self.save()
 
     def __str__(self):
-        return self.turma
+        return str(self.turma)
 
 class Professor (models.Model):
     nome = models.CharField(max_length=50)
-    code = models.CharField(max_length=15, primary_key=True)
+    codigo = models.CharField(max_length=15, primary_key=True)
     login = models.CharField(max_length=20)
     senha = models.CharField(max_length=20)
     turmas = models.ManyToManyField(Turma)
@@ -59,7 +59,7 @@ class Professor (models.Model):
         self.save()
 
     def __str__(self):
-        return self.code
+        return self.nome
 
 class Paciente(models.Model):
     cpf = models.CharField(max_length = 11, primary_key=True)
@@ -104,7 +104,7 @@ class Paciente(models.Model):
 class Atendimento (models.Model):
     data = models.DateTimeField(default=timezone.now)
     turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
-    tipo_ficha = models.ForeignKey(Tipo_Fichas, on_delete=models.CASCADE)
+    tipo_ficha = models.ForeignKey(Tipo_Ficha, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
 
     def publish(self):

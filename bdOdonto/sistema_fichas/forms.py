@@ -27,6 +27,12 @@ class AlunoForm(forms.ModelForm):
         model = Aluno
         fields = ('matricula',)
 
+class TurmaForm(forms.ModelForm):
+    class Meta:
+        model = Turma
+        fields = '__all__'
+        exclude = ['fichas', 'alunos']
+
 class PacienteForm(forms.ModelForm):
     
     class Meta:
@@ -43,6 +49,7 @@ class Ficha_UrgenciaForm(forms.ModelForm):
     class Meta:
         model = Ficha_Urgencia
         fields = '__all__'
+        exclude = ['atendimento']
         labels = {
             'historia_clinica' : 'História Clínica (condições de saúde)',
             'medicamentos' : 'Medicamentos em uso no momento', 
@@ -62,6 +69,7 @@ class Ficha_PPRForm(forms.ModelForm):
     class Meta:
         model = Ficha_PPR
         fields = '__all__'
+        exclude = ['atendimento']
         labels = {
             'class_kennedy_sup':'ClassificaÃ§Ã£o de Kennedy (superior)', 
             'tratamento_previo_sup':'Tratamento prÃ©vio (superior)', 
@@ -87,6 +95,7 @@ class Ficha_PeriodontiaForm(forms.ModelForm):
     class Meta:
         model = Ficha_Periodontia
         fields = '__all__'
+        exclude = ['atendimento', 'odontograma']
         labels = {
             'sangramento_gengiva':'Suas gengivas sangram quando escova os dentes?',
             'tratamento_gengiva':'JÃ¡ fez tratamento de gengiva alguma vez?',
@@ -136,6 +145,7 @@ class Ficha_Endodontia_TabelaForm(forms.ModelForm):
     class Meta:
         model = Ficha_Endodontia_Tabela
         fields = '__all__'
+        exclude = ['atendimento']
         labels = {
             'dente1':'Dente',
             'canal1':'Canal',
@@ -171,6 +181,7 @@ class Ficha_EndodontiaForm(forms.ModelForm):
     class Meta:
         model = Ficha_Endodontia
         fields = '__all__'
+        exclude = ['atendimento']
         labels = {
             'em_tratamento':'EstÃ¡ em tratamento mÃ©dico?',
             'quanto_tempo':'HÃ¡ quanto tempo?',
@@ -229,7 +240,9 @@ class Ficha_OrtodontiaForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_Ortodontia
-        fields = {
+        fields = '__all__'
+        exclude = ['atendimento', 'odontograma']
+        labels = {
             'queixa':'Queixa principal',
             'cor':'Cor da pele',
             'doencas':'DoenÃ§as',
@@ -304,6 +317,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
     class Meta():
         model = Ficha_Diagnostico
         fields = '__all__'
+        exclude = ['atendimento', 'odontograma']
         labels = {
             'motivo':'Motivo da consulta',
             'historia':'Historia da doenca atual',
@@ -405,6 +419,7 @@ class Ficha_DentisticaForm(forms.ModelForm):
     class Meta():
         model = Ficha_Dentistica
         fields = '__all__'
+        exclude = ['atendimento']
         labels = {
             'motivo_consulta':'Motivo da consulta:',
             'ultima_consulta':'Quando foi ao dentista pela ultima vez?',

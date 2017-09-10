@@ -1,0 +1,14 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/ficha_normal.css">
+</head>
+<div id="form_ficha_normal">
+	<h2>Registrar-se no BDOdonto</h2>
+	<form id="ficha_diagnostico_form" method="post" action="{% url 'sistema_fichas:ficha_diagnostico' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ ficha_diagnostico_form.as_p }}
+	</form>
+</div>
+{% endblock %}

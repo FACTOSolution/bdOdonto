@@ -16,3 +16,6 @@ admin.site.register(Ficha_Endodontia)
 admin.site.register(Ficha_Endodontia_Tabela)
 admin.site.register(Ficha_PPR)
 admin.site.register(Ficha_Dentistica)
+admin.site.register(Tipo_Ficha)
+admin.site.register(Turma_Aluno)
+

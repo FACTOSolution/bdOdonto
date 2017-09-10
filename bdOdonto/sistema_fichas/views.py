@@ -52,3 +52,70 @@ def registrar_usuario(request):
     return render(request, 'sistema_fichas/registrar_usuario.html',
                   {'user_form': user_form,
                    'aluno_form': aluno_form})
+
+def ficha_diagnostico(request):
+    if request.method == "POST":
+        form = Ficha_DiagnosticoForm(request.POST)
+        if form.is_valid():
+            ficha = form.save(commit=False)
+            ficha.data = timezone.now()
+            ficha.save()
+            return redirect('sistema_fichas:ficha_diagnostico_detail', pk=ficha.pk)
+        else:
+            form = Ficha_DiagnosticoForm()
+        return render(request, 'sistema_fichas/ficha_diagnostico_edit.html',
+                      {'ficha': ficha})
+
+def atendimento(request):
+    if request.method == "POST":
+        form = AtendimentoForm(request.POST)
+        if form.is_valid():
+            atendimento = form.save(commit=False)
+            aluno = get_object_or_404(Aluno, pk=request.POST['user'])
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('blog:post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+@login_required
+def listar_turmas(request):
+    aluno = Aluno.objects.filter(usuario=request.user)
+    turmas = Turma.objects.filter(alunos=aluno)
+    return render(request, 'sistema_fichas/listar_turmas.html',
+                  {'turmas' : turmas})
+
+def verify_url(nome_ficha):
+    if nome_ficha == "Ficha Diagnostico":
+        return "sistema_fichas/ficha_diagnostico.html"
+    elif nome_ficha == "Ficha Ortodontia":
+        return "sistema_fichas/ficha_ortodontia.html"
+    elif nome_ficha == "Ficha Periodontia":
+        return "sistema_fichas/ficha_periodontia.html"
+    elif nome_ficha == "Ficha Urgencia":
+        return "sistema_fichas/ficha_urgencia.html"
+    elif nome_ficha == "Ficha Endodontia":
+        return "sistema_fichas/ficha_endodontia.html"
+    elif nome_ficha == "Ficha Endodontia Tabela":
+        return "sistema_fichas/ficha_endodontia_tabela.html"
+    elif nome_ficha == "Ficha PPR":
+        return "sistema_fichas/ficha_ppr.html"
+    elif nome_ficha == "Ficha Dentistica":
+        return "sistema_fichas/ficha_dentistica.html"
+    else:
+        return None
+
+@login_required
+def detalhar_turma(request, pk):
+    turma = get_object_or_404(Turma, pk=pk)
+    fichas = Tipo_Ficha.objects.filter(turma=turma)
+    return render(request, 'sistema_fichas/detalhar_turma.html',
+                  {'fichas' : fichas},
+                  {'turma': turma})
+
+@login_required
+def ficha(request, pk):
+    ficha = get_object_or_404(Tipo_Fichas, pk=pk)
+    url = verify_url(ficha.nome)
+    return render(request, url)
