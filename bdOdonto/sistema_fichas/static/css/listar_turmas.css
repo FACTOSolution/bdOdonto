@@ -5,7 +5,7 @@ body {
 }
 
 #div_turmas {
-	padding: 20px;
+	padding: 10px;
 }
 
 #div_turmas h1 {
@@ -18,13 +18,51 @@ body {
 	border-bottom-width: 1px;
 }
 
-#div_turmas p, h4, h5 {
+#div_turmas p, h4 {
 	position: relative;
 	text-align: center;
 	font-weight: 100;
 }
 
 .turma {
-	padding-top: 5px;
-	padding-bottom: 5px;
+	display: inline-block;
+	padding: 4px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+#acessar_turma {
+	visibility: hidden;
+	text-align: center;
+	border-radius: 6px;
+}
+
+.turma a {
+	margin-top: 50%;
+	vertical-align: bottom;
+}
+
+.turma:hover {
+	color: #FFFFFF;
+	width: 20%;
+	background-color: #0088FF;
+	border: 1px solid #b9b9b9;
+	border-top: 1px solid #a0a0a0;
+	box-shadow: 10px 10px 5px #888888;
+	
+}
+
+.turma:hover a{
+	font-weight: 150;
+	color: #FFFFFF;
+	
+}
+
+.turma:hover #acessar_turma{
+	visibility: visible;
+}
+
+.turma a:active {
+	color: #55FFF6;
 }

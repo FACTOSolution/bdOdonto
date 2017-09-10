@@ -96,11 +96,15 @@ def verify_url(nome_ficha):
 
 @login_required
 def detalhar_turma(request, pk):
-    turma = get_object_or_404(Turma, pk=pk)
+
     if request.session.has_key('turma_atual'):
         del request.session['turma_atual']
+        request.session.modified = True
+    
+    turma = get_object_or_404(Turma, pk=pk)
     fichas = Tipo_Ficha.objects.filter(turma=turma)
     request.session['turma_atual'] = turma.codigo
+    request.session.modified = True
     return render(request, 'sistema_fichas/detalhar_turma.html',
                   {'fichas' : fichas},
                   {'turma': turma})
@@ -110,12 +114,15 @@ def info_ficha(request, pk):
     ficha = get_object_or_404(Tipo_Ficha, pk=pk)
     url = verify_url(ficha.nome)
     request.session['ficha_atual'] = ficha.codigo
-    turma = Turma.objects.filter(codigo=request.session['turma_atual'])
-    aluno = Aluno.objects.filter(usuario=request.user)
+    request.session.modified = True
+    t_codigo = request.session['turma_atual']
+    turma = get_object_or_404(Turma, codigo=t_codigo)
+    aluno = get_object_or_404(Aluno, usuario=request.user)
+    usuario = aluno.usuario
     return render(request, 'sistema_fichas/info_ficha.html',
                   {'ficha' : ficha,
                    'turma': turma,
-                   'aluno': aluno})
+                   'aluno': usuario})
 
 @login_required
 def atendimento(request):

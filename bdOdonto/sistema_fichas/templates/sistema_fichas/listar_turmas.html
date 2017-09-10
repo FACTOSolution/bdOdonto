@@ -8,7 +8,8 @@
     <h1>Suas Turmas</h1>
     {% for turma in turmas %}
         <div class="turma">
-			<h4>Turma: <a href="{% url 'sistema_fichas:detalhar_turma' pk=turma.pk %}">{{ turma.nome }}</a></h4>
+			<h4>{{ turma.nome }}</h4>
+			<h4 id="acessar_turma"><a href="{% url 'sistema_fichas:detalhar_turma' pk=turma.pk %}">Acessar Turma</a></h4>
         </div>
     {% endfor %}
 </div>

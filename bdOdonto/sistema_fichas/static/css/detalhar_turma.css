@@ -18,7 +18,7 @@ body {
 	border-bottom-width: 1px;
 }
 
-#div_fichas p, h4{
+#div_fichas p, h4 {
 	position: relative;
 	text-align: center;
 	font-weight: 100;
@@ -61,4 +61,8 @@ body {
 
 .ficha:hover #cadastrar_ficha{
 	visibility: visible;
+}
+
+#cadastrar_ficha a:active {
+	color: #55FFF6;
 }

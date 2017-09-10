@@ -55,6 +55,7 @@ strong {
 	padding-bottom: 3px;
 	border-radius: 4px;
 }
+
 #user_form p > input:hover {
     border: 1px solid #b9b9b9;
 	border-top: 1px solid #a0a0a0;
@@ -71,8 +72,10 @@ strong {
 	border: 0px;
 	color: #FFFFFF;
 	text-shadow: 0 1px rgba(0,0,0,0.1); 
-	background-color: #0088FF;
-
+    background: #79aec8;
+	padding: 10px 15px;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 #user_form input[value=Registrar]:hover{

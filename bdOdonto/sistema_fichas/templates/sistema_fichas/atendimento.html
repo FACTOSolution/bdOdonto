@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/atendimento.css">
 </head>
-<div id="atendimento_form">
+<div id="div_atendimento">
     <h2>Cadastrar novo atendimento</h2>
-		<form id="user_form" method="post" action="{% url 'sistema_fichas:atendimento' %}" enctype="multipart/form-data">
+		<form id="atendimento_form" method="post" action="{% url 'sistema_fichas:atendimento' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ atendimento_form.as_p }}
 		{{ paciente_form.as_p }}

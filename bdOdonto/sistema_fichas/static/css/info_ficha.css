@@ -54,3 +54,7 @@ body {
 	border-top: 1px solid #a0a0a0;
 	box-shadow: 10px 10px 5px #888888;
 }
+
+#avancar a:active {
+	color: #55FFF6;
+}
