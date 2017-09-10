@@ -13,10 +13,10 @@
 	    <input type="text" name="username" placeholder="Nome de usuário">
 	    <input type="password" name="password" placeholder="Senha">
 	    <input type="submit" name="login" class="login login-submit" value="login">
-	    <input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}" />
+	    <input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
 	</form>
 	<div class="login-help">
-		<a href="{% url 'sistema_fichas:registrar_usuario' %}">Registrar-se</a>
+		<a href="{% url 'sistema_fichas:registrar_usuario' %}">Ainda não tem login? Registre-se aqui</a>
 	</div>
 </div>
 {% endblock %}

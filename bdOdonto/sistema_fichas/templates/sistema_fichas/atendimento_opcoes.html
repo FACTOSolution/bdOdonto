@@ -1,0 +1,14 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+	<title>Salvar Atendimento - BDOdonto</title>
+	<link rel="stylesheet" href="/static/css/atendimento_opcoes.css">
+</head>
+<div id="div_ficha">
+	<h2>Atendimento</h2>
+        <div class="opcoes">
+			<h4 id="preencher_ficha"><a href="{% url 'sistema_fichas:preencher_ficha' %}"></a>Preencher Ficha</h4>
+			<h4 id="odontograma"><a href="{% url 'sistema_fichas:odontograma' %}">Preencher Odontograma</a></h4>	
+</div>
+{% endblock %}

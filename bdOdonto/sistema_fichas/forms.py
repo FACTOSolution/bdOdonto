@@ -1,6 +1,8 @@
 #coding: latin-1
 from django.contrib.auth.models import User
 from django import forms
+import datetime
+from django.forms.extras.widgets import SelectDateWidget
 
 from .models import *
 
@@ -34,7 +36,11 @@ class TurmaForm(forms.ModelForm):
         exclude = ['fichas', 'alunos']
 
 class PacienteForm(forms.ModelForm):
-    
+    data_nasc = forms.DateField(
+        label='Data de Nascimento',
+        widget=SelectDateWidget(years=[x for x in range(1900, 2101)])
+        )
+
     class Meta:
         model = Paciente
         fields = '__all__'
@@ -50,7 +56,7 @@ class PacienteForm(forms.ModelForm):
             }
 
 class AtendimentoForm(forms.ModelForm):
-
+    data = forms.DateField(widget=SelectDateWidget(years=[x for x in range(2017, 2100)]))
     class Meta:
         model = Atendimento
         fields = '__all__'

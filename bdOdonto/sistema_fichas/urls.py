@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^detalhar_turma/(?P<pk>[0-9]+)/$', views.detalhar_turma, name='detalhar_turma'),
     url(r'^info_ficha/(?P<pk>[0-9]+)/$', views.info_ficha, name='info_ficha'),
     url(r'^atendimento/$', views.atendimento, name='atendimento'),
+    url(r'^preencher_ficha/$', views.preencher_ficha, name='preencher_ficha'),
+    url(r'^atendimento_opcoes/$', views.atendimento_opcoes, name='atendimento_opcoes'),
 ]

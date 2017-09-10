@@ -6,11 +6,12 @@
 </head>
 <div id="div_atendimento">
     <h2>Cadastrar novo atendimento</h2>
-		<form id="atendimento_form" method="post" action="{% url 'sistema_fichas:atendimento' %}" enctype="multipart/form-data">
+		<form id="form_atendimento" method="post" action="{% url 'sistema_fichas:atendimento' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ atendimento_form.as_p }}
 		{{ paciente_form.as_p }}
 		<input type="submit" name="submit" value="Salvar e Cadastrar Ficha"/>
+		<input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
 	</form>
 </div>
 {% endblock %}

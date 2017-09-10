@@ -25,25 +25,25 @@ body {
 	font-size: 2.5em;
 }
 
-#atendimento_form {
+#form_atendimento {
 	margin: auto;
 	width: 75%;
 }
 
-#atendimento_form label{
+#form_atendimento label{
 	width: 20%;
 	padding: 5px;
 	margin-left: 20%;
 	font-size: 0.975em;
 }
 
-#atendimento_form p > input{
+#form_atendimento p > input{
 	width: 40%;
 	padding-bottom: 3px;
 	border-radius: 4px;
 }
 
-#atendimento_form input[type="submit"]{
+#form_atendimento input[type="submit"]{
 	padding: 4px;
 	display: block;
 	margin-left: 38%;

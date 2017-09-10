@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
+from django.forms.extras.widgets import SelectDateWidget
 
 class Aluno (models.Model):
     matricula = models.CharField(max_length=15, primary_key=True)
@@ -68,32 +69,28 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=200)
     cidade = models.CharField(max_length=200)
     estado = models.CharField(max_length=200)
-    cep_regex = RegexValidator(regex=r'^(64)\d{3}-\d{3}$', message="CEP deve estar no formato '64XXX-XXX'.")
-    cep = models.CharField(validators=[cep_regex], blank=True, max_length=9)
-    tel_regex = RegexValidator(regex=r'^(86|89)(988|999|998|994|995|981)\d{6}$', message="Telefone deve estar no formato '869XXXXXXXX'.")
-    tel = models.CharField(validators=[tel_regex], blank=True, max_length=11)
-    cel = models.CharField(validators=[tel_regex], blank=True, max_length=11)
-    email  = models.EmailField(blank = True,null=True)
+    cep = models.CharField(max_length=9, blank=True)
+    tel = models.CharField(max_length=11, blank=True)
+    cel = models.CharField(max_length=11, blank=True)
+    email  = models.EmailField(null=True, blank=True)
     estado_civil = models.CharField(max_length=200)
-    data_nasc = models.DateTimeField()
+    data_nasc = models.DateField()
     idade = models.CharField(max_length=3)
     cor = models.CharField(max_length=200)
     SEXOS = (
         ('M','M'),
         ('F','F'),
         )
-    sexo = models.CharField(max_length=1,choices=SEXOS)
-    rg_regex = RegexValidator(regex=r'^(64)\d{3}-\d{3}$', message="CEP deve estar no formato '64XXX-XXX'.")
+    sexo = models.CharField(max_length=1, choices=SEXOS)
     rg = models.CharField(max_length=8)
     naturalidade = models.CharField(max_length=200)
     nacionalidade = models.CharField(max_length=200)
-    profissao_atual = models.CharField(max_length=200,blank = True,null=True)
-    profissao_anterior = models.CharField(max_length=200,blank = True,null=True)
-    endereco_profissional = models.CharField(max_length=200,blank = True, null = True)
-    bairro_profissional = models.CharField(max_length=200,blank = True, null = True)
-    cep_profissional = models.CharField(validators=[cep_regex], blank=True, null=True, max_length=9)
-
-    turma_aluno = models.ManyToManyField(Turma_Aluno, through = "atendimento")
+    profissao_atual = models.CharField(max_length=200, blank = True, null=True)
+    profissao_anterior = models.CharField(max_length=200, blank = True, null=True)
+    endereco_profissional = models.CharField(max_length=200, blank = True, null = True)
+    bairro_profissional = models.CharField(max_length=200, blank = True, null = True)
+    cep_profissional = models.CharField(blank=True, null=True, max_length=9)
+    turma_aluno = models.ManyToManyField(Turma_Aluno, through='Atendimento')
 
     def publish(self):
         self.save()
@@ -102,16 +99,16 @@ class Paciente(models.Model):
         return self.cpf
 
 class Atendimento (models.Model):
-    data = models.DateTimeField(default=timezone.now)
+    data = models.DateField(auto_now=True)
     turma_aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
     tipo_ficha = models.ForeignKey(Tipo_Ficha, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
 
     def publish(self):
         self.save()
-    # __str__ Provisório
+
     def __str__(self):
-        return self.paciente
+        return str(self.paciente)
 
 class Odontograma(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
@@ -122,12 +119,12 @@ class Odontograma(models.Model):
 class Ficha_Diagnostico(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
 
-    data = models.DateTimeField(default=timezone.now)
+    data = models.DateField(auto_now=True)
 
     motivo = models.CharField(max_length=200)
     historia = models.TextField()
 
-    ultima_consulta = models.DateTimeField(blank = True, null = True)
+    ultima_consulta = models.DateField(blank = True, null = True)
     frequencia_consultas = models.CharField(max_length=200)
     higiene_propria = models.CharField(max_length=200)
     frequencia_escova = models.PositiveIntegerField()
