@@ -116,6 +116,8 @@ def detalhar_turma(request, pk):
 
 @login_required
 def ficha(request, pk):
-    ficha = get_object_or_404(Tipo_Fichas, pk=pk)
+    ficha = get_object_or_404(Tipo_Ficha, pk=pk)
     url = verify_url(ficha.nome)
     return render(request, url)
+
+#def atendimento(request, ):

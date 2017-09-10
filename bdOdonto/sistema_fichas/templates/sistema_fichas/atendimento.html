@@ -1,0 +1,16 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/atendimento.css">
+</head>
+<div id="atendimento_form">
+    <h2>Cadastrar novo atendimento</h2>
+		<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ atendimento_form.as_p }}
+		{{ paciente_form.as_p }}
+		<input type="submit" name="submit" value="Salvar e Cadastrar Ficha"/>
+	</form>
+</div>
+{% endblock %}

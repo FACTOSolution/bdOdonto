@@ -93,7 +93,7 @@ class Paciente(models.Model):
     bairro_profissional = models.CharField(max_length=200,blank = True, null = True)
     cep_profissional = models.CharField(validators=[cep_regex], blank=True, null=True, max_length=9)
 
-    turma_Aluno = models.ManyToManyField(Turma_Aluno, through = "atendimento")
+    turma_aluno = models.ManyToManyField(Turma_Aluno, through = "atendimento")
 
     def publish(self):
         self.save()
@@ -103,7 +103,7 @@ class Paciente(models.Model):
 
 class Atendimento (models.Model):
     data = models.DateTimeField(default=timezone.now)
-    turma_Aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
+    turma_aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
     tipo_ficha = models.ForeignKey(Tipo_Ficha, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
 

@@ -8,8 +8,8 @@
     <h1>Fichas da turma {{ turma.nome }}</h1>
     {% for ficha in fichas %}
         <div class="ficha">
-			<h4>Ficha: <a href="{% url 'sistema_fichas:ficha' pk=ficha.pk %}">{{ ficha.nome }}</a></h4>
-            <h5>Código: {{ ficha.codigo }}</h5>
+			<h4>{{ ficha.nome }}</h4>
+			<h4 id="cadastrar_ficha"><a href="{% url 'sistema_fichas:ficha' pk=ficha.pk %}">Novo Atendimento</a></h4>
         </div>
     {% endfor %}
 </div>

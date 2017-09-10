@@ -38,12 +38,24 @@ class PacienteForm(forms.ModelForm):
     class Meta:
         model = Paciente
         fields = '__all__'
+        exclude = ['turma_aluno']
         labels = {
+            'cpf': 'CPF',
             'tel': 'Telefone',
             'cel': 'Celular',
             'data_nasc': 'Data de Nascimento',
+            'rg': 'RG',
+            'profissao_atual': 'Profissão atual',
+            'profissao_anterior': 'Profissão anterior'
             }
 
+class AtendimentoForm(forms.ModelForm):
+
+    class Meta:
+        model = Atendimento
+        fields = '__all__'
+        exclude = ['turma_aluno', 'tipo_ficha', 'paciente']
+        
 class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:

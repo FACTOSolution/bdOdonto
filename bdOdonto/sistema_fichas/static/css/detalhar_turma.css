@@ -5,7 +5,7 @@ body {
 }
 
 #div_fichas {
-	padding: 20px;
+	padding: 10px;
 }
 
 #div_fichas h1 {
@@ -18,13 +18,47 @@ body {
 	border-bottom-width: 1px;
 }
 
-#div_fichas p, h4, h5 {
+#div_fichas p, h4{
 	position: relative;
 	text-align: center;
 	font-weight: 100;
 }
 
 .ficha {
-	padding-top: 5px;
-	padding-bottom: 5px;
+	display: inline-block;
+	padding: 4px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+#cadastrar_ficha {
+	visibility: hidden;
+	text-align: center;
+	border-radius: 6px;
+}
+
+.ficha a {
+	margin-top: 50%;
+	vertical-align: bottom;
+}
+
+.ficha:hover {
+	color: #FFFFFF;
+	width: 20%;
+	background-color: #0088FF;
+	border: 1px solid #b9b9b9;
+	border-top: 1px solid #a0a0a0;
+	box-shadow: 10px 10px 5px #888888;
+	
+}
+
+.ficha:hover a{
+	font-weight: 150;
+	color: #FFFFFF;
+	
+}
+
+.ficha:hover #cadastrar_ficha{
+	visibility: visible;
 }
