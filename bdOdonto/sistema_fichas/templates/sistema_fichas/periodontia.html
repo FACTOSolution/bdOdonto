@@ -1,0 +1,17 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+	<title>Preencher Ficha - BDOdonto</title>
+	<link rel="stylesheet" href="/static/css/preencher_ficha.css">
+</head>
+<div id="div_ficha">
+	<h2>Cadastrar Ficha Periodontia</h2>
+	<form id="ficha_form" method="post" action="{% url 'sistema_fichas:periodontia' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ ficha_form.as_p }}
+		<input type="submit" name="submit" value="Salvar Ficha"/>
+		<input type="hidden" name="next" value="{% url 'sistema_fichas:atendimento_opcoes' %}"/>
+	</form>
+</div>
+{% endblock %}
