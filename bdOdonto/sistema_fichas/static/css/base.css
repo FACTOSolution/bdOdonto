@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
 	padding-left: 20px;
@@ -10,7 +10,7 @@ body {
 	width: 50%;
 	padding-bottom: 10px;
 	color: #FFFFFF;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 #bdodonto {

@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 #div_turmas {
@@ -30,6 +30,8 @@ body {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 5px;
+	font-size-adjust: 0.6;
+	font-family: Arial;
 }
 
 #acessar_turma {
@@ -45,18 +47,18 @@ body {
 
 .turma:hover {
 	color: #FFFFFF;
-	width: 20%;
+	width: 170px;
 	background-color: #0088FF;
 	border: 1px solid #b9b9b9;
 	border-top: 1px solid #a0a0a0;
-	box-shadow: 10px 10px 5px #888888;
-	
+	box-shadow: 0px 0px 3px 4px #888888;
+	font-family: Arial;
 }
 
 .turma:hover a{
 	font-weight: 150;
 	color: #FFFFFF;
-	
+	font-weight: bolder;
 }
 
 .turma:hover #acessar_turma{

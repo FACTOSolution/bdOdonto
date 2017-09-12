@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html>
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
 <head>
-<title>Odontograma</title>
-<link rel="stylesheet" href="/static/css/odontograma_styles.css">
+    <title>Odontograma</title>
+	<link rel="stylesheet" href="/static/css/odontograma.css">
 </head>
-<body>
 <h2 id="pagetitle">Odontograma</h2>
 <div id="selectors">
-    <div id="Circle">
-        <button id="buttonCircle" type="button" onclick="buttonRedCircle()">Circulo Vermelho</button>
-        <button id="buttonCircle" type="button" onclick="buttonBlueCircle()">Circulo Azul</button>
+    <div class="marca_vermelha">
+        <button type="button" onclick="buttonRedCircle()">Circulo Vermelho</button>
+		<button type="button" onclick="buttonRedLine()">Linha Vermelha</button>
+		<button type="button" onclick="buttonRedAxis()">Marcar X Vermelho</button>
+		<button type="button" onclick="buttonRedFilledCircle()">Preencher Vermelho</button>
     </div>
-    <div id="Line">
-        <button id="buttonLine" type="button" onclick="buttonRedLine()">Linha Vermelha</button>
-        <button id="buttonLine" type="button" onclick="buttonBlueLine()">Linha Azul</button>
+    <div class="marca_azul">
+		<button type="button" onclick="buttonBlueCircle()">Circulo Azul</button>
+        <button type="button" onclick="buttonBlueLine()">Linha Azul</button>
+		<button type="button" onclick="buttonBlueAxis()">Marcar X Azul</button>
+		<button type="button" onclick="buttonBlueFilledCircle()">Preencher Azul</button>
     </div>
-    <div id="Axis">
-        <button id="buttonAxis" type="button" onclick="buttonRedAxis()">Marcar X Vermelho</button>
-        <button id="buttonAxis" type="button" onclick="buttonBlueAxis()">Marcar X Azul</button>
-    </div>
-	<div id="FilledCircle">
-        <button id="buttonFilledCircle" type="button" onclick="buttonRedFilledCircle()">Preencher Vermelho</button>
-        <button id="buttonFilledCircle" type="button" onclick="buttonBlueFilledCircle()">Preencher Azul</button>
-    </div>
-    <div id="Options">
+    <div id="opcoes">
 		<button id="buttonClear" type="button" onclick="buttonClear()">Limpar Alterações</button>
         <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar Alterações</button>
     </div>
-	<button id="buttonLogout" type="button"><a href="{% url 'logout' %}?next={{ request.path }}">Fazer Logout</a></button>
-
 </div>
 <canvas id="canvas" width="515" height="500"></canvas>
-
 <script>
 var rect = document.getElementById
 ("canvas").getBoundingClientRect();
@@ -158,8 +150,8 @@ function drawBlueFilledCircle(x, y){
     ctx.fill();
 }
 canvas.onclick = function(event) {
-    var x = (event.clientX - 4) - (rect.left + window.scrollX);	
-    var y = (event.clientY - 3) - (rect.top - window.scrollY);
+    var x = (event.clientX - 4) - (rect.left + (window.scrollX + 7));	
+    var y = (event.clientY - 3) - (rect.top - (window.scrollY - 350));
     switch(drawing_type){
         case "redfilledcircle":
             drawRedFilledCircle(x, y);
@@ -188,10 +180,8 @@ canvas.onclick = function(event) {
         default:
             alert("Opcao nao especificada");
     }
-
     points.drawing_text = [event.pageX, event.pageY];
     json = JSON.stringify(points);
 }
 </script>
-</body>
-</html>
+{% endblock %}

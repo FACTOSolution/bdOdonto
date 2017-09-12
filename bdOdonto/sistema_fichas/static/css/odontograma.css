@@ -1,0 +1,84 @@
+body{
+	  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+#pagetitle {
+	  position: relative;
+	  text-align: center;
+	  padding-bottom: 30px;
+	  font-weight: 100;
+	  font-size: 2.5em;
+	  border-bottom-style: solid;
+	  border-bottom-width: 1px;
+}
+
+#selectors {
+	  padding-top: 20px;
+    margin-left: 7%;
+	  position: relative;
+    padding-bottom: 30px;
+	  font-size: 100%;
+	  color: #FFFFFF;
+	  font-family: Arial;
+}
+
+#opcoes {
+	  margin-left: 32%;
+	  position: relative; 
+	  padding: 10px;
+	  color: #000000;
+}
+
+#opcoes button {
+	  padding: 10px;
+	  border-radius: 5px;
+}
+
+#buttonClear {
+	  background-color: #F0F0F0;
+}
+
+#buttonSave {
+	  background-color: #00FE0F;
+}
+
+
+.marca_vermelha {
+	  display: inline;
+    margin: auto;
+    width: 100%;
+}
+
+.marca_azul {
+    display: inline;
+    margin: auto;
+    width: 100%;
+}
+
+.marca_vermelha button {
+	  position: relative;
+	  padding: 10px;
+    display: inline;
+    background-color: #FF0022;
+    width: auto;
+    height: auto;
+	  text-align: center;
+	  border-radius: 5px;
+}
+
+.marca_azul button {
+	  position: relative;
+	  padding: 10px;
+    display: inline;
+	  background-color: #0066FF;
+	  width: auto;
+	  height: auto;
+	  text-align: center;
+	  border-radius: 5px;
+}
+
+#canvas {
+    display: block;
+	  margin: auto auto 5%;
+    padding: 10px;
+}
