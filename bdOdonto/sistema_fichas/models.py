@@ -111,6 +111,7 @@ class Atendimento (models.Model):
 
 class Odontograma(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    pontos = models.TextField(blank=True)
 
     def publish(self):
         self.save()

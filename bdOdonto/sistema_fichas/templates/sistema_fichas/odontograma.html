@@ -3,6 +3,7 @@
 <head>
     <title>Odontograma</title>
 	<link rel="stylesheet" href="/static/css/odontograma.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
 </head>
 <h2 id="pagetitle">Odontograma</h2>
 <div id="selectors">
@@ -20,7 +21,7 @@
     </div>
     <div id="opcoes">
 		<button id="buttonClear" type="button" onclick="buttonClear()">Limpar Alterações</button>
-        <button id="buttonSave" type="button" href="" onclick="buttonSave()">Salvar Alterações</button>
+        <button id="buttonSave" type="button" href="" onclick="SaveJSON()">Salvar Alterações</button>
     </div>
 </div>
 <canvas id="canvas" width="515" height="500"></canvas>
@@ -29,12 +30,21 @@ var rect = document.getElementById
 ("canvas").getBoundingClientRect();
 var body_rect = document.body.getBoundingClientRect();
 var drawing_type = "";
-var points = {};
+var points = {
+	redcircle: [],
+	redline: [], 
+	redaxis: [], 
+	redfilledcircle: [], 
+	bluecircle: [],
+	blueline: [],
+	blueaxis: [], 
+	bluefilledcircle: []
+};
+var url_odontograma = {% url 'sistema_fichas:odontograma' %};
 var arrayPoints = [];
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var img = new Image();
-json = JSON.stringify(points);
 img.onload = function(){
     ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
 };
@@ -77,11 +87,21 @@ function buttonClear(){
     ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
 }
 
-function buttonSave(){
-    var dataImageURL = canvas.toDataURL();
-    img.src = dataImageURL;
-    document.getElementById("buttonSave").href = dataImageURL;
-}
+function SaveJSON(){
+	$.ajax({
+		url: url_odontograma,
+		type: 'POST',
+		contentType: 'application/json; charset=utf-8,',
+		data: JSON.stringify(points),
+		dataType: 'JSON',
+		sucess: function(result) {
+			alert(result.Result);
+		}
+	});
+//    var dataImageURL = canvas.toDataURL();
+//    img.src = dataImageURL;
+//    document.getElementById("buttonSave").href = dataImageURL;
+}{% csrf_token %}
 function drawRedAxis(x, y){
     ctx.strokeStyle = "#FF0000";
     ctx.beginPath();
@@ -150,38 +170,56 @@ function drawBlueFilledCircle(x, y){
     ctx.fill();
 }
 canvas.onclick = function(event) {
-    var x = (event.clientX - 4) - (rect.left + (window.scrollX + 7));	
-    var y = (event.clientY - 3) - (rect.top - (window.scrollY - 350));
+    var x = (event.clientX - 4) - (rect.left + (window.scrollX));	
+    var y = (event.clientY - 3) - (rect.top - (window.scrollY));
     switch(drawing_type){
         case "redfilledcircle":
             drawRedFilledCircle(x, y);
+            var point = [x, y];
+            points.redfilledcircle.push(point);
             break;
         case "bluefilledcircle":
             drawBlueFilledCircle(x, y);
+            var point = [x, y];
+            points.bluefilledcircle.push(point);
             break;
         case "redcircle":
             drawRedCircle(x, y);
+            var point = [x, y];
+            points.redcircle.push(point);            
             break;
         case "bluecircle":
             drawBlueCircle(x, y);
+            var point = [x, y];
+            points.bluecircle.push(point);            
             break;
 		case "redline":
             drawRedLine(x, y);
+            var point = [x, y];
+            points.redline.push(point);            
             break;
         case "blueline":
             drawBlueLine(x, y);
+            var point = [x, y];
+            points.blueline.push(point);            
             break;
         case "redaxis":
             drawRedAxis(x, y);
+            var point = [x, y];
+            points.redaxis.push(point);
             break;
         case "blueaxis":
             drawBlueAxis(x, y);
+            var point = [x, y];
+            points.blueaxis.push(point);
             break;
         default:
             alert("Opcao nao especificada");
     }
-    points.drawing_text = [event.pageX, event.pageY];
-    json = JSON.stringify(points);
+//    json = JSON.stringify(points);
+//    document.getElementById('teste').onclick = function() {
+//        document.getElementById('teste').innerHTML = JSON.stringify(points);
+//    }
 }
 </script>
 {% endblock %}

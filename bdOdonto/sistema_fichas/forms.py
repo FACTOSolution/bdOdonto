@@ -108,6 +108,12 @@ class Dados_DentesForm(forms.ModelForm):
             'placa':'I. Placa'
             }
 
+class OdontogramaForm(forms.ModelForm):
+
+    class Meta:
+        model = Odontograma
+        fields = '__all__'
+
 class Ficha_PeriodontiaForm(forms.ModelForm):
     
     class Meta:

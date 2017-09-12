@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .models import *
 from .forms import *
+import json
 
 def index(request):
     return render(request, 'sistema_fichas/base.html', {})
@@ -162,8 +163,11 @@ def atendimento(request):
 @login_required
 def atendimento_opcoes(request):
     atendimento_ficha = False
+    odontograma = False
     if request.session.has_key('atendimento_ficha'):
         atendimento_ficha = True
+    if request.session.has_key('odontograma'):
+        odontograma = True
     aluno = get_object_or_404(Aluno, usuario=request.user)
     t_codigo = request.session['turma_atual']
     turma = get_object_or_404(Turma, codigo=t_codigo)
@@ -177,10 +181,27 @@ def atendimento_opcoes(request):
                    'aluno': aluno,
                    'ficha': tipo_ficha,
                    'atendimento': atendimento,
-                   'ficha_preenchida': atendimento_ficha})
+                   'ficha_preenchida': atendimento_ficha,
+                   'odontograma': odontograma})
 
 @login_required
 def odontograma(request):
+    if request.method == 'POST' and request.is_ajax():
+        aluno = get_object_or_404(Aluno, usuario=request.user)
+        t_codigo = request.session['turma_atual']
+        turma = get_object_or_404(Turma, codigo=t_codigo)
+        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
+        ficha_pk = request.session['ficha_atual']
+        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
+        paciente = get_object_or_404(Paciente, cpf=request.session['paciente_atual'])
+        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
+        odontograma_form = OdontogramaForm()
+        pontos_json = json.loads(request.body.decode("utf-8"))
+        odontograma = odontograma_form.save(commit=False)
+        odontograma.pontos = pontos_json
+        odontograma.atendimento = atendimento
+        odontograma.save()
+        request.session['odontograma'] = atendimento.paciente.nome
     return render(request, 'sistema_fichas/odontograma.html')
 
 ##@login_required
