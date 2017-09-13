@@ -26,19 +26,33 @@
 </div>
 <canvas id="canvas" width="515" height="500"></canvas>
 <script>
+//Function to set the csrf_token on header in AJAX request
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
 var rect = document.getElementById
 ("canvas").getBoundingClientRect();
 var body_rect = document.body.getBoundingClientRect();
 var drawing_type = "";
 var points = {
-	redcircle: [],
-	redline: [], 
-	redaxis: [], 
-	redfilledcircle: [], 
-	bluecircle: [],
-	blueline: [],
-	blueaxis: [], 
-	bluefilledcircle: []
+	"redcircle": [],
+	"redline": [], 
+	"redaxis": [], 
+	"redfilledcircle": [], 
+	"bluecircle": [],
+	"blueline": [],
+	"blueaxis": [], 
+	"bluefilledcircle": [],
+	'csrfmiddlewaretoken': '{{ csrf_token }}',
 };
 var url_odontograma = {% url 'sistema_fichas:odontograma' %};
 var arrayPoints = [];
@@ -87,6 +101,7 @@ function buttonClear(){
     ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
 }
 
+
 function SaveJSON(){
 	$.ajax({
 		url: url_odontograma,
@@ -94,14 +109,18 @@ function SaveJSON(){
 		contentType: 'application/json; charset=utf-8,',
 		data: JSON.stringify(points),
 		dataType: 'JSON',
+		beforeSend: function(xhr, settings) {
+		    console.log("Before Send");
+            $.ajaxSettings.beforeSend(xhr, settings);
+		},
 		sucess: function(result) {
 			alert(result.Result);
 		}
 	});
+}
 //    var dataImageURL = canvas.toDataURL();
 //    img.src = dataImageURL;
 //    document.getElementById("buttonSave").href = dataImageURL;
-}{% csrf_token %}
 function drawRedAxis(x, y){
     ctx.strokeStyle = "#FF0000";
     ctx.beginPath();
@@ -216,10 +235,6 @@ canvas.onclick = function(event) {
         default:
             alert("Opcao nao especificada");
     }
-//    json = JSON.stringify(points);
-//    document.getElementById('teste').onclick = function() {
-//        document.getElementById('teste').innerHTML = JSON.stringify(points);
-//    }
 }
 </script>
 {% endblock %}
