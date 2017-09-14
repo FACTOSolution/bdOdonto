@@ -32,7 +32,7 @@ def user_logout(request):
     if request.session.has_key('turma_atual'):
         del request.session['turma_atual']
     return HttpResponseRedirect('/accounts/login')
-    
+
 def registrar_usuario(request):
     if request.user.is_authenticated:
         return redirect('sistema_fichas:listar_turmas')
@@ -50,7 +50,7 @@ def registrar_usuario(request):
     else:
         user_form = UserForm()
         aluno_form = AlunoForm()
-	
+
     return render(request, 'sistema_fichas/registrar_usuario.html',
                   {'user_form': user_form,
                    'aluno_form': aluno_form})
@@ -81,7 +81,7 @@ def detalhar_turma(request, pk):
     if request.session.has_key('turma_atual'):
         del request.session['turma_atual']
         request.session.modified = True
-    
+
     turma = get_object_or_404(Turma, pk=pk)
     fichas = Tipo_Ficha.objects.filter(turma=turma)
     request.session['turma_atual'] = turma.codigo
@@ -166,8 +166,6 @@ def atendimento_opcoes(request):
     odontograma = False
     if request.session.has_key('atendimento_ficha'):
         atendimento_ficha = True
-    if request.session.has_key('odontograma'):
-        odontograma = True
     aluno = get_object_or_404(Aluno, usuario=request.user)
     t_codigo = request.session['turma_atual']
     turma = get_object_or_404(Turma, codigo=t_codigo)
@@ -176,6 +174,8 @@ def atendimento_opcoes(request):
     tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
     paciente = get_object_or_404(Paciente, cpf=request.session['paciente_atual'])
     atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
+    if Odontograma.objects.filter(atendimento=atendimento):
+        odontograma = True
     return render(request, 'sistema_fichas/atendimento_opcoes.html',
                   {'turma': turma,
                    'aluno': aluno,
@@ -201,7 +201,8 @@ def odontograma(request):
         odontograma.pontos = pontos_json
         odontograma.atendimento = atendimento
         odontograma.save()
-        request.session['odontograma'] = atendimento.paciente.nome
+        return redirect('sistema_fichas:atendimento_opcoes')
+#        request.session['odontograma'] = atendimento.paciente.nome
     return render(request, 'sistema_fichas/odontograma.html')
 
 ##@login_required
@@ -216,13 +217,13 @@ def odontograma(request):
 ##        ficha_pk = request.session['ficha_atual']
 ##        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
 ##        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=ficha)
-##        
+##
 ##    return render(request, 'sistema_fichas/odontograma.html')
 
 @login_required
 def redirecionar_atendimento(request):
     nome_ficha = request.session['ficha_atual']
-    
+
     if nome_ficha == "Ficha Diagnostico":
         return redirect('sistema_fichas:diagnostico')
     elif nome_ficha == "Ficha Ortodontia":
@@ -305,7 +306,7 @@ def ortodontia(request):
             return redirect('sistema_fichas:atendimento_opcoes')
     else:
         ficha_form = Ficha_OrtodontiaForm()
-    return render(request, 'sistema_fichas/ortodontia.html', 
+    return render(request, 'sistema_fichas/ortodontia.html',
                   {'ficha_form': ficha_form})
 
 @login_required

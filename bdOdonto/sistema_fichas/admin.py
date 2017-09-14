@@ -19,4 +19,4 @@ admin.site.register(Ficha_PPR)
 admin.site.register(Ficha_Dentistica)
 admin.site.register(Tipo_Ficha)
 admin.site.register(Turma_Aluno)
-
+admin.site.register(Odontograma)

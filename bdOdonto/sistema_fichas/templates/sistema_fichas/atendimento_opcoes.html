@@ -9,10 +9,10 @@
 	<h2>Atendimento</h2>
         <div class="opcoes">
 		    {% if not ficha_preenchida %}
-			    <h4 id="preencher_ficha"><a href="{% url 'sistema_fichas:redirecionar_atendimento' %}">Preencher Ficha</a></h4>
-			{% endif %}
-			{% if not odontograma %}
-			    <h4 id="odontograma"><a href="{% url 'sistema_fichas:odontograma' %}">Preencher Odontograma</a></h4>
+			      <h4 id="preencher_ficha"><a href="{% url 'sistema_fichas:redirecionar_atendimento' %}">Preencher Ficha</a></h4>
+			  {% endif %}
+			  {% if not odontograma %}
+			      <h4 id="odontograma"><a href="{% url 'sistema_fichas:odontograma' %}">Preencher Odontograma</a></h4>
 		    {% endif %}
 </div>
 {% endblock %}
