@@ -8,9 +8,6 @@ from .models import *
 from .forms import *
 import json
 
-def index(request):
-    return render(request, 'sistema_fichas/base.html', {})
-
 @login_required
 def lista_fichas_aluno(request):
     if request.method == 'POST':
@@ -50,23 +47,9 @@ def registrar_usuario(request):
     else:
         user_form = UserForm()
         aluno_form = AlunoForm()
-
     return render(request, 'sistema_fichas/registrar_usuario.html',
                   {'user_form': user_form,
                    'aluno_form': aluno_form})
-
-def ficha_diagnostico(request):
-    if request.method == "POST":
-        form = Ficha_DiagnosticoForm(request.POST)
-        if form.is_valid():
-            ficha = form.save(commit=False)
-            ficha.data = timezone.now()
-            ficha.save()
-            return redirect('sistema_fichas:ficha_diagnostico_detail', pk=ficha.pk)
-        else:
-            form = Ficha_DiagnosticoForm()
-        return render(request, 'sistema_fichas/ficha_diagnostico_edit.html',
-                      {'ficha': ficha})
 
 @login_required
 def listar_turmas(request):
@@ -77,11 +60,9 @@ def listar_turmas(request):
 
 @login_required
 def detalhar_turma(request, pk):
-
     if request.session.has_key('turma_atual'):
         del request.session['turma_atual']
         request.session.modified = True
-
     turma = get_object_or_404(Turma, pk=pk)
     fichas = Tipo_Ficha.objects.filter(turma=turma)
     request.session['turma_atual'] = turma.codigo
@@ -132,34 +113,6 @@ def atendimento(request):
                   {'atendimento_form': atendimento_form,
                    'paciente_form': paciente_form})
 
-##def verify_ficha(nome_ficha):
-##    if nome_ficha == "Ficha Diagnostico":
-##        aux = Ficha_DiagnosticoForm()
-##        return aux
-##    elif nome_ficha == "Ficha Ortodontia":
-##        aux = Ficha_OrtondontiaForm()
-##        return aux
-##    elif nome_ficha == "Ficha Periodontia":
-##        aux = Ficha_PeriodontiaForm()
-##        return aux
-##    elif nome_ficha == "Ficha Urgencia":
-##        aux = Ficha_UrgenciaForm()
-##        return aux
-##    elif nome_ficha == "Ficha Endodontia":
-##        aux = Ficha_EndodontiaForm()
-##        return aux
-##    elif nome_ficha == "Ficha Endodontia Tabela":
-##        aux = Ficha_Endodontia_Tabela()
-##        return Ficha_Endodontia_Tabela
-##    elif nome_ficha == "Ficha PPR":
-##        aux = Ficha_PPRForm()
-##        return aux
-##    elif nome_ficha == "Ficha Dentistica":
-##        aux = Ficha_DentisticaForm()
-##        return aux
-##    else:
-##        return None
-
 @login_required
 def atendimento_opcoes(request):
     atendimento_ficha = False
@@ -202,28 +155,11 @@ def odontograma(request):
         odontograma.atendimento = atendimento
         odontograma.save()
         return redirect('sistema_fichas:atendimento_opcoes')
-#        request.session['odontograma'] = atendimento.paciente.nome
     return render(request, 'sistema_fichas/odontograma.html')
-
-##@login_required
-##def odontograma(request):
-##    ficha_nome = request.session['ficha_atual']
-##    ficha = verify_url(ficha.nome)
-##    if request.method == 'POST':
-##        aluno = get_object_or_404(Aluno, usuario=request.user)
-##        t_codigo = request.session['turma_atual']
-##        turma = get_object_or_404(Turma, codigo=t_codigo)
-##        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-##        ficha_pk = request.session['ficha_atual']
-##        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-##        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=ficha)
-##
-##    return render(request, 'sistema_fichas/odontograma.html')
 
 @login_required
 def redirecionar_atendimento(request):
     nome_ficha = request.session['ficha_atual']
-
     if nome_ficha == "Ficha Diagnostico":
         return redirect('sistema_fichas:diagnostico')
     elif nome_ficha == "Ficha Ortodontia":
