@@ -1,0 +1,15 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/atendimento.css">
+</head>
+<div id="div_atendimento">
+    <h2>Buscar Paciente</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Buscar" />
+    </form>
+</div>
+{% endblock %}

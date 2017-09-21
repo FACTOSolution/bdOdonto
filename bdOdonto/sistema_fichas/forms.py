@@ -13,7 +13,7 @@ class UserForm(forms.ModelForm):
         max_length = 32,
         widget = forms.PasswordInput()
     )
-	
+
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'last_name', 'email')
@@ -61,7 +61,7 @@ class AtendimentoForm(forms.ModelForm):
         model = Atendimento
         fields = '__all__'
         exclude = ['turma_aluno', 'tipo_ficha', 'paciente']
-        
+
 class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:
@@ -70,14 +70,14 @@ class Ficha_UrgenciaForm(forms.ModelForm):
         exclude = ['atendimento']
         labels = {
             'historia_clinica' : 'História Clínica (condições de saúde)',
-            'medicamentos' : 'Medicamentos em uso no momento', 
-            'motivo' : 'Motivo da consulta', 
-            'diagnostico_provavel' : 'Diagnóstico provável após anamnese', 
-            'atend' : 'Atendimento', 
+            'medicamentos' : 'Medicamentos em uso no momento',
+            'motivo' : 'Motivo da consulta',
+            'diagnostico_provavel' : 'Diagnóstico provável após anamnese',
+            'atend' : 'Atendimento',
             'atend_outro' : 'Outro',
             'procedimento' : 'Procedimento realizado',
-            'encaminhamento' : 'Encaminhamento ou reagendamento', 
-            'prescricoes' : 'Prescrições Medicamentosas', 
+            'encaminhamento' : 'Encaminhamento ou reagendamento',
+            'prescricoes' : 'Prescrições Medicamentosas',
             'especialidade' : 'Especialidade em que se enquadrou o atendimento de urgência',
             'especialidade_outro' : 'Outro',
             }
@@ -89,13 +89,13 @@ class Ficha_PPRForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['atendimento']
         labels = {
-            'class_kennedy_sup':'Classificação de Kennedy (superior)', 
-            'tratamento_previo_sup':'Tratamento prévio (superior)', 
-            'planejamento_protese_sup':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (superior)', 
+            'class_kennedy_sup':'Classificação de Kennedy (superior)',
+            'tratamento_previo_sup':'Tratamento prévio (superior)',
+            'planejamento_protese_sup':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (superior)',
             'observacoes_sup':'Observações (superior)',
-            'class_kennedy_inf':'Classificação de Kennedy (inferior)', 
+            'class_kennedy_inf':'Classificação de Kennedy (inferior)',
             'tratamento_previo_inf':'Tratamento prévio (inferior)',
-            'planejamento_protese_inf':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (inferior)', 
+            'planejamento_protese_inf':'Planejamento da Prótese Removível: Apoios, tipo e localização, retentores, conector maior, sela. (inferior)',
             'observacoes_inf':'Observações (inferior)',
             }
 
@@ -115,7 +115,7 @@ class OdontogramaForm(forms.ModelForm):
         fields = '__all__'
 
 class Ficha_PeriodontiaForm(forms.ModelForm):
-    
+
     class Meta:
         model = Ficha_Periodontia
         fields = '__all__'
@@ -337,7 +337,7 @@ class Ficha_OrtodontiaForm(forms.ModelForm):
             }
 
 class Ficha_DiagnosticoForm(forms.ModelForm):
-    
+
     class Meta():
         model = Ficha_Diagnostico
         fields = '__all__'
@@ -361,7 +361,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
             'sol_frequente':'Costuma se expor frequentemente ao sol?',
             'tabagismo':'Teve ou tem o hábito do tabagismo?',
             'tipo_tabagismo':'Tipo de tabagismo:',
-            'duracao_tabagismo':'Duração do hábito:',    
+            'duracao_tabagismo':'Duração do hábito:',
             'tempo_abandono_tabagismo':'Há quanto tempo abandonou o hábito?',
             'alcool':'Consome bebidas alcoólicas?',
             'frequencia_alcool':'Com que frequencia consome bebidas alcoólicas?',
@@ -437,9 +437,9 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
             'disc':'Encaminhamento',
             'disc_outro':'Disciplina(s)'
             }
-            
+
 class Ficha_DentisticaForm(forms.ModelForm):
-    
+
     class Meta():
         model = Ficha_Dentistica
         fields = '__all__'
@@ -461,13 +461,13 @@ class Ficha_DentisticaForm(forms.ModelForm):
             'orientacao':'Orientação da dieta, tecnica de higienização',
             'evidenciacao_de_placa':'Evidenciação de placa',
             'profilaxia':'Profilaxia',
-            'fosfato':'Flúor fosfato acidulado 1,23%',    
+            'fosfato':'Flúor fosfato acidulado 1,23%',
             'sodio':'Fluoreto de sódio neutro 2%',
             'fluoreto':'Solução de Fluoreto de sódio 0,5%',
             'clorexidina':'Digluconato de Clorexidina a 2%(gel)',
             'aquosa_digluconato':'Solução aquosa de Digluconato de Clorexidina a 0,12%(diária)',
             'selamento_fissuras':'Selamento de fóssulas e fissuras (código do dente):',
-            'remineralizacao_de_lesoes_de_carie':'Remineralização de lesões de cárie ativas em esmalte (código do dente):',            
+            'remineralizacao_de_lesoes_de_carie':'Remineralização de lesões de cárie ativas em esmalte (código do dente):',
             'outra_medida':'Outra medida (especificar):',
             'restauracoes_provisorias':'Restaurações provissórias:',
             'tratamento_expectante':'Tratamento expectante (código do dente):',
@@ -477,3 +477,6 @@ class Ficha_DentisticaForm(forms.ModelForm):
             'observacoes_dentistica':'Observações:',
             'encaminhamento_para':'Necessidade de encaminhamento'
             }
+
+class BuscarPaciente(forms.Form):
+    cpf = forms.CharField(label='Digite o CPF do paciente')
