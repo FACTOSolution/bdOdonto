@@ -2,11 +2,11 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/atendimento.css">
+    <link rel="stylesheet" href="/static/css/buscar_paciente.css">
 </head>
-<div id="div_atendimento">
+<div id="div_busca">
     <h2>Buscar Paciente</h2>
-    <form action="" method="post">
+    <form id="buscar_paciente" action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" value="Buscar" />

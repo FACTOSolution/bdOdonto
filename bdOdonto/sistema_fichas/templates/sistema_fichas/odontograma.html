@@ -206,8 +206,8 @@ function drawBlueFilledCircle(x, y){
     ctx.fill();
 }
 canvas.onclick = function(event) {
-    var x = (event.clientX - 4) - (rect.left + (window.scrollX));	
-    var y = (event.clientY - 3) - (rect.top - (window.scrollY));
+    var x = (event.clientX - 10) - (rect.left + (window.scrollX));	
+    var y = (event.clientY - 10) - (rect.top - (window.scrollY));
     switch(drawing_type){
         case "redfilledcircle":
             drawRedFilledCircle(x, y);

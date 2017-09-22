@@ -125,9 +125,10 @@ def atendimento_opcoes(request):
     turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
     ficha_pk = request.session['ficha_atual']
     tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-    paciente = get_object_or_404(Paciente, cpf=request.session['paciente_atual'])
+    cpf = request.session['paciente_atual']
+    paciente = get_object_or_404(Paciente, cpf=cpf)
+    print(request.session['ficha_atual'], tipo_ficha, paciente, turma_aluno)
     atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
-    print request.session['ficha_atual']
     if Odontograma.objects.filter(atendimento=atendimento):
         odontograma = True
     return render(request, 'sistema_fichas/atendimento_opcoes.html',
@@ -371,4 +372,5 @@ def buscar_paciente(request):
                 return redirect('sistema_fichas:atendimento')
     else:
         form = BuscarPaciente()
-    return render(request, 'sistema_fichas/buscar_paciente.html', {'form': form})
+    return render(request, 'sistema_fichas/buscar_paciente.html', 
+                  {'form': form})
