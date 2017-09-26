@@ -127,7 +127,6 @@ def atendimento_opcoes(request):
     tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
     cpf = request.session['paciente_atual']
     paciente = get_object_or_404(Paciente, cpf=cpf)
-    print(request.session['ficha_atual'], tipo_ficha, paciente, turma_aluno)
     atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
     if Odontograma.objects.filter(atendimento=atendimento):
         odontograma = True
@@ -374,3 +373,41 @@ def buscar_paciente(request):
         form = BuscarPaciente()
     return render(request, 'sistema_fichas/buscar_paciente.html', 
                   {'form': form})
+
+def listar_fichas(atendimento):
+    listas = []
+    listas.append(get_object_or_404(Ficha_Diagnostico, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Ortodontia, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Periodontia, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Urgencia, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Endodontia, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Endodontia_Tabela, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_PPR, atendimento=atendimento))
+    listas.append(get_object_or_404(Ficha_Dentistica, atendimento=atendimento))
+    return listas
+
+#Listar as fichas do paciente com base no CPF 
+#Fluxo: buscar_paciente
+#Action: listar_fichas_paciente 
+@login_required
+def buscar_fichas_paciente(request):
+    aluno = get_object_or_404(Aluno, usuario=request.user)
+    t_codigo = request.session['turma_atual']
+    turma = get_object_or_404(Turma, codigo=t_codigo)
+    turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
+    ficha_pk = request.session['ficha_atual']
+    tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
+    cpf = request.session['paciente_atual']
+    paciente = get_object_or_404(Paciente, cpf=cpf)
+    atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
+    listas = listar_fichas(atendimento)
+    return render(request, 'sistema_fichas/listar_fichas_paciente.html', 
+                  {'listas': listas})
+
+#Histórico da ficha específica na turma selecionada
+#Fluxo: detalhar_turma
+#Action: historico_fichapass
+@login_required
+def historico_fichas_turma(request):
+    pass
+

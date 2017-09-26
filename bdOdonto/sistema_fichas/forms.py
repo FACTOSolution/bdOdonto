@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django import forms
 import datetime
 from django.forms.extras.widgets import SelectDateWidget
-
 from .models import *
 
 class UserForm(forms.ModelForm):
@@ -11,7 +10,14 @@ class UserForm(forms.ModelForm):
         required = True,
         label = 'Senha',
         max_length = 32,
+        min_length = 8,
         widget = forms.PasswordInput()
+    )
+    username = forms.CharField(
+        required = True,
+        label = 'Nome de usuário',
+        max_length = 150,
+        help_text = ""
     )
 
     class Meta:
@@ -21,7 +27,7 @@ class UserForm(forms.ModelForm):
             'username': 'Nome de Usuário',
             'first_name': 'Nome',
             'last_name': 'Sobrenome',
-}
+        }
 
 class AlunoForm(forms.ModelForm):
 
@@ -156,12 +162,12 @@ class Ficha_PeriodontiaForm(forms.ModelForm):
             'pressao_arterial':'Tem problemas com pressão arterial?',
             'problema_menstruacao':'Tem ou teve algum problema associado com a sua menstruação?',
             'gravida':'Está grávida?',
-            'fumante':'É fumante ou ex-fumante?',
+            'fumante':'É fumante ou ex-fumante?',
             'tempo_abandono_tabagismo':'Há quanto tempo?',
             'cigs_dia':'Fuma em média quantos cigarros/dia?',
-            'doenca_infec':'É portador de alguma doença infecto-contagiosa?',
+            'doenca_infec':'É portador de alguma doença infecto-contagiosa?',
             'qual_doenca_infec':'Qual(is)',
-            'drogas_ilicitas':'É ou já foi usuário de drogas ilícitas?',
+            'drogas_ilicitas':'É ou já foi usuário de drogas ilícitas?',
             }
 
 class Ficha_Endodontia_TabelaForm(forms.ModelForm):
@@ -180,24 +186,24 @@ class Ficha_Endodontia_TabelaForm(forms.ModelForm):
             'iai1':'IAI',
             'iaf1':'IAF',
             'im1':'IM',
-            'dente2':'Dente',
-            'canal2':'Canal',
-            'ponto_referencia2':'Ponto Referência',
-            'cad2':'CAD',
-            'ctp2':'CTP',
-            'crt2':'CRT',
-            'iai2':'IAI',
-            'iaf2':'IAF',
-            'im2':'IM',
-            'dente3':'Dente',
-            'canal3':'Canal',
-            'ponto_referencia3':'Ponto Referência',
-            'cad3':'CAD',
-            'ctp3':'CTP',
-            'crt3':'CRT',
-            'iai3':'IAI',
-            'iaf3':'IAF',
-            'im3':'IM',
+            'dente2':'Dente2',
+            'canal2':'Canal2',
+            'ponto_referencia2':'Ponto Referência2',
+            'cad2':'CAD2',
+            'ctp2':'CTP2',
+            'crt2':'CRT2',
+            'iai2':'IAI2',
+            'iaf2':'IAF2',
+            'im2':'IM2',
+            'dente3':'Dente3',
+            'canal3':'Canal3',
+            'ponto_referencia3':'Ponto Referência3',
+            'cad3':'CAD3',
+            'ctp3':'CTP3',
+            'crt3':'CRT3',
+            'iai3':'IAI3',
+            'iaf3':'IAF3',
+            'im3':'IM3',
             }
 
 class Ficha_EndodontiaForm(forms.ModelForm):
@@ -375,7 +381,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
             'def_doenca_grave':'Qual doença',
             'cirurgia':'Já se submeteu a alguma cirurgia?',
             'def_cirurgia':'Qual cirurgia?',
-            'anticoncepcional':'Faz uso de anticoncepcional?',
+            'anticoncepcional':'Faz uso dehelptext anticoncepcional?',
             'gravida':'Está grávida?',
             'tempo_gravidez':'Qual o tempo de gestação?',
             'alergia':'Tem algum tipo de alergia?',
