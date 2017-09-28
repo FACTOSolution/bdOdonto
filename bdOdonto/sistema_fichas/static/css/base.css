@@ -1,8 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-	padding-left: 20px;
-	padding-right: 20px;
+	
 }
 
 #header_name{
@@ -17,13 +16,12 @@ body {
 	text-align: center;
 }
 
+
 .page-header {
-    background-color: #0088FF;
+    background-color: #800000;
     margin-top: 0;
-    padding: 40px 40px 20px 40px;
+    padding: 10px 10px 10px 10px;
     font-family: 'Roboto', sans-serif;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -42,19 +40,20 @@ body {
 
 #logout {
     color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    position: relative;
+    font-size: 30pt;
+    position: absolute;
     display: inline-block;
+    right: 40px;
+    top:80px;
 }
 
 #logout:hover {
-	color: #000000;
+	color: #d26c6c;
 }
 
 #logout .tooltiptext {
     visibility: hidden;
-    font-size: 9pt;
+    font-size: 12pt;
     width: 120px;
     color: #fff;
     text-align: center;
@@ -71,4 +70,10 @@ body {
 
 #logout:hover .tooltiptext {
     visibility: visible;
+}
+
+#footer {
+    color:white;
+    text-align: left;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }

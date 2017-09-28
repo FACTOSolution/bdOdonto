@@ -8,6 +8,12 @@
     </head>
     <body>
         <div class="page-header">
+            <div>
+                <p id="footer">Developed by &nbsp&nbsp<img src="../../static/images/factos_logo.svg"></p>
+            </div>
+            <div id="header_name">
+                <h1 id="bdodonto"><a href="{% url 'sistema_fichas:listar_turmas' %}">BDOdonto</a></h1>
+            </div>
 		    {% if user.is_authenticated %}
                 <!--<div id="logout" class="glyphicon glyphicon-off">-->
 			    <a href="{% url 'logout' %}?next={% url 'login' %}" id="logout">
@@ -16,9 +22,6 @@
 				</a>
 				<!--</div>-->
             {% endif %}
-		    <div id="header_name">
-                <h1 id="bdodonto"><a href="{% url 'sistema_fichas:listar_turmas' %}">BDOdonto</a></h1>
-			</div>
         </div>
         <div class="content container">
 			{% block content %}

@@ -20,7 +20,7 @@
 	{% csrf_token %}
 	    <input type="text" name="username" placeholder="Nome de usuário">
 	    <input type="password" name="password" placeholder="Senha">
-	    <input type="submit" name="login" class="login login-submit" value="login">
+	    <input type="submit" name="login" class="login login-submit" value="Login">
 	    <input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
 	</form>
 	<div class="login-help">
