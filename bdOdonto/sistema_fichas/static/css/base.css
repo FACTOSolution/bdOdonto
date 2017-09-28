@@ -13,7 +13,14 @@ body {
 }
 
 #bdodonto {
-	text-align: center;
+	position: relative;
+    text-align: center;
+    padding-bottom: 30px;
+    font-weight: 100;
+    font-size: 2.5em;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    color:#800000;
 }
 
 
@@ -44,7 +51,7 @@ body {
     position: absolute;
     display: inline-block;
     right: 40px;
-    top:80px;
+    top:110px;
 }
 
 #logout:hover {
@@ -76,4 +83,9 @@ body {
     color:white;
     text-align: left;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+#logo_white{
+    position:absolute;
+    left:220px;
+    top:-20px;
 }

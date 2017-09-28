@@ -16,6 +16,7 @@ body {
 	font-size: 2.5em;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+	color:#800000;
 }
 
 #div_fichas p, h4 {
@@ -27,12 +28,14 @@ body {
 .ficha {
 	display: inline-block;
 	text-align: center;
-	padding: 10px;
+	padding: 4px 21px;
 	margin:2px;
+	margin-left: 3px;
+	background-color: #f3d9d9;
+	color:#800000;
 	border-style: solid;
 	border-width: 1px;
-	border-radius: 5px;
-	font-size-adjust: 0.5;
+	font-size-adjust: 0.6;
 	font-family: Arial;
 
 }
@@ -49,19 +52,19 @@ body {
 }
 
 .ficha:hover {
-	color: #FFFFFF;
-	width: 200px;
-	background-color: #0088FF;
+	color: #f3d9d9;
+	padding: 5px 21px;
+	background-color: #800000;
 	border: 1px solid #b9b9b9;
 	border-top: 1px solid #a0a0a0;
-	box-shadow: 0px 0px 3px 4px #888888;
+	box-shadow: 0px 0px 1px 1px #888888;
 	font-family: Arial;
 }
 
 .ficha:hover a{
 	font-weight: 150;
 	color: #FFFFFF;
-	font-weight: bolder;
+	font-weight: italic;
 }
 
 .ficha:hover #cadastrar_ficha{

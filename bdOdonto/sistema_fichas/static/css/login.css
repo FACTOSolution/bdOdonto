@@ -64,7 +64,18 @@ body {
 
 .login-submit:hover {
 	border: 0px;
-	text-shadow: 0 1px rgba(0,0,0,0.3);
+	text-shadow: 0 1px rgba(0,0,0,0.1); 
+	color: #d26c6c;
+}
+
+.login-submit:hover {
+	color: #f3d9d9;
+	padding: 5px 21px;
+	background-color: #800000;
+	border: 0px;
+	border-top: 1px solid #a0a0a0;
+	box-shadow: 0px 0px 1px 2px #888888;
+	font-family: Arial;
 }
 
 .login-card a {
