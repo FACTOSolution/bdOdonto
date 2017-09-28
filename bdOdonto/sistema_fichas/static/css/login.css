@@ -88,3 +88,8 @@ body {
 	text-align: center;
 	font-size: 12px;
 }
+
+.user_sucess {
+	text-align: center;
+	font-weight: bold;
+}

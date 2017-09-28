@@ -23,6 +23,7 @@ def lista_fichas_aluno(request):
             pass
     return render(request, 'lista_fichas_aluno.html', {'fichas': ficha_lista})
 
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -39,11 +40,14 @@ def registrar_usuario(request):
         if user_form.is_valid() and aluno_form.is_valid():
             user = user_form.save(commit=False)
             aluno = aluno_form.save(commit=False)
+            password = user.password
+            password
             user.set_password(user.password)
             user.save()
             aluno.usuario = user
             aluno.save()
-            return redirect('/accounts/login')
+            context = {'Flag': True}
+            return render(request, "registration/login.html", context)
     else:
         user_form = UserForm()
         aluno_form = AlunoForm()

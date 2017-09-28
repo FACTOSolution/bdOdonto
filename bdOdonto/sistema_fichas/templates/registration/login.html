@@ -6,8 +6,10 @@
     <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
+	{%if Flag%}
+	<p class="user_sucess">Usuário cadastrado com sucesso!</p>
+	{%endif%}	
 <div class="login-card">
-	<h1>Login</h1><br>
 	<form action="{% url 'login' %}" method="post">
 	{% csrf_token %}
 	    <input type="text" name="username" placeholder="Nome de usuário">
