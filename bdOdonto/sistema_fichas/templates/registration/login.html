@@ -6,8 +6,14 @@
     <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
+	{% if form.errors %}
+    <p class="aviso">Usuário ou senha inválidos!</p>
+	{% endif %}
+    {% if user.is_authenticated %}
+ 		<meta http-equiv="REFRESH" content="0;url=http://localhost:8000/turmas_aluno/">
+    {% endif %}
 	{%if Flag%}
-	<p class="user_sucess">Usuário cadastrado com sucesso!</p>
+	<p class="aviso">Usuário cadastrado com sucesso!</p>
 	{%endif%}	
 <div class="login-card">
 	<form action="{% url 'login' %}" method="post">
