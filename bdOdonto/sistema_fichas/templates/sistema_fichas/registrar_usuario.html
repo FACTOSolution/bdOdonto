@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/static/css/registrar_usuario.css">
 </head>
 <div id="div_registro">
-	<h2>Registrar-se no BDOdonto</h2>
+	<h2>Registrar-se</h2>
 	<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ user_form.as_p }}
