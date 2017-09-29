@@ -43,7 +43,6 @@ body {
 #cadastrar_ficha {
 	visibility: hidden;
 	text-align: center;
-	border-radius: 6px;
 }
 
 .ficha a {
@@ -62,7 +61,7 @@ body {
 }
 
 .ficha:hover a{
-	font-weight: 150;
+	font-weight: 20;
 	color: #FFFFFF;
 	font-weight: italic;
 }
@@ -74,3 +73,4 @@ body {
 #cadastrar_ficha a:active {
 	color: #55FFF6;
 }
+

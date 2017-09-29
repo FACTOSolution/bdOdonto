@@ -7,14 +7,14 @@ body {
 #div_busca {
 	border-style: solid;
 	border-width: 0.5px;
-	background-color: #FFFFFF;
-	border-radius: 5px;
+	background-color: #f3d9d9;
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	width: 75%;
 	margin-left: 12.5%;
 	margin-right: 12.5%;
 	margin-bottom: 2%;
 	padding: 5px;
+	border-color: #800000;
 }
 
 #div_busca h2 {
@@ -23,8 +23,14 @@ body {
 	padding-bottom: 30px;
 	font-weight: 100;
 	font-size: 2.5em;
+	color:#800000;
 }
 
+#div_busca p {
+	position:relative;
+	width: 1000px;
+	left:-12%;
+}
 #buscar_paciente {
 	margin: auto;
 	width: 75%;
@@ -37,24 +43,17 @@ body {
 	font-size: 0.975em;
 }
 
-#buscar_paciente p > input{
-	width: 40%;
-	padding-bottom: 3px;
-	border-radius: 4px;
-}
-
 #buscar_paciente input[type="submit"]{
 	padding: 4px;
 	display: block;
 	margin-left: 38%;
-	margin-top: 2%;
+	margin-top: 7%;
 	margin-bottom: 2%;
 	text-align: center;
 	width: 30%;
 	position: relative;
 	background: #79aec8;
 	padding: 10px 15px;
-	border-radius: 4px;
 	color: #FFFFFF;
 	cursor: pointer;
 }

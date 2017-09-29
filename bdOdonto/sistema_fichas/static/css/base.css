@@ -12,23 +12,14 @@ body {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-#bdodonto {
-	position: relative;
-    text-align: center;
-    padding-bottom: 30px;
-    font-weight: 100;
-    font-size: 2.5em;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    color:#800000;
-}
-
 
 .page-header {
     background-color: #800000;
     margin-top: 0;
     padding: 10px 10px 10px 10px;
     font-family: 'Roboto', sans-serif;
+    position: relative;
+    height: 170px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -51,7 +42,7 @@ body {
     position: absolute;
     display: inline-block;
     right: 40px;
-    top:110px;
+    top:100px;
 }
 
 #logout:hover {
@@ -85,7 +76,8 @@ body {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 #logo_white{
-    position:absolute;
-    left:220px;
-    top:-20px;
+    position:relative;
+    left:200px;
+    top:-30px;
+    width: 250px;
 }

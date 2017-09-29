@@ -8,9 +8,9 @@
     <h1>Confirmar Atendimento:</h1>
         <div class="info">
 			<h4>Ficha: {{ ficha.nome }}</h4>
-      <h4>Aluno: {{ aluno.first_name }}</h4>
+      		<h4>Aluno: {{ aluno.first_name }}</h4>
 			<h4>Turma: {{ turma.nome }}</h4>
         </div>
-		<div id="avancar"><a href="{% url 'sistema_fichas:buscar_paciente' %}">Avançar para o atendimento</a></div>
+		<div id="avancar"><a class="button" href="{% url 'sistema_fichas:buscar_paciente' %}">Avançar para o atendimento</a></div>
 </div>
 {% endblock %}

@@ -1,30 +1,37 @@
-{% extends 'sistema_fichas/base.html' %}
-{% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-    <link rel="stylesheet" href="/static/css/login.css">
-</head>
-	{% if form.errors %}
-    <p class="aviso">Usuário ou senha inválidos!</p>
-	{% endif %}
-    {% if user.is_authenticated %}
- 		<meta http-equiv="REFRESH" content="0;url=http://localhost:8000/turmas_aluno/">
-    {% endif %}
-	{%if Flag%}
-	<p class="aviso">Usuário cadastrado com sucesso!</p>
-	{%endif%}	
-<div class="login-card">
-	<form action="{% url 'login' %}" method="post">
-	{% csrf_token %}
-	    <input type="text" name="username" placeholder="Nome de usuário">
-	    <input type="password" name="password" placeholder="Senha">
-	    <input type="submit" name="login" class="login login-submit" value="Login">
-	    <input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
-	</form>
-	<div class="login-help">
-		<a href="{% url 'sistema_fichas:registrar_usuario' %}">Ainda não tem login? Registre-se aqui</a>
-	</div>
-</div>
-{% endblock %}
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+		<link rel="stylesheet" href="/static/css/login.css">
+        <meta charset="UTF-8">
+    </head>
+	<body>
+		{% if form.errors %}
+	    <p class="aviso">Usuário ou senha inválidos!</p>
+		{% endif %}
+	    {% if user.is_authenticated %}
+	 		<meta http-equiv="REFRESH" content="0;url=http://localhost:8000/turmas_aluno/">
+	    {% endif %}
+		{%if Flag%}
+		<p class="aviso">Usuário cadastrado com sucesso!</p>
+		{%endif%}	
+		<div class="login-card">
+			<a href="{% url 'sistema_fichas:listar_turmas' %}"><img id="logo_bd" src="../../static/images/logo_bd.svg"></a>
+			<form action="{% url 'login' %}" method="post">
+			{% csrf_token %}
+			    <input type="text" name="username" placeholder="Nome de usuário">
+			    <input type="password" name="password" placeholder="Senha">
+			    <input type="submit" name="login" class="login login-submit" value="Login">
+			    <input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
+			</form>
+			<div class="login-help">
+				<a href="{% url 'sistema_fichas:registrar_usuario' %}">Ainda não tem login? Registre-se aqui</a>
+			</div>
+		</div>
+		<div>
+            <p class="footer">Developed by &nbsp&nbsp<img src="../../static/images/factos_logo.svg"></p>
+        </div>
+	</body>
+</html>
