@@ -7,7 +7,7 @@ from django.forms.extras.widgets import SelectDateWidget
 
 class Aluno (models.Model):
     matricula = models.CharField(max_length=15, primary_key=True)
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     
     def publish(self):
         self.save()

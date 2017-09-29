@@ -12,7 +12,7 @@
                 <p id="footer">Developed by &nbsp&nbsp<img src="../../static/images/factos_logo.svg"></p>
             </div>
             <div id="header_name">
-                <a href="{% url 'sistema_fichas:listar_turmas' %}"><img id="logo_white" src="../../static/images/logo_white.svg"></a>
+                <a id="logo_white" href="{% url 'sistema_fichas:listar_turmas' %}"><img style="width: 18em" src="../../static/images/logo_white.svg"></a>
             </div>
 		    {% if user.is_authenticated %}
                 <!--<div id="logout" class="glyphicon glyphicon-off">-->
