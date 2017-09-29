@@ -45,8 +45,8 @@ body {
 	width: 25%;
 	padding: 8px;
 	font-size: 15px;
-	background-color: #f3d9d9;
-	border-color: #800000;
+	background-color: #800000;
+	border-color: #b9b9b9;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -56,22 +56,17 @@ body {
 	position: relative;
 	width: 25%;
 	padding: 8px;
+	font-size: 14px;
 	border: 1px solid #b9b9b9;
-	border-top: 1px solid #a0a0a0;
 	background-color: #800000;
 	box-shadow: 0px 0px 1px 1px #888888;
 	font-weight: bolder;
 }
 
-#avancar a:active {
-	color: #55FFF6;
-}
-
 .button{
-	color:#800000;
+	color:#FFFFFF;
 }
 
 .button:hover {
 	color: #FFFFFF;
-	font-size: 15px;
 }
