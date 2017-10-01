@@ -43,6 +43,21 @@ body {
 	font-size: 0.975em;
 }
 
+#buscar_paciente p > input{
+	width: 20%;
+	border-style: solid;
+	border-width: 1px;
+	padding-bottom: 3px;
+	display: inline-block;
+	opacity: 0.8;
+	transition: opacity ease 0.5s;
+}
+
+
+#buscar_paciente p > input:hover{
+	opacity: 1;
+}
+
 #buscar_paciente input[type="submit"]{
 	padding: 4px;
 	display: block;

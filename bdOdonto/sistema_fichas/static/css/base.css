@@ -1,7 +1,10 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {
-	
+
+html, body {height:100%;}
+
+body{
+    background-color: #f3d9d9;
 }
 
 #header_name{
@@ -71,17 +74,20 @@ body {
 }
 
 #footer {
-    color:white;
-    text-align: left;
+    color:#800000;
+    text-align: right;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-}
-#logo_white{
-    position:relative;
-    left:40%;
-    top:-30px;
-    width: 50%;
+    position:fixed;
+    bottom:0;
+    padding:5px 5px;
+    width:100%;
+    margin:5px;
 }
 
-body{
-    background-color: #f3d9d9;
+#logo_white{
+    position:relative;
+    left:41%;
+    top:20px;
+    width: 70%;
 }
+

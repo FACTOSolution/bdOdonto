@@ -52,16 +52,17 @@ body {
 
 .ficha:hover {
 	color: #f3d9d9;
-	padding: 5px 21px;
+	padding: 4px 21px;
+	margin:2px;
+	margin-left: 3px;
 	background-color: #800000;
 	border: 1px solid #b9b9b9;
 	font-family: Arial;
 }
 
 .ficha:hover a{
-	font-weight: 20;
 	color: #FFFFFF;
-	font-weight: italic;
+
 }
 
 .ficha:hover #cadastrar_ficha{

@@ -38,34 +38,28 @@ body {
 	color:#800000;
 }
 
-#avancar {
-	margin: 3% auto 0;
-	position: relative;
+
+.button {
+	display: inline-block;
 	text-align: center;
-	width: 25%;
-	padding: 8px;
-	font-size: 15px;
-	background-color: #800000;
-	border-color: #b9b9b9;
+	padding: 1% 2%;
+	margin-top: 4%;
+	margin-left: 38%;
+	height: 7%;
+	background-color: #f3d9d9;
+	color:#800000;
 	border-style: solid;
 	border-width: 1px;
-}
-
-#avancar:hover {
-	margin: 3% auto 0;
-	position: relative;
-	width: 25%;
-	padding: 8px;
+	border-color: #800000;
+	font-size-adjust: 0.6;
+	font-family: Arial;
 	font-size: 15px;
-	border: 1px solid #b9b9b9;
-	background-color: #800000;
-	font-weight: bolder;
-}
 
-.button{
-	color:#FFFFFF;
 }
 
 .button:hover {
-	color: #FFFFFF;
+	color: #f3d9d9;
+	background-color: #800000;
+	border: 1px solid #b9b9b9;
+	font-family: Arial;
 }
