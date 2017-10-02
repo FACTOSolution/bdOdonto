@@ -51,9 +51,8 @@ class Turma_Aluno (models.Model):
 class Professor (models.Model):
     nome = models.CharField(max_length=50)
     codigo = models.CharField(max_length=15, primary_key=True)
-    login = models.CharField(max_length=20)
-    senha = models.CharField(max_length=20)
     turmas = models.ManyToManyField(Turma)
+    usuario = models.OneToOneField(User, null= True, on_delete=models.CASCADE, unique=True)
 
     def publish(self):
         self.save()
