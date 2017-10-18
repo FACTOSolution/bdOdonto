@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
         label = 'Senha',
         max_length = 32,
         min_length = 8,
-        widget = forms.PasswordInput()
+        widget = forms.PasswordInput(attrs={'placeholder' : 'Senha'})
     )
     username = forms.CharField(
         required = True,
@@ -19,7 +19,16 @@ class UserForm(forms.ModelForm):
         max_length = 150,
         help_text = ""
     )
+    username.widget.attrs['placeholder']='Nome de Usuário'
 
+    first_name = forms.CharField()
+    first_name.widget.attrs['placeholder']='Nome'
+
+    last_name = forms.CharField()
+    last_name.widget.attrs['placeholder']='Sobrenome'
+
+    email = forms.CharField()
+    email.widget.attrs['placeholder']='Email'
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'last_name', 'email')
@@ -29,8 +38,10 @@ class UserForm(forms.ModelForm):
             'last_name': 'Sobrenome',
         }
 
-class AlunoForm(forms.ModelForm):
 
+class AlunoForm(forms.ModelForm):
+    matricula = forms.CharField()
+    matricula.widget.attrs['placeholder']='Matrícula'
     class Meta:
         model = Aluno
         fields = ('matricula',)

@@ -1,18 +1,31 @@
-{% extends 'sistema_fichas/base.html' %}
-{% block content %}
-<head>
-    <meta charset="UTF-8">
-	<title>Registrar novo usuário - BDOdonto</title>
-	<link rel="stylesheet" href="/static/css/registrar_usuario.css">
-</head>
-<div id="div_registro">
-	<h2>Registrar-se</h2>
-	<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
-		{% csrf_token %}
-		{{ user_form.as_p }}
-		{{ aluno_form.as_p }}
-		<input type="submit" name="submit" value="Registrar"/>
-		<input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
-	</form>
-</div>
-{% endblock %}
+<html>
+    <head>
+        <title>BDOdonto</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+		<link rel="stylesheet" href="/static/css/login.css">
+        <meta charset="UTF-8">
+    </head>
+	<body>
+		{% if form.errors %}
+	    <p class="aviso">Usuário ou senha inválidos!</p>
+		{% endif %}
+	    {% if user.is_authenticated %}
+	 		<meta http-equiv="REFRESH" content="0;url=http://localhost:8000/turmas_aluno/">
+	    {% endif %}	
+		<div class="login-card" id="register">
+			<a href="{% url 'sistema_fichas:listar_turmas' %}"><img id="logo_bd" src="../../static/images/logo_bd.svg"></a>
+			<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ aluno_form.as_p }}
+				<input type="submit" name="submit" class="login login-submit" value="Registrar"/>
+				<input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
+			</form>
+		</div>
+		<div>
+            <p class="footer" id="foot" >Developed by &nbsp&nbsp<img src="../../static/images/factos_logo.svg"></p>
+        </div>
+	</body>
+</html>

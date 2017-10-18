@@ -19,6 +19,10 @@ body {
 	left:32.5%;
 }
 
+#register{
+	top:0.3%;
+}
+
 .login-card h1 {
 	font-weight: 100;
 	text-align: center;
@@ -31,8 +35,13 @@ body {
 	margin-bottom: 10px;
 	position: relative;
 }
+.login-card label {
+	visibility: hidden;
+	position:absolute;
 
-.login-card input[type=text], input[type=password] {
+}
+
+.login-card input[type=text], input[type=password], input[type=email]{
 	height: 44px;
 	font-size: 16px;
 	width: 100%;
@@ -43,7 +52,7 @@ body {
 	box-sizing: border-box;
 }
 
-.login-card input[type=text]:hover, input[type=password]:hover {
+.login-card input[type=text]:hover, input[type=password]:hover , input[type=email]:hover{
 	border: 1px solid #b9b9b9;
 	border-top: 1px solid #a0a0a0;
 }
@@ -114,6 +123,17 @@ body {
     top:77%;
     left:38%;
     width: 300px;
+}
+
+#foot{
+	text-align: right;
+	padding-right: 8px;
+	padding-bottom: 4px;
+	position:fixed;
+	bottom:0px;
+	top:auto;
+	left:auto;
+	right:0px;
 }
 
 #logo_bd{

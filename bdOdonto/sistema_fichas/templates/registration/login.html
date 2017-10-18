@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
 		<link rel="stylesheet" href="/static/css/login.css">
+		
         <meta charset="UTF-8">
     </head>
 	<body>
@@ -19,7 +20,7 @@
 		{%endif%}	
 		<div class="login-card">
 			<a href="{% url 'sistema_fichas:listar_turmas' %}"><img id="logo_bd" src="../../static/images/logo_bd.svg"></a>
-			<form action="{% url 'login' %}" method="post">
+			<form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			    <input type="text" name="username" placeholder="Nome de usuário">
 			    <input type="password" name="password" placeholder="Senha">
