@@ -79,7 +79,8 @@ body{
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     position:fixed;
     bottom:0;
-    width:100%;
+    width: 190px;
+    right:0px;
     padding-bottom:4px;
     padding-right: 8px;
 }

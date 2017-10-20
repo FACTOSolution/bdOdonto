@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+
 body{
 	  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
@@ -10,11 +12,12 @@ body{
 	  font-size: 2.5em;
 	  border-bottom-style: solid;
 	  border-bottom-width: 1px;
+	  color: #800000;
+	  border-color: #800000;
 }
 
 #selectors {
 	  padding-top: 20px;
-    margin-left: 7%;
 	  position: relative;
     padding-bottom: 30px;
 	  font-size: 100%;
@@ -23,14 +26,17 @@ body{
 }
 
 #opcoes {
-	  margin-left: 32%;
-	  position: relative; 
+	  margin-top: -10%;
+	  margin-left: 85%;
+	  position: right; 
 	  padding: 10px;
 	  color: #000000;
 }
 
 #opcoes button {
 	  padding: 10px;
+	  margin-bottom: 22.5%;
+	   width: 100%;
 	  border-radius: 5px;
 }
 
@@ -44,41 +50,38 @@ body{
 
 
 .marca_vermelha {
-	  display: inline;
-    margin: auto;
-    width: 100%;
+    margin: 0px;
+    width: 14%;
 }
 
 .marca_azul {
-    display: inline;
-    margin: auto;
-    width: 100%;
+    margin: 0px;
+    width: 14%;
 }
 
 .marca_vermelha button {
-	  position: relative;
-	  padding: 10px;
-    display: inline;
+	padding: 10px;
     background-color: #FF0022;
-    width: auto;
+    width: 100%;
     height: auto;
-	  text-align: center;
-	  border-radius: 5px;
+	text-align: center;
+	border-radius: 5px;
+	float:left;
 }
 
 .marca_azul button {
-	  position: relative;
-	  padding: 10px;
-    display: inline;
-	  background-color: #0066FF;
-	  width: auto;
-	  height: auto;
-	  text-align: center;
-	  border-radius: 5px;
+	position: left;
+	padding: 10px;
+	background-color: #0066FF;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	border-radius: 5px;
+	float:left;
 }
 
 #canvas {
     display: block;
-	margin: auto auto 5%;
+	margin: 0% 10% 0% 22%;
     padding: 10px;
 }

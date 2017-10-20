@@ -25,12 +25,20 @@ a {
 	width: 25%;
 	text-align: center;
 	margin: auto;
-	background-color: #0088FF;
+	background-color: #f3d9d9;
+	color:#800000;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #800000;
+	font-size-adjust: 0.6;
+	font-family: Arial;
 }
 
 #preencher_ficha:hover {
-	width: 300px;
-	box-shadow: 0px 0px 3px 4px #888888;
+	color: #f3d9d9;
+	background-color: #800000;
+	border: 1px solid #b9b9b9;
+	font-family: Arial;
 }
 
 #preencher_ficha:hover a{
@@ -43,12 +51,36 @@ a {
 	width: 25%;
 	text-align: center;
 	margin: auto;
-	background-color: #0088FF;
+	margin-top:20px;
+	background-color: #f3d9d9;
+	color:#800000;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #800000;
+	font-size-adjust: 0.6;
+	font-family: Arial
 }
 
+#letra{
+	color:#800000;
+}
+#letra:hover{
+	color:#f3d9d9;
+}
+
+#letr{
+	color:#800000;
+}
+#letr:hover{
+	color:#f3d9d9;
+}
+
+
 #odontograma:hover {
-	width: 300px;
-	box-shadow: 0px 0px 3px 4px #888888;
+	color: #f3d9d9;
+	background-color: #800000;
+	border: 1px solid #b9b9b9;
+	font-family: Arial;
 }
 
 #odontograma:hover a{
@@ -57,4 +89,13 @@ a {
 
 a:visited {
 	color: #000000;
+}
+
+#div_ficha h2 {
+	color: #800000;
+	position: relative;
+	text-align: center;
+	padding-bottom: 30px;
+	font-weight: 100;
+	font-size: 2.5em;
 }
