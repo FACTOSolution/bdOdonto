@@ -71,8 +71,8 @@ body {
 
 .button:hover {
 	color: #f3d9d9;
-	padding: 4px 21px;
 	background-color: #800000;
 	border: 1px solid #b9b9b9;
 	font-family: Arial;
+	padding: 4px 21px;
 }

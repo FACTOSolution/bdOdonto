@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>BDOdonto</title>
+        <title>Criar Conta - BDOdonto</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
@@ -16,16 +16,16 @@
 	    {% endif %}	
 		<div class="login-card" id="register">
 			<a href="{% url 'sistema_fichas:listar_turmas' %}"><img id="logo_bd" src="../../static/images/logo_bd.svg"></a>
-			<form id="user_form" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
+			<form id="user_form" style="margin-bottom: 0px;" method="post" action="{% url 'sistema_fichas:registrar_usuario' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				{{ user_form.as_p }}
 				{{ aluno_form.as_p }}
-				<input type="submit" name="submit" class="login login-submit" value="Registrar"/>
+				<input type="submit" name="submit" style="margin-bottom: 0px;" class="login login-submit" value="Registrar"/>
 				<input type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
 			</form>
 		</div>
 		<div>
-            <p class="footer" id="foot" >Developed by &nbsp&nbsp<img src="../../static/images/factos_logo.svg"></p>
+            <p class="footer" id="foot" >Developed by &nbsp&nbsp<a href="http://factos.ufpi.br"><img src="../../static/images/factos_logo.svg"></a></p>
         </div>
 	</body>
 </html>
