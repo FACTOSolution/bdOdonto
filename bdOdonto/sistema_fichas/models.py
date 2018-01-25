@@ -26,16 +26,6 @@ class Turma (models.Model):
     def __str__(self):
         return self.nome
 
-class Tipo_Ficha(models.Model):
-    codigo = models.PositiveIntegerField(primary_key=True)
-    nome = models.CharField(max_length=50)
-    turma = models.ManyToManyField(Turma)
-
-    def publish(self):
-        self.save()
-
-    def __str__(self):
-        return self.nome
 
 class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
@@ -59,7 +49,39 @@ class Professor (models.Model):
 
     def __str__(self):
         return self.nome
+#PODE SER APAGADO ESSAS 4 CLASSES.
 
+
+
+class TAP(models.Model):
+    cod_prof = models.CharField(max_length=15)
+    mat_aluno = models.CharField(max_length=11)
+    cod_turma = models.CharField(max_length=15)
+    turma = models.CharField(max_length=25)
+    aluno = models.CharField(max_length=30)
+    prof = models.CharField(max_length=30)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.cod_prof + self.mat_aluno + self.cod_turma + self.turma + self.aluno + self.prof
+
+
+#RELAÇÃO COM TURMA TEM QUE SER SUBSTITUIDA POR TAP
+class Tipo_Ficha(models.Model):
+    codigo = models.PositiveIntegerField(primary_key=True)
+    nome = models.CharField(max_length=50)
+    turma = models.ManyToManyField(Turma)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.nome
+
+
+#Futuro prontuario - ADICIONAR IMAGEM PRA TERMO
 class Paciente(models.Model):
     cpf = models.CharField(max_length = 11, primary_key=True)
     nome = models.CharField(max_length=200)
@@ -96,6 +118,7 @@ class Paciente(models.Model):
     def __str__(self):
         return self.cpf
 
+#mudar atendimento pra relação TAP - prontuario
 class Atendimento (models.Model):
     data = models.DateField(auto_now=True)
     turma_aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
@@ -108,12 +131,29 @@ class Atendimento (models.Model):
     def __str__(self):
         return str(self.paciente)
 
+#diretorio IMAGEMFIELD
+'''class Exame (models.Model):
+    imagem = models.ImageField()
+    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
+    data = models.DateField(auto_now=True)
+
+class Procedimento (models.Model):
+    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
+    descricao = models.CharField(blank = True, null = True)
+    data = models.DateField(auto_now=True)
+    ficha_ou_procedimento = models.BooleanField() #Se o procedimento for cadastrado juntamente com uma ficha, é tipo "Cadastro de ficha" - 1. Se for cadastrado sem ficha, é "Cadastro de procedimento" - 0
+'''
+
+
+#TODAS AS FICHAS PEGAM CHAVE ESTRANGEIRA DE PROCEDIMENTO.
+
 class Odontograma(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
     pontos = models.TextField(blank=True)
 
     def publish(self):
         self.save()
+
 
 class Ficha_Diagnostico(models.Model):
     atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
