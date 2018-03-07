@@ -5,7 +5,6 @@
 	<link rel="stylesheet" href="odontograma2.css">
 </head>
 
-
 <body>
 	<div class="left odontograma">
 
@@ -1028,18 +1027,43 @@
 	</svg>
 </div>
 
-<div class="left">
-	Marcação
+<div class="left marcacao">
+	<p>Marcação</p>
+	<p>Coroa do dente</p>
+	<div class=color style="background-color: #fe5f55ff"><p>Cárie</p></div>
+	<div class=color style="background-color: #f0b67fff"><p>Restauração com cárie</p></div>
+	<div class=color style="background-color: #d6d1b1ff"><p>Restauração sem cárie</p></div>
+	<p>Raiz do dente</p>
+	<div class=color style="background-color: gray"><p>Dente a extrair</p></div>
+	<div class=color style="background-color: white"><p>Dente extraído</p></div>
+	<div class=color style="background-color: #9f7e69ff"><p>Trat. endodôntico a ser feito</p></div>
+	<div class=color style="background-color: #f2efc7ff"><p>Trat. endodôntico concluído</p></div>
+	<div class=color style="background-color: #f0b67fff"><p>Restauração com cárie</p></div>
+	<div class=color style="background-color: #d6d1b1ff"><p>Restauração sem cárie</p></div>
+	<div class=color style="background-color: #fe5f55ff"><p>Cárie radicular</p></div>
+
+
+
 </div>
 
-<div class="menu" id="menuRaiz">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+<div class="menu" id="menuCoroa">
+    <a href="#" onclick="alterar(1)">Cárie</a>
+    <a href="#" onclick="alterar(2)">Restauração com cárie</a>
+    <a href="#" onclick="alterar(3)">Restauração sem cárie</a>
+    <a href="#" onclick="alterar(0)">Remover marcação</a>
   </div>
 
-<div class="menu">
-</div>
+<div class="menu" id="menuRaiz">
+    <a href="#" onclick="alterar(4)">Dente a extrair</a>
+    <a href="#" onclick="alterar(5)">Dente extraído</a>
+    <a href="#" onclick="alterar(6)">Trat. endodôntico a ser feito</a>
+    <a href="#" onclick="alterar(7)">Trat. endodôntico concluído</a>
+    <a href="#" onclick="alterar(8)">Restauração com cárie</a>
+    <a href="#" onclick="alterar(9)">Restauração sem cárie</a>
+    <a href="#" onclick="alterar(10)">Cárie radicular</a> 
+    <a href="#" onclick="alterar(0)">Remover marcação</a>
+  </div>
+
 
 </body>
 
@@ -1060,40 +1084,106 @@ for (var j = 1; j<5 ; j++){
 		dentes.push(document.getElementById("d" + j + "" + i +"b"))
 	}
 }
+var menu2 = document.getElementById("menuCoroa");
+var menu = document.getElementById("menuRaiz");
 
+var saida ="";
+
+var dente_onclick;
 var semaphore = 0;
 dentes.map(
 	function(dente) {
+		var color;
 		dente.onmouseover = function(){
-			this.style.fill="red";
-			this.style.cursor="pointer";
+			if(this.style.fill!="bbbbbb"){
+				color=this.style.fill;
+				this.style.fill="red";
+				this.style.cursor="pointer";	
+			}
 		}
 		dente.onmouseout= function(){
-			this.style.fill="#800000"; 
-			this.style.cursor="default";
+			if(this.style.fill!="bbbbbb"){	
+				this.style.fill=color; 
+				this.style.cursor="default";
+			}
 		}
 		dente.onclick = function(evt){
 			if(this.id[3]==="r"){
-				var menu = document.getElementById("menuRaiz");
 				menu.style.left=evt.clientX;
 				menu.style.top=evt.clientY;
 				menu.style.visibility="visible";
+				menu2.style.visibility="hidden";
 				semaphore += 1;
 			} else {
-				var menu = document.getElementById("menuGeral");
+				menu2.style.left=evt.clientX;
+				menu2.style.top=evt.clientY;
+				menu2.style.visibility="visible";
+				menu.style.visibility="hidden";
+				semaphore += 1;
 			}
+			dente_onclick=this;
 		}
 	}
 );
 
+
+//Para adicionar saida é tipo 1, para remover é tipo 2.
+function alterar_saida(tipo,dado){
+	if(saida.indexOf(dente_onclick.id) > -1 ? true : false){ //verifica se o dente já foi marcado
+		var pos = saida.indexOf(dente_onclick.id); //pega posição da escrita do dente
+		saida=saida.replace(dente_onclick.id,""); //deleta o dente marcado
+		saida = saida.slice(0,pos) + saida.slice(pos+2,saida.length); //deleta o numero da marcação
+
+	}
+	if(tipo==1){
+		saida = saida + " " + dente_onclick.id + dado; //marca
+	}
+	saida = saida.replace("  ", " "); //corrige espaços
+	console.log(saida);
+}
+
+function alterar(tipo){
+	if(tipo==1 || tipo==10){
+		dente_onclick.style.fill="#fe5f55";
+	}
+	if(tipo==2 || tipo==8){
+		dente_onclick.style.fill="#f0b67f";
+	}
+	if(tipo==3 || tipo==9){
+		dente_onclick.style.fill="#d6d1b1";
+	}
+	if(tipo==4){
+		dente_onclick.style.fill="gray";
+	}
+	if(tipo==5){
+		dente_onclick.style.fill="white";
+	}
+	if(tipo==6){
+		dente_onclick.style.fill="#9f7e69";
+	}
+	if(tipo==7){
+		dente_onclick.style.fill="#f2efc7";
+	}
+	if(tipo==0){
+		dente_onclick.style.fill="#800000";
+		alterar_saida(0 ,tipo-1)
+	}
+	else{
+		alterar_saida(1 ,tipo-1)
+	}
+}
+
 document.onclick = function(){
-	var menu = document.getElementById("menuRaiz");
 	semaphore += 1;
 	if (semaphore>3){
 		semaphore=2;
 	}
 	if (menu.style.visibility=="visible" && semaphore == 3){
 		menu.style.visibility="hidden";
+		semaphore=0;
+	}
+	if (menu2.style.visibility=="visible" && semaphore == 3){
+		menu2.style.visibility="hidden";
 		semaphore=0;
 	}
 
