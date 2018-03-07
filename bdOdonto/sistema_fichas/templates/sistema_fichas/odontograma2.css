@@ -8,6 +8,7 @@ body {
 	float:left;
 }
 .marcacao {
+	margin-top: 30px;
 	margin-left: 40px;
 	width: 200px;
 	color:#800000;
@@ -50,7 +51,7 @@ body {
 }
 .color p {
 	padding-left: 40px;
-	padding-top: 5px;
+	padding-top: 8px;
 	font-size: 10px;
 	width: 150px;
 }
