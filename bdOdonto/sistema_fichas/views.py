@@ -1,12 +1,37 @@
 # -*- coding: utf-8 -*-
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate
+from django.contrib import auth
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 from .models import *
 from .forms import *
 import json
+
+def login(request):
+    if request.method == 'POST':    
+        form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return HttpResponseRedirect('index') # redireciona o usuario logado para a pagina inicial
+        else:
+            return render(request, "registration/login.html", {'err': True})
+    
+    #se nenhuma informacao for passada, exibe a pagina de login com o formulario
+    return render(request, "registration/login.html", {})
+
+
+@login_required
+def index(request):
+    return render(request, 'sistema_fichas/index.html', {})
 
 @login_required
 def lista_fichas_aluno(request):
@@ -31,7 +56,7 @@ def user_logout(request):
         del request.session['turma_atual']
     return HttpResponseRedirect('/accounts/login')
 
-def registrar_usuario(request):
+'''def registrar_usuario(request):
     if request.user.is_authenticated:
         return redirect('sistema_fichas:listar_turmas')
     if request.method == 'POST':
@@ -53,7 +78,7 @@ def registrar_usuario(request):
         aluno_form = AlunoForm()
     return render(request, 'sistema_fichas/registrar_usuario.html',
                   {'user_form': user_form,
-                   'aluno_form': aluno_form})
+                   'aluno_form': aluno_form})'''
 
 @login_required
 def listar_turmas(request):
