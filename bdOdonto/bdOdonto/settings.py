@@ -75,17 +75,34 @@ WSGI_APPLICATION = 'bdOdonto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-db_config = read_db_config("config.ini", "mysql")
+od_db_config = read_db_config("config.ini", "mysql")
+sigaa_disc_config = read_db_config("sigaa_disc_config.ini", "postgresql")
+sigaa_users_config = read_db_config("sigaa_users_config.ini", "postgresql")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': db_config['database'],
-        'USER': db_config['user'],
-        'PASSWORD': db_config['password'],
-        'HOST': db_config['host'],
+        'NAME': od_db_config['database'],
+        'USER': od_db_config['user'],
+        'PASSWORD': od_db_config['password'],
+        'HOST': od_db_config['host'],
         'PORT': '3306',
-    }
-	
+    },
+	'sigaa_disc':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': sigaa_disc_config['database'],
+        'USER': sigaa_disc_config['user'],
+        'PASSWORD': sigaa_disc_config['password'],
+        'HOST': sigaa_disc_config['host'],
+        'PORT': sigaa_disc_config['port'],
+    },
+    'sigaa_users':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': sigaa_users_config['database'],
+        'USER': sigaa_users_config['user'],
+        'PASSWORD': sigaa_users_config['password'],
+        'HOST': sigaa_users_config['host'],
+        'PORT': sigaa_users_config['port'],
+    },
 }
 
 PASSWORD_HASHERS = [
