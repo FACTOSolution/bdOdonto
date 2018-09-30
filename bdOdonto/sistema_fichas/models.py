@@ -72,7 +72,7 @@ class TAP(models.Model):
 class Tipo_Ficha(models.Model):
     codigo = models.PositiveIntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
-    turma = models.ManyToManyField(Turma)
+    tap = models.ManyToManyField(TAP)
 
     def publish(self):
         self.save()
@@ -110,7 +110,8 @@ class Paciente(models.Model):
     endereco_profissional = models.CharField(max_length=200, blank = True, null = True)
     bairro_profissional = models.CharField(max_length=200, blank = True, null = True)
     cep_profissional = models.CharField(blank=True, null=True, max_length=9)
-    turma_aluno = models.ManyToManyField(Turma_Aluno, through='Atendimento')
+    tap = models.ManyToManyField(TAP, through='Atendimento')
+    termo_cons = models.ImageField()
 
     def publish(self):
         self.save()
@@ -121,8 +122,8 @@ class Paciente(models.Model):
 #mudar atendimento pra relação TAP - prontuario
 class Atendimento (models.Model):
     data = models.DateField(auto_now=True)
-    turma_aluno = models.ForeignKey(Turma_Aluno, on_delete=models.CASCADE)
-    tipo_ficha = models.ForeignKey(Tipo_Ficha, on_delete=models.CASCADE)
+    periodo = models.CharField(max_length=6)
+    tap = models.ForeignKey(TAP, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
 
     def publish(self):
@@ -132,23 +133,23 @@ class Atendimento (models.Model):
         return str(self.paciente)
 
 #diretorio IMAGEMFIELD
-'''class Exame (models.Model):
+class Exame (models.Model):
     imagem = models.ImageField()
-    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
+    cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
     data = models.DateField(auto_now=True)
 
 class Procedimento (models.Model):
-    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
-    descricao = models.CharField(blank = True, null = True)
+    cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
+    descricao = models.CharField(blank = True, null = True, max_length = 2000)
     data = models.DateField(auto_now=True)
     ficha_ou_procedimento = models.BooleanField() #Se o procedimento for cadastrado juntamente com uma ficha, é tipo "Cadastro de ficha" - 1. Se for cadastrado sem ficha, é "Cadastro de procedimento" - 0
-'''
+    exame = models.BooleanField() 
 
 
 #TODAS AS FICHAS PEGAM CHAVE ESTRANGEIRA DE PROCEDIMENTO.
 
 class Odontograma(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     pontos = models.TextField(blank=True)
 
     def publish(self):
@@ -156,7 +157,7 @@ class Odontograma(models.Model):
 
 
 class Ficha_Diagnostico(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
 
     data = models.DateField(auto_now=True)
 
@@ -283,7 +284,7 @@ class Ficha_Diagnostico(models.Model):
         self.save()
 
 class Ficha_Ortodontia(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
 
     queixa = models.CharField(max_length=200)
 
@@ -402,7 +403,7 @@ class Ficha_Ortodontia(models.Model):
         self.save()
 
 class Ficha_Periodontia(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
 
     ESCS = (
         ('Sim','Sim'),
@@ -471,7 +472,7 @@ class Dados_Dentes(models.Model):
         self.save()
 
 class Ficha_Urgencia(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     
     historia_clinica = models.CharField(max_length=60)
     medicamentos = models.CharField(max_length=60)
@@ -497,7 +498,7 @@ class Ficha_Urgencia(models.Model):
         self.save()
 
 class Ficha_Endodontia(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     ESCS = (('Sim','Sim'),('NÃ£o','NÃ£o'),('NÃ£o sei','NÃ£o sei'))
 
     #ANAMNESE
@@ -569,7 +570,7 @@ class Ficha_Endodontia(models.Model):
         self.save()
 
 class Ficha_Endodontia_Tabela(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     
     dente1 = models.PositiveIntegerField(blank = True, null = True)
     canal1 = models.CharField(max_length = 20, blank = True, null = True)
@@ -604,7 +605,7 @@ class Ficha_Endodontia_Tabela(models.Model):
         self.save()
 
 class Ficha_PPR(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
 
     class_kennedy_sup = models.TextField()
     tratamento_previo_sup = models.TextField()
@@ -620,7 +621,7 @@ class Ficha_PPR(models.Model):
         self.save()
 
 class Ficha_Dentistica(models.Model):
-    atendimento = models.ForeignKey(Atendimento, on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     
     #ANAMNESE
     motivo_consulta = models.CharField(max_length=20, blank=True, null=True)
