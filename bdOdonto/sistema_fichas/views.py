@@ -54,7 +54,7 @@ def user_logout(request):
     logout(request)
     if request.session.has_key('turma_atual'):
         del request.session['turma_atual']
-    return HttpResponseRedirect('/accounts/login')
+    return HttpResponseRedirect(reverse('sistema_fichas:login'))
 
 '''def registrar_usuario(request):
     if request.user.is_authenticated:

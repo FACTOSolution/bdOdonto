@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+
+body {
+	background-color:#800000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:1.2rem;
+}
+
+.container {
+	background-color: white;
+	background-image: url("../images/logo_claro.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 800px;
+	width: 50%;
+	min-width: 500px;
+	height: 70%;
+	margin: 5% 25%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding:1rem;
+}
+p {
+	margin-bottom:1.4rem;
+
+}
+
+img {
+	width: 20em;
+}
+
+.container a {
+	margin-top:5%;
+	opacity: .6;
+}
+
+.container a:hover {
+	opacity: 1;
+}
+
+form {
+	margin-bottom:8%;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+form input[type="text"] {
+	width: 340px;
+	height: 2rem;
+	padding: .5rem;
+	opacity: .6;
+}
+
+form input[type="text"]:hover {
+	opacity: 1;
+}
+
+form input[type="submit"] {
+	height: 2.5rem;
+	opacity: .6;
+	width: 10rem;
+	font-size: 1.1rem;
+	margin-top:1.4rem;
+	background-color: #800000;
+	color:white;
+	border: none;
+}
+
+form input[type="submit"]:hover {
+	opacity: 1;
+}
+
+.footer {
+	position:fixed;
+	bottom: 0;
+	right: 1rem;
+	color: white;
+	font-size: 0.8rem;
+}
+.footer img {
+	margin-left:.1rem;
+	width: 60px;
+	margin-bottom:-.5rem;
+}
+
+.logout:before {
+	content: "";
+    display: block;
+    background: url("../images/sair.svg") no-repeat;
+    background-size: 3.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    float: left;
+    filter:invert(100%);
+
+}
+.logout:hover:before {
+	fill:pink;
+	background-size: 3.7rem;
+}
+
+
+.logout {
+	color: white;
+	font-size: 1.7rem;
+	position:absolute;
+	left:1rem;
+	top:.5rem;
+	text-decoration: none;
+}
+
+.logout:hover {
+	color:#d26c6c;
+}

@@ -3,24 +3,26 @@
 body {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	background-color: #800000;
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .login-card {
 	width: 35%;
+	min-width: 480px;
 	padding: 30px;
 	margin: auto;
 	background-color: #FFFFFF;
 	border-style: solid;
 	border-width: 1px;
 	border-color: white;
-	overflow: hidden;
-	position:absolute;
-	top:20%;
-	left:32.5%;
-}
-
-#register{
-	top:2%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .login-card h1 {
@@ -33,11 +35,9 @@ body {
 	width: 100%;
 	display: block;
 	margin-bottom: 10px;
-	position: relative;
 }
 .login-card label {
 	visibility: hidden;
-	position:absolute;
 
 }
 
@@ -95,6 +95,11 @@ body {
 	transition: opacity ease 0.5s;
 }
 
+.login-card img {
+	width: 300px;
+	margin-bottom: 30px;
+}
+
 .login-card a:hover {
 	opacity: 1;
 }
@@ -106,12 +111,12 @@ body {
 }
 
 .aviso {
-	text-align: center;
 	font-weight: bold;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	font-size-adjust: 0.6;
 	color:white;
-	padding-top:7%;
+	margin-bottom: 0;
+	margin-top: 100px;
 }
 
 .footer {
@@ -119,9 +124,6 @@ body {
     text-align: center;
     padding: 20px;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    position:absolute;
-    top:77%;
-    left:38%;
     width: 300px;
 }
 
@@ -134,11 +136,4 @@ body {
 	top:auto;
 	left:auto;
 	right:0px;
-}
-
-#logo_bd{
-    position:relative;
-    left:18%;
-    top:-20px;
-    width: 300px;
 }
