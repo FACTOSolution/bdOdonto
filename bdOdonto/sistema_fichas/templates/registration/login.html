@@ -9,14 +9,14 @@
         <meta charset="UTF-8">
     </head>
 	<body>
+		{% if user.is_authenticated %}
+			<meta http-equiv="refresh" content="0; url=index">
+        {% endif %}
 		{% if err == True %}
 	    <p class="aviso">Usuário ou senha inválidos!</p>
 		{% endif %}
-		{%if Flag%}
-		<p class="aviso">Usuário cadastrado com sucesso!</p>
-		{%endif%}	
 		<div class="login-card">
-			<a href="{% url 'sistema_fichas:index' %}"><img id="logo_bd" src="../../static/images/logo_bd.svg"></a>
+			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
 			<form action="{% url 'sistema_fichas:login' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			    <input type="text" name="username" placeholder="Nome de usuário">

@@ -1,9 +1,25 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<title>teste</title>
-</head>
-<body>
-	<h1> teste </h1>
-</body>
+    <head>
+        <title>BDOdonto</title>
+		<link rel="stylesheet" href="/static/css/index.css">
+		
+        <meta charset="UTF-8">
+    </head>
+	<body>
+		{% if user.is_authenticated %}
+                <!--<div id="logout" class="glyphicon glyphicon-off">-->
+			    <a title="Logout" class="logout" href="{% url 'sistema_fichas:logout' %}?next={% url 'sistema_fichas:login' %}"></a>
+				<!--</div>-->
+        {% endif %}
+		<div class="container">
+			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
+			<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
+					<p>Olá Renato, pesquise abaixo o CPF do paciente</p>
+					<input type="text" placeholder="CPF do Paciente" name="cpf_p">
+					<input type="submit" name="pesquisa" value="Pesquisar">
+
+			</form>
+		</div>
+		<p class="footer">Developed by <a target="_blank" href="http://factos.ufpi.br"><img src="../../static/images/factos_logo.svg"></a></p>
+	</body>
 </html>
