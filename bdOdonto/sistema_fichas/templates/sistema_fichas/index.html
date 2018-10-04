@@ -14,7 +14,7 @@
 		<div class="container">
 			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
 			<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
-					<p>Olá Renato, pesquise abaixo o CPF do paciente</p>
+					<p>Olá {{username}}, pesquise abaixo o CPF do paciente</p>
 					<input type="text" placeholder="CPF do Paciente" name="cpf_p">
 					<input type="submit" name="pesquisa" value="Pesquisar">
 

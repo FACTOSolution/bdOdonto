@@ -17,7 +17,7 @@ def login(request):
         form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
@@ -31,7 +31,8 @@ def login(request):
 
 @login_required
 def index(request):
-    return render(request, 'sistema_fichas/index.html', {})
+    username = request.user.username
+    return render(request, 'sistema_fichas/index.html', {'username': username})
 
 @login_required
 def lista_fichas_aluno(request):
