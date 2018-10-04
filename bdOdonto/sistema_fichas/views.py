@@ -39,7 +39,7 @@ def lista_fichas_aluno(request):
         requested_aluno = get_object_or_404(Aluno, pk=request.POST['aluno_mat'])
         requested_turma = get_object_or_404(Turma, pk=request.POST['turma_code'])
         requested_rela = get_object_or_404(Turma_Aluno, turma=requested_turma, aluno=requested_aluno, periodo=request.POST['periodo'])
-        requested_atendimentos = Atendimentos.objects.find(turma_aluno = requested_rela)
+        requested_atendimentos = Atendimento.objects.find(turma_aluno = requested_rela)
         ficha_lista = list()
     for atendi in requested_atendimentos:
         if atendi.tipo_ficha == 1:
@@ -107,7 +107,7 @@ def info_ficha(request, pk):
     request.session.modified = True
     codigo_turma = request.session['turma_atual']
     turma = get_object_or_404(Turma, codigo=codigo_turma)
-    aluno = get_object_or_404(Aluno, usuario=request.user)
+    aluno = get_object_or_404(Aluno, usuario=request.user) #???
     usuario = aluno.usuario
     return render(request, 'sistema_fichas/info_ficha.html',
                   {'ficha' : ficha,
@@ -121,13 +121,18 @@ def atendimento(request):
         paciente_form = PacienteForm(data=request.POST)
         if paciente_form.is_valid() and atendimento_form.is_valid():
             aluno = get_object_or_404(Aluno, usuario=request.user)
+
             t_codigo = request.session['turma_atual']
             turma = get_object_or_404(Turma, codigo=t_codigo)
+
             turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
+            
             ficha_pk = request.session['ficha_atual']
             ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
+            
             paciente = paciente_form.save()
             paciente.save()
+
             atendimento = atendimento_form.save(commit=False)
             atendimento.turma_aluno = turma_aluno
             atendimento.tipo_ficha = ficha
@@ -144,19 +149,25 @@ def atendimento(request):
 
 @login_required
 def atendimento_opcoes(request):
+    aluno = get_object_or_404(Aluno, usuario=request.user)
+    
+    t_codigo = request.session['turma_atual']
+    turma = get_object_or_404(Turma, codigo=t_codigo)
+
+    turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
+
+    ficha_pk = request.session['ficha_atual']
+    tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
+
+    cpf = request.session['paciente_atual']
+    paciente = get_object_or_404(Paciente, cpf=cpf)
+
+    atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
+
     atendimento_ficha = False
     odontograma = False
     if request.session.has_key('atendimento_ficha'):
         atendimento_ficha = True
-    aluno = get_object_or_404(Aluno, usuario=request.user)
-    t_codigo = request.session['turma_atual']
-    turma = get_object_or_404(Turma, codigo=t_codigo)
-    turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-    ficha_pk = request.session['ficha_atual']
-    tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-    cpf = request.session['paciente_atual']
-    paciente = get_object_or_404(Paciente, cpf=cpf)
-    atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
     if Odontograma.objects.filter(atendimento=atendimento):
         odontograma = True
     return render(request, 'sistema_fichas/atendimento_opcoes.html',

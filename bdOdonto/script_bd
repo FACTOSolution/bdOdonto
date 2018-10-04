@@ -1,6 +1,6 @@
 INSERT INTO sistema_fichas_turma VALUES ("1","Turma Teste");
-INSERT INTO sistema_fichas_aluno VALUES ("20159007758", Null);
-INSERT INTO sistema_fichas_turma_aluno VALUES (1,"2017.2","20159007758","1");
+INSERT INTO sistema_fichas_aluno VALUES ("20159007874", Null);
+INSERT INTO sistema_fichas_turma_aluno VALUES (1,"2017.2","20159007874","1");
 INSERT INTO sistema_fichas_tipo_ficha VALUES (1,"Ficha Diagnostico");
 INSERT INTO sistema_fichas_tipo_ficha VALUES (2,"Ficha Ortodontia");
 INSERT INTO sistema_fichas_tipo_ficha VALUES (3,"Ficha Periodontia");

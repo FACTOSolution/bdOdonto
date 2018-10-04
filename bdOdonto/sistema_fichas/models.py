@@ -60,6 +60,7 @@ class TAP(models.Model):
     turma = models.CharField(max_length=25)
     aluno = models.CharField(max_length=30)
     prof = models.CharField(max_length=30)
+    #adicionar periodo
 
     def publish(self):
         self.save()
@@ -81,8 +82,7 @@ class Tipo_Ficha(models.Model):
         return self.nome
 
 
-#Futuro prontuario - ADICIONAR IMAGEM PRA TERMO
-class Paciente(models.Model):
+class Prontuario(models.Model):
     cpf = models.CharField(max_length = 11, primary_key=True)
     nome = models.CharField(max_length=200)
     endereco = models.CharField(max_length=200)
@@ -124,22 +124,23 @@ class Atendimento (models.Model):
     data = models.DateField(auto_now=True)
     periodo = models.CharField(max_length=6)
     tap = models.ForeignKey(TAP, on_delete=models.CASCADE)
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
 
     def publish(self):
         self.save()
 
     def __str__(self):
-        return str(self.paciente)
+        return str(self.prontuario)
 
 #diretorio IMAGEMFIELD
 class Exame (models.Model):
     imagem = models.ImageField()
-    cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
+    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
     data = models.DateField(auto_now=True)
 
 class Procedimento (models.Model):
-    cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
+    tap = models.ForeignKey(TAP, on_delete=models.CASCADE)
+    cpf_p = models.ForeignKey(Prontuario,on_delete=models.CASCADE)
     descricao = models.CharField(blank = True, null = True, max_length = 2000)
     data = models.DateField(auto_now=True)
     ficha_ou_procedimento = models.BooleanField() #Se o procedimento for cadastrado juntamente com uma ficha, é tipo "Cadastro de ficha" - 1. Se for cadastrado sem ficha, é "Cadastro de procedimento" - 0
@@ -159,7 +160,7 @@ class Odontograma(models.Model):
 class Ficha_Diagnostico(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
 
-    data = models.DateField(auto_now=True)
+    data = models.DateField(auto_now=True) #remover
 
     motivo = models.CharField(max_length=200)
     historia = models.TextField()
