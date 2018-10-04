@@ -59,7 +59,7 @@ class PacienteForm(forms.ModelForm):
         )
 
     class Meta:
-        model = Paciente
+        model = Procedimento
         fields = '__all__'
         exclude = ['turma_aluno']
         labels = {
