@@ -59,18 +59,8 @@ class PacienteForm(forms.ModelForm):
         )
 
     class Meta:
-        model = Procedimento
-        fields = '__all__'
-        exclude = ['turma_aluno']
-        labels = {
-            'cpf': 'CPF',
-            'tel': 'Telefone',
-            'cel': 'Celular',
-            'data_nasc': 'Data de Nascimento',
-            'rg': 'RG',
-            'profissao_atual': 'Profissão atual',
-            'profissao_anterior': 'Profissão anterior'
-            }
+        model = Paciente
+        exclude = ['tap']
 
 class AtendimentoForm(forms.ModelForm):
     data = forms.DateField(widget=SelectDateWidget(years=[x for x in range(2017, 2100)]))

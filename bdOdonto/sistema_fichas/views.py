@@ -55,6 +55,25 @@ def menu_paciente(request):
     return render(request, 'sistema_fichas/menu_paciente.html', context=contexto)
 
 @login_required
+def cadastrar_paciente(request):
+    if request.method == 'GET':
+        formPaciente = PacienteForm()
+    elif request.method == 'POST':
+        formPaciente = PacienteForm(request.POST, request.FILES)
+        if formPaciente.is_valid():
+            novo_paciente = formPaciente.save()
+            request.session['cpf_p'] = novo_paciente.cpf
+            return HttpResponseRedirect(reverse('sistema_fichas:menu_paciente'))            
+    
+    return render(request, 'sistema_fichas/cadastrar_paciente.html', {'form': formPaciente})
+
+def detalhar_paciente(request):
+    cpf_p = request.session['cpf_p']
+    paciente = Paciente.objects.get(pk=cpf_p)
+    formPaciente = PacienteForm(instance=paciente)
+    return render(request, 'sistema_fichas/detalhes_paciente.html', {'form': formPaciente})
+
+@login_required
 def lista_fichas_aluno(request):
     if request.method == 'POST':
         requested_aluno = get_object_or_404(Aluno, pk=request.POST['aluno_mat'])
