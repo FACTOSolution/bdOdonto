@@ -12,8 +12,13 @@
 				<!--</div>-->
         {% endif %}
 		<div class="container">
+			
+			{% if pac_404 %}
+				<h1> DEU MERDA, PADRIM</h1>
+			{% endif %}
 			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
 			<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
 					<p>Olá {{username}}, pesquise abaixo o CPF do paciente</p>
 					<input type="text" placeholder="CPF do Paciente" name="cpf_p">
 					<input type="submit" name="pesquisa" value="Pesquisar">
