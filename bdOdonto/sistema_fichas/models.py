@@ -111,7 +111,7 @@ class Paciente(models.Model):
     bairro_profissional = models.CharField(max_length=200, blank = True, null = True)
     cep_profissional = models.CharField(blank=True, null=True, max_length=9)
     tap = models.ManyToManyField(TAP, through='Atendimento')
-    termo_cons = models.ImageField()
+    termo_cons = models.ImageField(null=True)
 
     def publish(self):
         self.save()

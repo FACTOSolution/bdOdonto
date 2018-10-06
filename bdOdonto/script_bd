@@ -17,4 +17,4 @@ INSERT INTO sistema_fichas_tipo_ficha_turma VALUES (5,5,1);
 INSERT INTO sistema_fichas_tipo_ficha_turma VALUES (6,6,1);
 INSERT INTO sistema_fichas_tipo_ficha_turma VALUES (7,7,1);
 INSERT INTO sistema_fichas_tipo_ficha_turma VALUES (8,8,1);
-INSERT INTO sistema_fichas_paciente VALUES("00000000001","Bejamin Arrola", "Quadra 4, Rua 3", "Vale Quem Tem", "Teresina", "Piruli", "64000100", "86000000001", "86000000000", "bejamim@arrola.com", "ESQUEMANDO", "1991-01-01", "27", "Pretim", "M", "00000001", "Teresina", "Brasileiro", "Uber", "Desempregado", "Indefinido", "Indefinido", "000000000");
+INSERT INTO sistema_fichas_paciente VALUES("00000000001","Bejamin Arrola", "Quadra 4, Rua 3", "Vale Quem Tem", "Teresina", "Piruli", "64000100", "86000000001", "86000000000", "bejamim@arrola.com", "ESQUEMANDO", "1991-01-01", "27", "Pretim", "M", "00000001", "Teresina", "Brasileiro", "Uber", "Desempregado", "Indefinido", "Indefinido", "000000000", "C:\Users\Kaio Delmondes\Pictures\termo de consetimento.png");
