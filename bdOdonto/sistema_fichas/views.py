@@ -14,7 +14,7 @@ import json
 
 def login(request):
     if request.method == 'POST':    
-        form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
+        #form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
@@ -31,8 +31,28 @@ def login(request):
 
 @login_required
 def index(request):
-    username = request.user.username
-    return render(request, 'sistema_fichas/index.html', {'username': username})
+    if request.method == 'GET':
+        username = request.user.username
+        return render(request, 'sistema_fichas/index.html', {'username': username})
+    elif request.method == 'POST':
+        cpf_p = request.POST['cpf_p']
+        try:
+            Paciente.objects.get(pk=cpf_p)
+            request.session['cpf_p'] = cpf_p
+            return HttpResponseRedirect(reverse('sistema_fichas:menu_paciente',))
+        except Paciente.DoesNotExist:
+            return render(request, 'sistema_fichas/paciente_nao_encontrado.html')
+            
+
+@login_required
+def menu_paciente(request):
+    cpf_p = request.session.get('cpf_p', None)
+    paciente = Paciente.objects.get(pk=cpf_p)
+    qt_procedimentos = len(Procedimento.objects.filter(cpf_p=paciente.cpf))
+    contexto = {'nome_p': paciente.nome,
+                'cpf_p': paciente.cpf,
+                'qt_procedimentos': qt_procedimentos,}
+    return render(request, 'sistema_fichas/menu_paciente.html', context=contexto)
 
 @login_required
 def lista_fichas_aluno(request):
@@ -48,7 +68,6 @@ def lista_fichas_aluno(request):
         else:
             pass
     return render(request, 'lista_fichas_aluno.html', {'fichas': ficha_lista})
-
 
 @login_required
 def user_logout(request):
@@ -397,6 +416,7 @@ def dentistica(request):
     return render(request, 'sistema_fichas/dentistica.html',
                   {'ficha_form': ficha_form})
 
+
 @login_required
 def buscar_paciente(request):
     form = BuscarPaciente()
@@ -414,6 +434,7 @@ def buscar_paciente(request):
         form = BuscarPaciente()
     return render(request, 'sistema_fichas/buscar_paciente.html', 
                   {'form': form})
+
 
 def listar_fichas(atendimento):
     listas = []

@@ -12,10 +12,6 @@
 				<!--</div>-->
         {% endif %}
 		<div class="container">
-			
-			{% if pac_404 %}
-				<h1> DEU MERDA, PADRIM</h1>
-			{% endif %}
 			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
 			<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
 					{% csrf_token %}

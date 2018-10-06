@@ -7,6 +7,7 @@ app_name = 'sistema_fichas'
 urlpatterns = [
     url(r'^$', views.login, name='login'),
     url(r'^index/$', views.index, name='index'),
+    url(r'^paciente/$', views.menu_paciente, name='menu_paciente'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^odontograma/$', views.odontograma, name='odontograma'),
     url(r'^turmas_aluno/$', views.listar_turmas, name='listar_turmas'),
