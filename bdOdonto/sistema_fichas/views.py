@@ -73,6 +73,15 @@ def detalhar_paciente(request):
     formPaciente = PacienteForm(instance=paciente)
     return render(request, 'sistema_fichas/detalhes_paciente.html', {'form': formPaciente})
 
+def listar_procedimentos(request):
+    return render(request, 'sistema_fichas/listar_procedimentos.html')
+
+def cadastrar_procedimento(request):
+    if request.method == 'GET':
+        formProcedimento = ProcedimentoForm()
+        return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento})
+
+
 @login_required
 def lista_fichas_aluno(request):
     if request.method == 'POST':
