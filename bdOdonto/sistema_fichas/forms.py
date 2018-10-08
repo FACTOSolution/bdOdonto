@@ -69,6 +69,35 @@ class AtendimentoForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['turma_aluno', 'tipo_ficha', 'paciente']
 
+class ProcedimentoForm(forms.ModelForm):
+    materias = (
+        ('Estágio I','Estágio I'),
+        ('Estágio II','Estágio II'),
+        ('Estágio III','Estágio III'),
+        ('Estágio IV','Estágio IV'),
+        ('Perio II','Perio II'),
+        ('Destística II','Destística II'),
+        ('Destística IV','Destística IV'),
+        ('Endo II','Endo II'),
+        ('PPR I','PPR I'),
+        ('PT','PT'),
+        ('PF II','PF II'),
+        ('Diagnóstico','Diagnóstico'),
+        ('Cirurgia I','Cirurgia I'),
+        ('Cirurgia II','Cirurgia II'),
+        ('Orto II','Orto II'),
+        )
+    materia = forms.ChoiceField(choices=materias)
+    class Meta:
+        model = Procedimento
+        fields = ['materia','descricao', 'ficha_ou_procedimento', 'exame']
+        labels = {
+            'materia': 'Matéria',
+            'descricao': 'Descrição',
+            'ficha_ou_procedimento': 'Ficha',
+            'exame': 'Exame',
+        }
+
 class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:

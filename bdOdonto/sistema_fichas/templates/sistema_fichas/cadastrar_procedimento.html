@@ -1,0 +1,16 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/atendimento.css">
+</head>
+<div id="div_atendimento">
+    <h2>Prontuário do Paciente</h2>
+		<form id="form_procedimento" method="post" action="{% url 'sistema_fichas:cadastrar_procedimento' %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input class="button" type="submit" name="submit" value="Salvar e Cadastrar Procedimento"/>
+		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:logout' %}"/>
+	</form>
+</div>
+{% endblock %}

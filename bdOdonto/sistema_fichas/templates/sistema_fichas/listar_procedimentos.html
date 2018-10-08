@@ -1,0 +1,12 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/atendimento.css">
+</head>
+<div id="div_atendimento">
+    <h2>Prontuário do Paciente - Procedimentos</h2>
+		<a href="{% url 'sistema_fichas:cadastrar_procedimento' %}">Adicionar Procedimento</a>
+	</form>
+</div>
+{% endblock %}
