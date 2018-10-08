@@ -52,6 +52,7 @@ form input[type="text"] {
 	height: 2rem;
 	padding: .5rem;
 	opacity: .6;
+	text-align: center;
 }
 
 form input[type="text"]:hover {
