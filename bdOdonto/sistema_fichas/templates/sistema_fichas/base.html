@@ -30,7 +30,7 @@
             </div style="min-height:100%;">
 		    {% if user.is_authenticated %}
                 <!--<div id="logout" class="glyphicon glyphicon-off">-->
-			    <a href="{% url 'logout' %}?next={% url 'login' %}" id="logout">
+			    <a href="{% url 'sistema_fichas:logout' %}?next={% url 'sistema_fichas:login' %}" id="logout">
 					<span class="glyphicon glyphicon-off"></span>
 					<span class="tooltiptext">Logout</span>
 				</a>

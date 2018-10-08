@@ -1,0 +1,13 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/atendimento.css">
+</head>
+<div id="div_atendimento">
+    <h2>Detalhes do Paciente</h2>
+	<div id="form_atendimento">
+        {{form.as_p}}
+    </div>
+</div>
+{% endblock %}
