@@ -2,15 +2,15 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/atendimento.css">
+    <link rel="stylesheet" href="/static/css/cadastrar_paciente.css">
 </head>
 <div id="div_atendimento">
     <h2>Cadastrar novo paciente</h2>
 		<form id="form_atendimento" method="post" action="{% url 'sistema_fichas:cadastrar_paciente' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<input class="button" type="submit" name="submit" value="Salvar e Cadastrar Ficha"/>
-		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:listar_turmas' %}"/>
+		<input class="button" type="submit" name="submit" value="Finalizar Cadastro"/>
+		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:menu_paciente' %}"/>
 	</form>
 </div>
 {% endblock %}

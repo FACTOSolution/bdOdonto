@@ -39,9 +39,10 @@ def index(request):
         try:
             Paciente.objects.get(pk=cpf_p)
             request.session['cpf_p'] = cpf_p
-            return HttpResponseRedirect(reverse('sistema_fichas:menu_paciente',))
+
+            return HttpResponseRedirect(reverse('sistema_fichas:menu_paciente'))
         except Paciente.DoesNotExist:
-            return render(request, 'sistema_fichas/paciente_nao_encontrado.html')
+            return render(request, 'sistema_fichas/paciente_nao_encontrado.html',  {'cpf': cpf_p})
             
 
 @login_required

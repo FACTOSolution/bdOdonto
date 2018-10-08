@@ -2,12 +2,22 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/atendimento.css">
+    <link rel="stylesheet" href="/static/css/listar_procedimentos.css">
 </head>
 <div id="div_atendimento">
     <h2>Prontuário do Paciente - Procedimentos</h2>
+<<<<<<< HEAD
         {{list_proc}}
 		<a href="{% url 'sistema_fichas:cadastrar_procedimento' %}">Adicionar Procedimento</a>
 	</form>
+=======
+	<div class="table">
+		Tabela com procedimentos recentes
+	</div>
+	<div class="but">
+		<a href="{% url 'sistema_fichas:menu_paciente' %}"><button class="back">Voltar</button></a>
+		<a href="{% url 'sistema_fichas:cadastrar_procedimento' %}"><button>Adicionar Procedimento</button></a>
+	<div>
+>>>>>>> 37e79a7e6a2a5e91f135c681f8783a0eccc97a59
 </div>
 {% endblock %}

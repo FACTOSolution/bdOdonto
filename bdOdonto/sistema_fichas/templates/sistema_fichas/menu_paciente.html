@@ -1,16 +1,24 @@
-<html>
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
     <head>
         <title>Paciente - BDOdonto</title>                
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/css/menu_paciente.css">
     </head>
-    <body>
-        <div>
-            Nome do Paciente: {{nome_p}} <br>
-            CPF do Paciente: {{cpf_p}} <br>
-            Quantidade de Procedimentos realizados: {{qt_procedimentos}} <br>
-            <a href="{% url 'sistema_fichas:detalhar_paciente' %}">Detalhes Paciente</a>
-            <br>
-            <a href="{% url 'sistema_fichas:listar_procedimentos' %}">Procedimentos</a>
+    <div class="this">
+        <div class="data">
+            <h3>Ficha do Paciente</h3>
+            <p>Nome: {{nome_p}}</p>
+            <p>CPF: {{cpf_p}}</p>
+            <p>Quantidade de procedimentos realizados: {{qt_procedimentos}}</p>
+            <a href="{% url 'sistema_fichas:detalhar_paciente' %}"><button >Mais Informações</button></a>
+            <a href="{% url 'sistema_fichas:index' %}"><button id="back">Voltar</button></a>
         </div>
-    </body>
-</html>
+        <div class="options">
+            <a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button >Procedimentos</button></a>
+            <a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button >Procedimentos</button></a>
+            <a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button >Procedimentos</button></a>
+            <a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button >Procedimentos</button></a>
+        </div>
+    </div>
+{% endblock %}

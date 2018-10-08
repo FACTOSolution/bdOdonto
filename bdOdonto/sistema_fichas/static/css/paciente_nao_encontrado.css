@@ -1,0 +1,30 @@
+.container div {
+	display:flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+button {
+	height: 2.5rem;
+	opacity: .6;
+	width: 10rem;
+	font-size: 1.1rem;
+	background-color: #800000;
+	color:white;
+	border: none;
+}
+
+button[name="cadastro"] {
+	height:3rem;
+	width:15rem;
+	opacity: .7;
+}
+
+button:hover {
+	opacity: 1;
+}
+.but {
+	margin:0 !important;
+}
