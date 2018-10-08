@@ -26,7 +26,6 @@ class Turma (models.Model):
     def __str__(self):
         return self.nome
 
-
 class Turma_Aluno (models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
@@ -52,7 +51,6 @@ class Professor (models.Model):
 #PODE SER APAGADO ESSAS 4 CLASSES.
 
 
-
 class TAP(models.Model):
     cod_prof = models.CharField(max_length=15)
     mat_aluno = models.CharField(max_length=11)
@@ -66,8 +64,8 @@ class TAP(models.Model):
         self.save()
 
     def __str__(self):
-        return self.cod_prof + self.mat_aluno + self.cod_turma + self.turma + self.aluno + self.prof
-
+        string = "Cod_Prof: " + self.cod_prof + ", Mat_Aluno: " + self.mat_aluno + ", Cod_Turma: " + self.cod_turma + ", Turma: " + self.turma + ", Aluno: " + self.aluno + ", Professor: " + self.prof
+        return string
 
 #RELAÇÃO COM TURMA TEM QUE SER SUBSTITUIDA POR TAP
 class Tipo_Ficha(models.Model):
@@ -80,7 +78,6 @@ class Tipo_Ficha(models.Model):
 
     def __str__(self):
         return self.nome
-
 
 class Paciente(models.Model):
     cpf = models.CharField(max_length = 11, primary_key=True)
@@ -155,7 +152,6 @@ class Odontograma(models.Model):
 
     def publish(self):
         self.save()
-
 
 class Ficha_Diagnostico(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
