@@ -74,12 +74,79 @@ def detalhar_paciente(request):
     return render(request, 'sistema_fichas/detalhes_paciente.html', {'form': formPaciente})
 
 def listar_procedimentos(request):
-    return render(request, 'sistema_fichas/listar_procedimentos.html')
+    list_proc = Procedimento.objects.filter(cpf_p = request.session['cpf_p'])
+    return render(request, 'sistema_fichas/listar_procedimentos.html', {'list_proc':list_proc})
 
 def cadastrar_procedimento(request):
     if request.method == 'GET':
         formProcedimento = ProcedimentoForm()
-        return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento})
+    elif request.method == 'POST':
+        turma = request.POST['materia']
+        
+        aluno_user = request.user.username
+        user = User.objects.filter(username = aluno_user)[0]
+        print(user.id)
+        
+        aluno = Aluno.objects.get(usuario_id=user.id)
+        
+        turma = request.POST['materia']
+        tap = TAP.objects.get(turma = turma, mat_aluno=aluno.matricula)
+        cpf_p = request.session['cpf_p']
+        paciente = Paciente.objects.get(pk=cpf_p)
+        
+        parc_procedimento = Procedimento(tap = tap, cpf_p = paciente)
+        formProcedimento = ProcedimentoForm(request.POST, instance=parc_procedimento)
+
+
+        if formProcedimento.is_valid():
+            procedimento = formProcedimento.save()
+            if formProcedimento.cleaned_data['ficha_ou_procedimento']:
+                materia = turma.replace(" ", "")
+                request.session['procedimento'] = procedimento.id
+                return HttpResponseRedirect(reverse('sistema_fichas:opcoes_ficha', args=(materia,)))
+            return HttpResponseRedirect(reverse('sistema_fichas:listar_procedimentos'))
+    return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento})
+
+def opcoes_ficha(request, slug):
+    materias = {
+        'EstágioI':('Periodontia', 'Dentistica', 'PPR', 'Odontograma'),
+        'EstágioII':('Periodontia', 'Dentistica', 'Endodontia', 'PPR', 'Odontograma'),
+        'EstágioIII':('Periodontia', 'Dentistica', 'Endodontia', 'PPR', 'Odontograma', 'Urgencia'),
+        'EstágioIV':('Periodontia', 'Dentistica', 'Endodontia', 'PPR', 'Odontograma', 'Urgencia', 'Ortodontia'),
+        'PerioII':('Periodontia'),
+        'DestísticaII':('Destística'),
+        'DestísticaIV':('Destística'),
+        'EndoII':('Endodontia'),
+        'PPRI':('PPR'),
+        'PT':('Odontograma'),
+        'PFII':('Odontograma'),
+        'Diagnóstico':('Diagnóstico'),
+        'CirurgiaI':('Odontograma'),
+        'CirurgiaII':('Odontograma'),
+        'OrtoII':('Ortodontia'),
+        }
+    if request.method == 'GET':
+        return render(request, 'sistema_fichas/opcoes_ficha.html', {'fichas': materias[slug], 'materia': slug})
+    elif request.method == 'POST':
+        nome_ficha = request.POST['TipoFicha']
+        if nome_ficha == "Diagnóstico":
+            return redirect('sistema_fichas:diagnostico')
+        elif nome_ficha == "Ortodontia":
+            return redirect('sistema_fichas:ortodontia')
+        elif nome_ficha == "Periodontia":
+            return redirect('sistema_fichas:periodontia')
+        elif nome_ficha == "Urgencia":
+            return redirect('sistema_fichas:urgencia')
+        elif nome_ficha == "Endodontia":
+            return redirect('sistema_fichas:endodontia')
+        elif nome_ficha == "Endodontia Tabela":
+            return redirect('sistema_fichas:endodontia_tabela')
+        elif nome_ficha == "PPR":
+            return redirect('sistema_fichas:ppr')
+        elif nome_ficha == "Dentistica":
+            return redirect('sistema_fichas:dentistica')
+        else:
+            return redirect('sistema_fichas:atendimento_opcoes')
 
 
 @login_required
@@ -247,28 +314,6 @@ def odontograma(request):
     return render(request, 'sistema_fichas/odontograma.html')
 
 @login_required
-def redirecionar_atendimento(request):
-    nome_ficha = request.session['ficha_atual']
-    if nome_ficha == "Ficha Diagnostico":
-        return redirect('sistema_fichas:diagnostico')
-    elif nome_ficha == "Ficha Ortodontia":
-        return redirect('sistema_fichas:ortodontia')
-    elif nome_ficha == "Ficha Periodontia":
-        return redirect('sistema_fichas:periodontia')
-    elif nome_ficha == "Ficha Urgencia":
-        return redirect('sistema_fichas:urgencia')
-    elif nome_ficha == "Ficha Endodontia":
-        return redirect('sistema_fichas:endodontia')
-    elif nome_ficha == "Ficha Endodontia Tabela":
-        return redirect('sistema_fichas:endodontia_tabela')
-    elif nome_ficha == "Ficha PPR":
-        return redirect('sistema_fichas:ppr')
-    elif nome_ficha == "Ficha Dentistica":
-        return redirect('sistema_fichas:dentistica')
-    else:
-        return redirect('sistema_fichas:atendimento_opcoes')
-
-@login_required
 def diagnostico(request):
     if request.method == 'POST':
         aluno = get_object_or_404(Aluno, usuario=request.user)
@@ -293,20 +338,12 @@ def diagnostico(request):
 @login_required
 def urgencia(request):
     if request.method == 'POST':
-        aluno = get_object_or_404(Aluno, usuario=request.user)
-        t_codigo = request.session['turma_atual']
-        turma = get_object_or_404(Turma, codigo=t_codigo)
-        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-        ficha_pk = request.session['ficha_atual']
-        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha)
         ficha_form = Ficha_UrgenciaForm(data=request.POST)
         if ficha_form.is_valid():
             ficha = ficha_form.save(commit=False)
-            ficha.atendimento = atendimento
+            ficha.atendimento = Procedimento.objects.get(pk=request.session['procedimento'])
             ficha.save()
-            request.session['atendimento_ficha'] = ficha_pk
-            return redirect('sistema_fichas:atendimento_opcoes')
+            return redirect('sistema_fichas:listar_procedimentos')
     else:
         ficha_form = Ficha_UrgenciaForm()
     return render(request, 'sistema_fichas/urgencia.html',
@@ -334,22 +371,17 @@ def ortodontia(request):
     return render(request, 'sistema_fichas/ortodontia.html',
                   {'ficha_form': ficha_form})
 
+"""
+Esta função ainda não foi completada
+"""
 @login_required
 def periodontia(request):
     if request.method == 'POST':
-        aluno = get_object_or_404(Aluno, usuario=request.user)
-        t_codigo = request.session['turma_atual']
-        turma = get_object_or_404(Turma, codigo=t_codigo)
-        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-        ficha_pk = request.session['ficha_atual']
-        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha)
         ficha_form = Ficha_PeriodontiaForm(request.POST)
         if ficha_form.is_valid():
             ficha = ficha_form.save(commit=False)
-            ficha.atendimento = atendimento
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
             ficha.save()
-            request.session['atendimento_ficha'] = ficha_pk
             return redirect('sistema_fichas:atendimento_opcoes')
     else:
         ficha_form = Ficha_PeriodontiaForm()
@@ -403,20 +435,12 @@ def endodontia_tabela(request):
 @login_required
 def ppr(request):
     if request.method == 'POST':
-        aluno = get_object_or_404(Aluno, usuario=request.user)
-        t_codigo = request.session['turma_atual']
-        turma = get_object_or_404(Turma, codigo=t_codigo)
-        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-        ficha_pk = request.session['ficha_atual']
-        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha)
         ficha_form = Ficha_PPRForm(request.POST)
         if ficha_form.is_valid():
             ficha = ficha_form.save(commit=False)
-            ficha.atendimento = atendimento
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
             ficha.save()
-            request.session['atendimento_ficha'] = ficha_pk
-            return redirect('sistema_fichas:atendimento_opcoes')
+            return redirect('sistema_fichas:listar_procedimentos')
     else:
         ficha_form = Ficha_PPRForm()
     return render(request, 'sistema_fichas/ppr.html',
@@ -425,20 +449,12 @@ def ppr(request):
 @login_required
 def dentistica(request):
     if request.method == 'POST':
-        aluno = get_object_or_404(Aluno, usuario=request.user)
-        t_codigo = request.session['turma_atual']
-        turma = get_object_or_404(Turma, codigo=t_codigo)
-        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-        ficha_pk = request.session['ficha_atual']
-        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha)
         ficha_form = Ficha_DentisticaForm(request.POST)
         if ficha_form.is_valid():
             ficha = ficha_form.save(commit=False)
-            ficha.atendimento = atendimento
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
             ficha.save()
-            request.session['atendimento_ficha'] = ficha_pk
-            return redirect('sistema_fichas:atendimento_opcoes')
+            return redirect('sistema_fichas:listar_procedimentos')
     else:
         ficha_form = Ficha_DentisticaForm()
     return render(request, 'sistema_fichas/dentistica.html',

@@ -629,7 +629,7 @@ class Ficha_Dentistica(models.Model):
     diario_alimentar = models.CharField(max_length=30, blank=True, null=True)
     frequencia_consumo_acucar = models.CharField(max_length=20, choices = (('3x ao dia','3x ao dia'),('5x ao dia','5x ao dia'),('>5x ao dia','>5x ao dia')))
     RESPOSTA = (('Junto Ã s refeiÃ§Ãµes','Junto Ã s refeiÃ§Ãµes'),('Intervalos entre refeiÃ§Ãµes','Intervalos entre refeiÃ§Ãµes'),('Junto Ã s refeiÃ§Ãµes e nos intervalos das mesmas','Junto Ã s refeiÃ§Ãµes e nos intervalos das mesmas') )
-    horario_consumo_acucar = models.CharField(max_length=20, choices=(RESPOSTA))
+    horario_consumo_acucar = models.CharField(max_length=100, choices=(RESPOSTA))
     toma_medicamento = models.CharField(max_length=20, blank=True, null=True)
     fluxo_salivar = models.CharField(max_length=10, blank=True, null=True)
     
@@ -643,16 +643,16 @@ class Ficha_Dentistica(models.Model):
     
     #PLANO DE TRATAMENTO
         #ORIENTAÃÃO E MEDIDAS PREVENTIVAS
-    orientacao = models.BooleanField()
-    evidenciacao_de_placa = models.BooleanField()
-    profilaxia = models.BooleanField()
+    orientacao = models.BooleanField(default=False)
+    evidenciacao_de_placa = models.BooleanField(default=False)
+    profilaxia = models.BooleanField(default=False)
         #APLICAÃÃO DE FLUOR
-    fosfato = models.BooleanField()
-    sodio = models.BooleanField()
-    fluoreto = models.BooleanField()
+    fosfato = models.BooleanField(default=False)
+    sodio = models.BooleanField(default=False)
+    fluoreto = models.BooleanField(default=False)
         #APLICAÃÃO DE CLOREXIDINA
-    clorexidina = models.BooleanField()
-    aquosa_digluconato = models.BooleanField()
+    clorexidina = models.BooleanField(default=False)
+    aquosa_digluconato = models.BooleanField(default=False)
     selamento_fissuras = models.CharField(max_length=20, blank=True, null=True)
     remineralizacao_de_lesoes_de_carie = models.CharField(max_length=20, blank=True, null=True)
     outra_medida = models.CharField(max_length=20, blank=True, null=True)

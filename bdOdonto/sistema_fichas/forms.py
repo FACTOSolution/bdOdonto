@@ -102,8 +102,7 @@ class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_Urgencia
-        fields = '__all__'
-        exclude = ['atendimento']
+        exclude = ['procedimento']
         labels = {
             'historia_clinica' : 'História Clínica (condições de saúde)',
             'medicamentos' : 'Medicamentos em uso no momento',
@@ -122,8 +121,7 @@ class Ficha_PPRForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_PPR
-        fields = '__all__'
-        exclude = ['atendimento']
+        exclude = ['procedimento']
         labels = {
             'class_kennedy_sup':'Classificação de Kennedy (superior)',
             'tratamento_previo_sup':'Tratamento prévio (superior)',
@@ -154,8 +152,7 @@ class Ficha_PeriodontiaForm(forms.ModelForm):
 
     class Meta:
         model = Ficha_Periodontia
-        fields = '__all__'
-        exclude = ['atendimento', 'odontograma']
+        exclude = ['procedimento', 'odontograma']
         labels = {
             'sangramento_gengiva':'Suas gengivas sangram quando escova os dentes?',
             'tratamento_gengiva':'Já fez tratamento de gengiva alguma vez?',
@@ -478,8 +475,7 @@ class Ficha_DentisticaForm(forms.ModelForm):
 
     class Meta():
         model = Ficha_Dentistica
-        fields = '__all__'
-        exclude = ['atendimento']
+        exclude = ['procedimento']
         labels = {
             'motivo_consulta':'Motivo da consulta:',
             'ultima_consulta':'Quando foi ao dentista pela ultima vez?',
