@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+
+body {
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+#div_atendimento {
+	min-height:350px;
+}
+
+h2 {
+	color: #800000;
+	font-weight: 100;
+	text-align: center;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-color: #800000;
+	padding-bottom: 20px;
+}
+
+.table {
+	width:50%;
+	height:40%;
+	background-color: white;
+	margin:auto;
+
+}
+
+.but {
+	margin-top:2rem;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	height: 3.2rem;
+	opacity: .6;
+	width: 17rem;
+	font-size: 1.4rem;
+	background-color: #800000;
+	color:white;
+	border: none;
+}
+
+button:hover {
+	opacity: 1;
+}
+
+.back {
+	height: 3rem;
+	margin-right: 2rem;
+}

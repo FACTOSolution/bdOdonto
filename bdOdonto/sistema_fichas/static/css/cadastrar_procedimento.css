@@ -1,0 +1,28 @@
+form {
+	margin-top:4rem;
+	margin-left:30%;
+}
+
+form label {
+	width: 10rem;
+}
+
+form input[type="text"] {
+	width: 50rem;
+}
+
+.button {
+	margin-top:2rem;
+	height: 3.5rem;
+	opacity: .6;
+	width: 22rem;
+	font-size: 1.4rem;
+	background-color: #800000;
+	color:white;
+	border: none;
+	margin-left: 15%
+}
+
+.button:hover {
+	opacity: 1;
+}

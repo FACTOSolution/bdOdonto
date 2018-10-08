@@ -2,15 +2,17 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/atendimento.css">
+    <link rel="stylesheet" href="/static/css/listar_procedimentos.css">
+    <link rel="stylesheet" href="/static/css/cadastrar_procedimento.css">
 </head>
 <div id="div_atendimento">
-    <h2>Prontuário do Paciente</h2>
+    <h2>Prontuário do Paciente - Cadastrar Procedimento</h2>
 		<form id="form_procedimento" method="post" action="{% url 'sistema_fichas:cadastrar_procedimento' %}">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<input class="button" type="submit" name="submit" value="Salvar e Cadastrar Procedimento"/>
+		<input class="button" type="submit" name="submit" value="Cadastrar Procedimento"/>
 		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:logout' %}"/>
-	</form>
+	</form>	
+		<a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button class="back">Cancelar</button></a>
 </div>
 {% endblock %}

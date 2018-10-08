@@ -1,25 +1,13 @@
-<html>
-    <head>
-        <title>BDOdonto</title>
-		<link rel="stylesheet" href="/static/css/index.css">
-		<link rel="stylesheet" href="/static/css/paciente_nao_encontrado.css">
-		
-        <meta charset="UTF-8">
-    </head>
-	<body>
-		{% if user.is_authenticated %}
-                <!--<div id="logout" class="glyphicon glyphicon-off">-->
-			    <a title="Logout" class="logout" href="{% url 'sistema_fichas:logout' %}?next={% url 'sistema_fichas:login' %}"></a>
-				<!--</div>-->
-        {% endif %}
-		<div class="container">
-			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
-			<p>O paciente de cpf {{cpf}} não consta no banco de dados</p>
-			<div>
-				<a class="but" href="{% url 'sistema_fichas:index' %}"><button name="voltar">Voltar</button></a>
-				<a class="but" href="{% url 'sistema_fichas:cadastrar_paciente' %}"><button name="cadastro">Cadastrar Paciente</button></a>
-			</div>
-		</div>
-		<p class="footer">Developed by <a target="_blank" href="http://factos.ufpi.br"><img src="../../static/images/factos_logo.svg"></a></p>
-	</body>
-</html>
+{% extends 'sistema_fichas/base2.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/paciente_nao_encontrado.css">
+</head>
+<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
+<p>O paciente de cpf {{cpf}} não consta no banco de dados</p>
+<div>
+	<a class="but" href="{% url 'sistema_fichas:index' %}"><button name="voltar">Voltar</button></a>
+	<a class="but" href="{% url 'sistema_fichas:cadastrar_paciente' %}"><button name="cadastro">Cadastrar Paciente</button></a>
+</div>
+{% endblock %}

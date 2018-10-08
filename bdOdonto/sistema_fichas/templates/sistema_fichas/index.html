@@ -1,29 +1,13 @@
-<html>
-    <head>
-        <title>BDOdonto</title>
-		<link rel="stylesheet" href="/static/css/index.css">
-		
-        <meta charset="UTF-8">
-    </head>
-	<body>
-		{% if user.is_authenticated %}
-                <!--<div id="logout" class="glyphicon glyphicon-off">-->
-			    <a title="Logout" class="logout" href="{% url 'sistema_fichas:logout' %}?next={% url 'sistema_fichas:login' %}"></a>
-				<!--</div>-->
-        {% endif %}
-		<div class="container">
-			<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
-			<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<p>Olá {{username}}, pesquise abaixo o CPF do paciente</p>
-					<input maxlength="11" type="text" onkeydown="" id="cpf" placeholder="Ex: 00000000000" name="cpf_p">
-					<input type="submit" name="pesquisa" value="Pesquisar">
+{% extends 'sistema_fichas/base2.html' %}
+{% block content %}
+	<a href="{% url 'sistema_fichas:index' %}"><img src="../../static/images/logo_bd.svg"></a>
+	<form action="{% url 'sistema_fichas:index' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>Olá {{username}}, pesquise abaixo o CPF do paciente</p>
+			<input maxlength="11" type="text" onkeydown="" id="cpf" placeholder="Ex: 00000000000" name="cpf_p">
+			<input type="submit" name="pesquisa" value="Pesquisar">
 
-			</form>
-		</div>
-		<p class="footer">Developed by <a target="_blank" href="http://factos.ufpi.br"><img src="../../static/images/factos_logo.svg"></a></p>
-	</body>
-
+	</form>
 	<script>
 	var CPF = document.getElementById("cpf");
 	console.log(CPF);
@@ -39,4 +23,4 @@
 	 	//.substring(3,7) + '.' + CPF.value.substring(7,10) + '-' + CPF.value.substring(10,12); }
  	}
 	</script>
-</html>
+{% endblock %}

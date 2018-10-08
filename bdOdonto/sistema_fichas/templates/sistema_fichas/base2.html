@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>BDOdonto</title>
+		<link rel="stylesheet" href="/static/css/index.css">
+		
+        <meta charset="UTF-8">
+    </head>
+	<body>
+		{% if user.is_authenticated %}
+                <!--<div id="logout" class="glyphicon glyphicon-off">-->
+			    <a title="Logout" class="logout" href="{% url 'sistema_fichas:logout' %}?next={% url 'sistema_fichas:login' %}"></a>
+				<!--</div>-->
+        {% endif %}
+		<div class="container">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<p class="footer">Developed by <a target="_blank" href="http://factos.ufpi.br"><img src="../../static/images/factos_logo.svg"></a></p>
+	</body>
+</html>
