@@ -149,6 +149,58 @@ def opcoes_ficha(request, slug):
         else:
             return redirect('sistema_fichas:atendimento_opcoes')
 
+def listar_fichas(procedimentos):
+    listas = []
+    for proc in procedimentos:
+        listas.extend(Ficha_Diagnostico.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Ortodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Periodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Urgencia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Endodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Endodontia_Tabela.objects.filter(procedimento=proc))
+        listas.extend(Ficha_PPR.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Dentistica.objects.filter(procedimento=proc))
+    return listas
+
+#Listar as fichas do paciente com base no CPF 
+#Fluxo: buscar_paciente
+#Action: listar_fichas_paciente 
+@login_required
+def buscar_fichas_paciente(request):
+    cpf_p = request.session['cpf_p']
+    procedimentos = Procedimento.objects.filter(cpf_p=cpf_p)
+    listas = listar_fichas(procedimentos)
+    return render(request, 'sistema_fichas/listar_fichas.html', 
+                  {'fichas': listas})
+
+@login_required
+def detalhar_ficha(request,slug,pk):
+    if slug == "diagnostico":
+        ficha = get_object_or_404(Ficha_Diagnostico, pk=pk)
+        ficha_form = Ficha_DiagnosticoForm(instance = ficha)
+    elif slug == "ortodontia":
+        ficha = get_object_or_404(Ficha_Ortodontia, pk=pk)
+        ficha_form = Ficha_OrtodontiaForm(instance = ficha)
+    elif slug == "periodontia":
+        ficha = get_object_or_404(Ficha_Periodontia, pk=pk)
+        ficha_form = Ficha_PeriodontiaForm(instance = ficha)
+    elif slug == "urgencia":
+        ficha = get_object_or_404(Ficha_Urgencia, pk=pk)
+        ficha_form = Ficha_UrgenciaForm(instance = ficha)
+    elif slug == "endodontia":
+        ficha = get_object_or_404(Ficha_Endodontia, pk=pk)
+        ficha_form = Ficha_EndodontiaForm(instance = ficha)
+    elif slug == "endodontia-tabela":
+        ficha = get_object_or_404(Ficha_Endodontia_Tabela, pk=pk)
+        ficha_form = Ficha_Endodontia_TabelaForm(instance = ficha)
+    elif slug == "ppr":
+        ficha = get_object_or_404(Ficha_PPR, pk=pk)
+        ficha_form = Ficha_PPRForm(instance = ficha)
+    elif slug == "dentistica":
+        ficha = get_object_or_404(Ficha_Dentistica, pk=pk)
+        ficha_form = Ficha_DentisticaForm(instance = ficha)
+    return render(request, 'sistema_fichas/detalhar_ficha.html', {'ficha': ficha_form,})
+
 @login_required
 def urgencia(request):
     if request.method == 'POST':
@@ -197,31 +249,6 @@ def odontograma(request):
         ficha_form = OdontogramaForm(request.POST)
         return redirect('sistema_fichas:atendimento_opcoes')
     return render(request, 'sistema_fichas/odontograma.html')
-
-def listar_fichas(procedimentos):
-    listas = []
-    for proc in procedimentos:
-        listas.extend(Ficha_Diagnostico.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Ortodontia.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Periodontia.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Urgencia.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Endodontia.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Endodontia_Tabela.objects.filter(procedimento=proc))
-        listas.extend(Ficha_PPR.objects.filter(procedimento=proc))
-        listas.extend(Ficha_Dentistica.objects.filter(procedimento=proc))
-    return listas
-
-#Listar as fichas do paciente com base no CPF 
-#Fluxo: buscar_paciente
-#Action: listar_fichas_paciente 
-@login_required
-def buscar_fichas_paciente(request):
-    cpf_p = request.session['cpf_p']
-    procedimentos = Procedimento.objects.filter(cpf_p=cpf_p)
-    listas = listar_fichas(procedimentos)
-    return render(request, 'sistema_fichas/listar_fichas.html', 
-                  {'fichas': listas})
-
 
 @login_required
 def lista_fichas_aluno(request):

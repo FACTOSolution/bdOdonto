@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^cadastrar_procedimento/$', views.cadastrar_procedimento, name='cadastrar_procedimento'),
     url(r'^cadastrar_procedimento/opcoes_ficha/(?P<slug>[-\w]+)/$', views.opcoes_ficha, name='opcoes_ficha'),
     url(r'^listar_fichas/$', views.buscar_fichas_paciente, name='listar_fichas'),
+    url(r'^detalhar_ficha/(?P<slug>[-\w]+)-(?P<pk>\d+)/$', views.detalhar_ficha, name='detalhar_ficha'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^odontograma/$', views.odontograma, name='odontograma'),
     url(r'^turmas_aluno/$', views.listar_turmas, name='listar_turmas'),
