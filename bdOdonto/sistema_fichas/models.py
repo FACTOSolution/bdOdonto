@@ -477,7 +477,7 @@ class Ficha_Urgencia(models.Model):
     diagnostico_provavel = models.CharField(max_length=20)
     atend = models.CharField(max_length=15,choices= (('EstÃ¡gio III','EstÃ¡gio III'),('EstÃ¡gio IV','EstÃ¡gio IV'),('Outro','Outro')))
     atend_outro = models.CharField(max_length=20,blank=True,null=True)
-    procedimento = models.CharField(max_length=60)
+    procedimento_real = models.CharField(max_length=60)
     encaminhamento = models.CharField(max_length=60,blank=True,null=True)
     prescricoes = models.CharField(max_length=60,blank=True,null=True)
     ESCS = (

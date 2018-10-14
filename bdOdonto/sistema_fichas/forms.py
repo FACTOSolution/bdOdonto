@@ -110,7 +110,7 @@ class Ficha_UrgenciaForm(forms.ModelForm):
             'diagnostico_provavel' : 'Diagnóstico provável após anamnese',
             'atend' : 'Atendimento',
             'atend_outro' : 'Outro',
-            'procedimento' : 'Procedimento realizado',
+            'procedimento_real' : 'Procedimento realizado',
             'encaminhamento' : 'Encaminhamento ou reagendamento',
             'prescricoes' : 'Prescrições Medicamentosas',
             'especialidade' : 'Especialidade em que se enquadrou o atendimento de urgência',
@@ -146,7 +146,10 @@ class OdontogramaForm(forms.ModelForm):
 
     class Meta:
         model = Odontograma
-        fields = '__all__'
+        exclude = ['procedimento']
+        labels = {
+            'pontos': 'Pontos',
+        }
 
 class Ficha_PeriodontiaForm(forms.ModelForm):
 
@@ -374,7 +377,7 @@ class Ficha_DiagnosticoForm(forms.ModelForm):
     class Meta():
         model = Ficha_Diagnostico
         fields = '__all__'
-        exclude = ['atendimento', 'odontograma']
+        exclude = ['procedimento', 'odontograma']
         labels = {
             'motivo':'Motivo da consulta',
             'historia':'Historia da doenca atual',

@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^listar_procedimento/$', views.listar_procedimentos, name='listar_procedimentos'),
     url(r'^cadastrar_procedimento/$', views.cadastrar_procedimento, name='cadastrar_procedimento'),
     url(r'^cadastrar_procedimento/opcoes_ficha/(?P<slug>[-\w]+)/$', views.opcoes_ficha, name='opcoes_ficha'),
+    url(r'^listar_fichas/$', views.buscar_fichas_paciente, name='listar_fichas'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^odontograma/$', views.odontograma, name='odontograma'),
     url(r'^turmas_aluno/$', views.listar_turmas, name='listar_turmas'),

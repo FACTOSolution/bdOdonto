@@ -149,6 +149,79 @@ def opcoes_ficha(request, slug):
         else:
             return redirect('sistema_fichas:atendimento_opcoes')
 
+@login_required
+def urgencia(request):
+    if request.method == 'POST':
+        ficha_form = Ficha_UrgenciaForm(data=request.POST)
+        if ficha_form.is_valid():
+            ficha = ficha_form.save(commit=False)
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
+            ficha.save()
+            return redirect('sistema_fichas:listar_procedimentos')
+    else:
+        ficha_form = Ficha_UrgenciaForm()
+    return render(request, 'sistema_fichas/urgencia.html',
+                  {'ficha_form': ficha_form})
+
+@login_required
+def ppr(request):
+    if request.method == 'POST':
+        ficha_form = Ficha_PPRForm(request.POST)
+        if ficha_form.is_valid():
+            ficha = ficha_form.save(commit=False)
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
+            ficha.save()
+            return redirect('sistema_fichas:listar_procedimentos')
+    else:
+        ficha_form = Ficha_PPRForm()
+    return render(request, 'sistema_fichas/ppr.html',
+                  {'ficha_form': ficha_form})
+
+@login_required
+def dentistica(request):
+    if request.method == 'POST':
+        ficha_form = Ficha_DentisticaForm(request.POST)
+        if ficha_form.is_valid():
+            ficha = ficha_form.save(commit=False)
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
+            ficha.save()
+            return redirect('sistema_fichas:listar_procedimentos')
+    else:
+        ficha_form = Ficha_DentisticaForm()
+    return render(request, 'sistema_fichas/dentistica.html',
+                  {'ficha_form': ficha_form})
+
+@login_required
+def odontograma(request):
+    if request.method == 'POST':
+        ficha_form = OdontogramaForm(request.POST)
+        return redirect('sistema_fichas:atendimento_opcoes')
+    return render(request, 'sistema_fichas/odontograma.html')
+
+def listar_fichas(procedimentos):
+    listas = []
+    for proc in procedimentos:
+        listas.extend(Ficha_Diagnostico.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Ortodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Periodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Urgencia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Endodontia.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Endodontia_Tabela.objects.filter(procedimento=proc))
+        listas.extend(Ficha_PPR.objects.filter(procedimento=proc))
+        listas.extend(Ficha_Dentistica.objects.filter(procedimento=proc))
+    return listas
+
+#Listar as fichas do paciente com base no CPF 
+#Fluxo: buscar_paciente
+#Action: listar_fichas_paciente 
+@login_required
+def buscar_fichas_paciente(request):
+    cpf_p = request.session['cpf_p']
+    procedimentos = Procedimento.objects.filter(cpf_p=cpf_p)
+    listas = listar_fichas(procedimentos)
+    return render(request, 'sistema_fichas/listar_fichas.html', 
+                  {'fichas': listas})
+
 
 @login_required
 def lista_fichas_aluno(request):
@@ -294,25 +367,6 @@ def atendimento_opcoes(request):
                    'ficha_preenchida': atendimento_ficha,
                    'odontograma': odontograma})
 
-@login_required
-def odontograma(request):
-    if request.method == 'POST' and request.is_ajax():
-        aluno = get_object_or_404(Aluno, usuario=request.user)
-        t_codigo = request.session['turma_atual']
-        turma = get_object_or_404(Turma, codigo=t_codigo)
-        turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-        ficha_pk = request.session['ficha_atual']
-        tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-        paciente = get_object_or_404(Paciente, cpf=request.session['paciente_atual'])
-        atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
-        odontograma_form = OdontogramaForm()
-        pontos_json = json.loads(request.body.decode("utf-8"))
-        odontograma = odontograma_form.save(commit=False)
-        odontograma.pontos = pontos_json
-        odontograma.atendimento = atendimento
-        odontograma.save()
-        return redirect('sistema_fichas:atendimento_opcoes')
-    return render(request, 'sistema_fichas/odontograma.html')
 
 @login_required
 def diagnostico(request):
@@ -336,19 +390,6 @@ def diagnostico(request):
     return render(request, 'sistema_fichas/diagnostico.html',
                   {'ficha_form': ficha_form})
 
-@login_required
-def urgencia(request):
-    if request.method == 'POST':
-        ficha_form = Ficha_UrgenciaForm(data=request.POST)
-        if ficha_form.is_valid():
-            ficha = ficha_form.save(commit=False)
-            ficha.atendimento = Procedimento.objects.get(pk=request.session['procedimento'])
-            ficha.save()
-            return redirect('sistema_fichas:listar_procedimentos')
-    else:
-        ficha_form = Ficha_UrgenciaForm()
-    return render(request, 'sistema_fichas/urgencia.html',
-                  {'ficha_form': ficha_form})
 
 @login_required
 def ortodontia(request):
@@ -433,33 +474,6 @@ def endodontia_tabela(request):
     return render(request, 'sistema_fichas/endodontia_tabela.html',
                   {'ficha_form': ficha_form})
 
-@login_required
-def ppr(request):
-    if request.method == 'POST':
-        ficha_form = Ficha_PPRForm(request.POST)
-        if ficha_form.is_valid():
-            ficha = ficha_form.save(commit=False)
-            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
-            ficha.save()
-            return redirect('sistema_fichas:listar_procedimentos')
-    else:
-        ficha_form = Ficha_PPRForm()
-    return render(request, 'sistema_fichas/ppr.html',
-                  {'ficha_form': ficha_form})
-
-@login_required
-def dentistica(request):
-    if request.method == 'POST':
-        ficha_form = Ficha_DentisticaForm(request.POST)
-        if ficha_form.is_valid():
-            ficha = ficha_form.save(commit=False)
-            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
-            ficha.save()
-            return redirect('sistema_fichas:listar_procedimentos')
-    else:
-        ficha_form = Ficha_DentisticaForm()
-    return render(request, 'sistema_fichas/dentistica.html',
-                  {'ficha_form': ficha_form})
 
 
 @login_required
@@ -481,35 +495,7 @@ def buscar_paciente(request):
                   {'form': form})
 
 
-def listar_fichas(atendimento):
-    listas = []
-    listas.append(get_object_or_404(Ficha_Diagnostico, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Ortodontia, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Periodontia, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Urgencia, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Endodontia, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Endodontia_Tabela, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_PPR, atendimento=atendimento))
-    listas.append(get_object_or_404(Ficha_Dentistica, atendimento=atendimento))
-    return listas
 
-#Listar as fichas do paciente com base no CPF 
-#Fluxo: buscar_paciente
-#Action: listar_fichas_paciente 
-@login_required
-def buscar_fichas_paciente(request):
-    aluno = get_object_or_404(Aluno, usuario=request.user)
-    t_codigo = request.session['turma_atual']
-    turma = get_object_or_404(Turma, codigo=t_codigo)
-    turma_aluno = get_object_or_404(Turma_Aluno, turma=turma, aluno=aluno)
-    ficha_pk = request.session['ficha_atual']
-    tipo_ficha = get_object_or_404(Tipo_Ficha, nome=ficha_pk)
-    cpf = request.session['paciente_atual']
-    paciente = get_object_or_404(Paciente, cpf=cpf)
-    atendimento = get_object_or_404(Atendimento, turma_aluno=turma_aluno, tipo_ficha=tipo_ficha, paciente=paciente)
-    listas = listar_fichas(atendimento)
-    return render(request, 'sistema_fichas/listar_fichas_paciente.html', 
-                  {'listas': listas})
 
 #Histórico da ficha específica na turma selecionada
 #Fluxo: detalhar_turma
