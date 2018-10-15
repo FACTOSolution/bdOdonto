@@ -88,14 +88,16 @@ class ProcedimentoForm(forms.ModelForm):
         ('Orto II','Orto II'),
         )
     materia = forms.ChoiceField(choices=materias)
+    exame_img = forms.ImageField()
     class Meta:
         model = Procedimento
-        fields = ['materia','descricao', 'ficha_ou_procedimento', 'exame']
+        fields = ['materia','descricao', 'ficha_ou_procedimento', 'exame', 'exame_img']
         labels = {
             'materia': 'Matéria',
             'descricao': 'Descrição',
             'ficha_ou_procedimento': 'Ficha',
             'exame': 'Exame',
+            'exame_img': 'Upload',
         }
 
 class Ficha_UrgenciaForm(forms.ModelForm):
