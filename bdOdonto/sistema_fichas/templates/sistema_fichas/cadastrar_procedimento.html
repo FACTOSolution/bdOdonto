@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="/static/css/cadastrar_procedimento.css">
 </head>
 <div id="div_atendimento">
-    <h2>Prontuário do Paciente - Cadastrar Procedimento</h2>
+	<h2>Prontuário do Paciente - Cadastrar Procedimento</h2>
+		
+		{% if err_upload %}
+			<span>Faça o Upload de uma imagem ou desmarque a opção de exame</span>
+		{% endif %}
+			
 		<form id="form_procedimento" method="post" action="{% url 'sistema_fichas:cadastrar_procedimento' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}

@@ -86,7 +86,6 @@ def cadastrar_procedimento(request):
         
         aluno_user = request.user.username
         user = User.objects.filter(username = aluno_user)[0]
-        print(user.id)
         
         aluno = Aluno.objects.get(usuario_id=user.id)
         
@@ -100,16 +99,20 @@ def cadastrar_procedimento(request):
 
 
         if formProcedimento.is_valid():
-            procedimento = formProcedimento.save()
             if formProcedimento.cleaned_data['exame']:
-                parc_exame = Exame(cpf_p = paciente, imagem=request.FILES['exame_img'])
-                parc_exame.save()
+                if len(request.FILES) != 0:
+                    imagem = request.FILES['exame_img']
+                    parc_exame = Exame(cpf_p = paciente, imagem=imagem)
+                    parc_exame.save()
+                else:
+                    return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento, 'err_upload': True})
+            procedimento = formProcedimento.save()
             if formProcedimento.cleaned_data['ficha_ou_procedimento']:
                 materia = turma.replace(" ", "")
                 request.session['procedimento'] = procedimento.id
                 return HttpResponseRedirect(reverse('sistema_fichas:opcoes_ficha', args=(materia,)))
             return HttpResponseRedirect(reverse('sistema_fichas:listar_procedimentos'))
-    return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento})
+    return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento, 'err_upload': False})
 
 def opcoes_ficha(request, slug):
     materias = {
@@ -203,6 +206,17 @@ def detalhar_ficha(request,slug,pk):
         ficha = get_object_or_404(Ficha_Dentistica, pk=pk)
         ficha_form = Ficha_DentisticaForm(instance = ficha)
     return render(request, 'sistema_fichas/detalhar_ficha.html', {'ficha': ficha_form,})
+
+def listar_exames(request):
+    cpf_p = request.session['cpf_p']
+    paciente = Paciente.objects.get(cpf = cpf_p)
+    exames = Exame.objects.filter(cpf_p=cpf_p)
+    termo = paciente.termo_cons
+    if request.method == 'POST':
+        paciente.termo_cons = request.FILES['termo']
+        paciente.save()
+    return render(request, 'sistema_fichas/listar_exames.html', 
+                  {'exames': exames, 'termo': termo})
 
 @login_required
 def urgencia(request):

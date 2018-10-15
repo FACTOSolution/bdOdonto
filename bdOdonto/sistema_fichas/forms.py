@@ -88,7 +88,7 @@ class ProcedimentoForm(forms.ModelForm):
         ('Orto II','Orto II'),
         )
     materia = forms.ChoiceField(choices=materias)
-    exame_img = forms.ImageField()
+    exame_img = forms.ImageField(required=False)
     class Meta:
         model = Procedimento
         fields = ['materia','descricao', 'ficha_ou_procedimento', 'exame', 'exame_img']

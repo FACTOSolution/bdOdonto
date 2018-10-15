@@ -1,0 +1,33 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/listar_procedimentos.css">
+</head>
+<div id="div_atendimento">
+    <h2>Prontuário do Paciente - Exames</h2>
+	<div class="table">
+        <div>
+            Termo de Consentimento
+            {% if termo is None %}
+                <form id="form_term_consentimento" method="post" action="{% url 'sistema_fichas:listar_exames' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input name="termo" type="file">
+                <input class="button" type="submit" name="submit" value="Gravar Termo">
+                </form>
+            {% endif %}
+            <!--Aqui tu deve fazer caso o paciente tenha um termo de Consentimento-->
+        </div>
+		<table>
+            {% for exame in exames %}
+                <tr>
+                    <td>{{exame}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+	</div>
+	<div class="but">
+		<a href="{% url 'sistema_fichas:menu_paciente' %}"><button class="back">Voltar</button></a>
+	<div>
+</div>
+{% endblock %}
