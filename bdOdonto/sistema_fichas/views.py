@@ -76,14 +76,12 @@ def detalhar_paciente(request):
 
 def listar_procedimentos(request):
     list_proc = Procedimento.objects.filter(cpf_p = request.session['cpf_p'])
-    return render(request, 'sistema_fichas/listar_procedimentos.html', {'list_proc':list_proc})
+    return render(request, 'sistema_fichas/listar_procedimentos.html', {'procedimentos':list_proc})
 
 def cadastrar_procedimento(request):
     if request.method == 'GET':
         formProcedimento = ProcedimentoForm()
     elif request.method == 'POST':
-        turma = request.POST['materia']
-        
         aluno_user = request.user.username
         user = User.objects.filter(username = aluno_user)[0]
         
@@ -217,6 +215,23 @@ def listar_exames(request):
         paciente.save()
     return render(request, 'sistema_fichas/listar_exames.html', 
                   {'exames': exames, 'termo': termo})
+
+def cadastrar_planejamento(request):
+    if request.method == 'GET':
+        formPlan = PlanejamentoForm()
+    elif request.method == 'POST':
+        cpf_p = request.session['cpf_p']
+        paciente = Paciente.objects.get(cpf=cpf_p)
+        parc_plan = Planejamento(cpf_p = paciente)
+        plan = PlanejamentoForm(request.POST, instance = parc_plan)
+        if plan.is_valid():
+            parc_plan.save()
+            return HttpResponseRedirect(reverse('sistema_fichas:listar_planejamentos'))
+    return render(request, 'sistema_fichas/cadastrar_planejamento.html', {'form': formPlan})
+
+def listar_planejamentos(request):
+    planejamentos = Planejamento.objects.filter(cpf_p = request.session['cpf_p'])
+    return render(request, 'sistema_fichas/listar_planejamentos.html', {'planejamentos': planejamentos})
 
 @login_required
 def urgencia(request):

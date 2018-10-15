@@ -100,6 +100,15 @@ class ProcedimentoForm(forms.ModelForm):
             'exame_img': 'Upload',
         }
 
+class PlanejamentoForm(forms.ModelForm):
+    class Meta:
+        model = Planejamento
+        exclude = ['data', 'cpf_p']
+        labels = {
+            'descricao': 'Descrição do Planejamento',
+            'tap': 'Turma/Matéria',
+        }
+
 class Ficha_UrgenciaForm(forms.ModelForm):
 
     class Meta:

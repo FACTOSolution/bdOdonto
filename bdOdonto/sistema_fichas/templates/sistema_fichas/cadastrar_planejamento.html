@@ -1,0 +1,18 @@
+{% extends 'sistema_fichas/base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/listar_procedimentos.css">
+    <link rel="stylesheet" href="/static/css/cadastrar_procedimento.css">
+</head>
+<div id="div_atendimento">
+	<h2>Prontuário do Paciente - Cadastrar Planejamento</h2>			
+		<form id="form_procedimento" method="post" action="{% url 'sistema_fichas:cadastrar_planejamento' %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input class="button" type="submit" name="submit" value="Cadastrar Planejamento"/>
+		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:logout' %}"/>
+	</form>	
+		<a href="{% url 'sistema_fichas:listar_planejamentos' %}"><button class="back">Cancelar</button></a>
+</div>
+{% endblock %}

@@ -64,7 +64,7 @@ class TAP(models.Model):
         self.save()
 
     def __str__(self):
-        string = "Cod_Prof: " + self.cod_prof + ", Mat_Aluno: " + self.mat_aluno + ", Cod_Turma: " + self.cod_turma + ", Turma: " + self.turma + ", Aluno: " + self.aluno + ", Professor: " + self.prof
+        string = "Turma: " + self.turma + ", Aluno: " + self.aluno + ", Professor: " + self.prof
         return string
 
 #RELAÇÃO COM TURMA TEM QUE SER SUBSTITUIDA POR TAP
@@ -134,6 +134,17 @@ class Exame (models.Model):
     imagem = models.ImageField()
     cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
     data = models.DateField(auto_now=True)
+
+class Planejamento(models.Model):
+    cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
+    tap = models.ForeignKey(TAP, on_delete=models.CASCADE)
+    descricao = models.TextField()
+    data = models.DateField(auto_now=True)
+
+    def __str__(self):
+        str_retorno = "TAP: " + str(self.tap)
+        return str_retorno
+
 
 class Procedimento (models.Model):
     tap = models.ForeignKey(TAP, on_delete=models.CASCADE)

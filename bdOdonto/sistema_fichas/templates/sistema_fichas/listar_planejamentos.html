@@ -5,18 +5,19 @@
     <link rel="stylesheet" href="/static/css/listar_procedimentos.css">
 </head>
 <div id="div_atendimento">
-    <h2>Prontuário do Paciente - Fichas</h2>
+    <h2>Prontuário do Paciente - Planejamentos</h2>
 	<div class="table">
 		<table>
-            {% for ficha in fichas %}
+            {% for plan in planejamentos %}
                 <tr>
-                    <td>{{ficha}}</td>
+                    <td>{{plan}}</td>
                 </tr>
             {% endfor %}
         </table>
 	</div>
 	<div class="but">
 		<a href="{% url 'sistema_fichas:menu_paciente' %}"><button class="back">Voltar</button></a>
+		<a href="{% url 'sistema_fichas:cadastrar_planejamento' %}"><button>Adicionar Planejamento</button></a>
 	<div>
 </div>
 {% endblock %}

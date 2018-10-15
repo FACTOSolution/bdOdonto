@@ -14,6 +14,6 @@ INSERT INTO sistema_fichas_turma VALUES ("13","Cirurgia I");
 INSERT INTO sistema_fichas_turma VALUES ("14","Cirurgia II");
 INSERT INTO sistema_fichas_turma VALUES ("15","Orto II");
 INSERT INTO sistema_fichas_aluno VALUES ("20159007874", 2);
-INSERT INTO sistema_fichas_professor VALUES("José", "20159007878", 3);
+INSERT INTO sistema_fichas_professor VALUES("Maria", "20159007878", 3);
 INSERT INTO sistema_fichas_paciente VALUES("00000000001","Bejamin Arrola", "Quadra 4, Rua 3", "Vale Quem Tem", "Teresina", "Piruli", "64000100", "86000000001", "86000000000", "bejamim@arrola.com", "ESQUEMANDO", "1991-01-01", "27", "Pretim", "M", "00000001", "Teresina", "Brasileiro", "Uber", "Desempregado", "Indefinido", "Indefinido", "000000000", "C:\Users\Kaio Delmondes\Pictures\termo de consetimento.png");
 INSERT INTO sistema_fichas_tap VALUES (1,"20159007878", "20159007874", 1, "Estágio IV", "José", "Maria");
