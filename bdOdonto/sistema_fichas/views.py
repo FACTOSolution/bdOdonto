@@ -96,11 +96,14 @@ def cadastrar_procedimento(request):
         paciente = Paciente.objects.get(pk=cpf_p)
         
         parc_procedimento = Procedimento(tap = tap, cpf_p = paciente)
-        formProcedimento = ProcedimentoForm(request.POST, instance=parc_procedimento)
+        formProcedimento = ProcedimentoForm(request.POST, request.FILES, instance=parc_procedimento)
 
 
         if formProcedimento.is_valid():
             procedimento = formProcedimento.save()
+            if formProcedimento.cleaned_data['exame']:
+                parc_exame = Exame(cpf_p = paciente, imagem=request.FILES['exame_img'])
+                parc_exame.save()
             if formProcedimento.cleaned_data['ficha_ou_procedimento']:
                 materia = turma.replace(" ", "")
                 request.session['procedimento'] = procedimento.id
