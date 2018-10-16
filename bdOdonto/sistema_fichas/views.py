@@ -100,18 +100,13 @@ def cadastrar_procedimento(request):
     if request.method == 'GET':
         formProcedimento = ProcedimentoForm()
     elif request.method == 'POST':
-        aluno_user = request.user.username
-        user = User.objects.filter(username = aluno_user)[0]
-        
-        aluno = Aluno.objects.get(usuario_id=user.id)
-        
-        turma = request.POST['materia']
-        tap = TAP.objects.get(turma = turma, mat_aluno=aluno.matricula)
         cpf_p = request.session['cpf_p']
         paciente = Paciente.objects.get(pk=cpf_p)
         
-        parc_procedimento = Procedimento(tap = tap, cpf_p = paciente)
+        parc_procedimento = Procedimento(cpf_p = paciente)
         formProcedimento = ProcedimentoForm(request.POST, request.FILES, instance=parc_procedimento)
+        parc_procedimento = formProcedimento.save(commit=False)
+        turma = parc_procedimento.tap.turma
 
 
         if formProcedimento.is_valid():
