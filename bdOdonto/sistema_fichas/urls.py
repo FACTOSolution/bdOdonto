@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^detalhar_procedimento/(?P<pk>\d+)/$', views.detalhar_procedimento, name='detalhar_procedimento'),
     url(r'^listar_planejamentos/$', views.listar_planejamentos, name='listar_planejamentos'),
     url(r'^cadastrar_planejamento/$', views.cadastrar_planejamento, name='cadastrar_planejamento'),
+    url(r'^detalhar_planejamento/(?P<pk>\d+)/$', views.detalhar_planejamento, name='detalhar_planejamento'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^odontograma/$', views.odontograma, name='odontograma'),
     url(r'^listar_turmas/$', views.listar_turmas, name='listar_turmas'),

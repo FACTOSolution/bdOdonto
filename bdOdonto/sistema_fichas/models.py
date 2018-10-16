@@ -156,7 +156,6 @@ class Procedimento (models.Model):
 
 
 #TODAS AS FICHAS PEGAM CHAVE ESTRANGEIRA DE PROCEDIMENTO.
-
 class Odontograma(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     pontos = models.TextField(blank=True)
