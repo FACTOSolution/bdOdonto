@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout, authenticate
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,6 +12,13 @@ from .models import *
 from .forms import *
 import json
 
+def usuario_prof(user):
+    try:
+        Professor.objects.get(usuario = user)
+    except Professor.DoesNotExist:
+        return False
+    return True
+
 def login(request):
     if request.method == 'POST':    
         #form = AuthenticationForm(data=request.POST) # Veja a documentacao desta funcao
@@ -21,7 +28,10 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return HttpResponseRedirect('index') # redireciona o usuario logado para a pagina inicial
+            if usuario_prof(user):
+                return HttpResponseRedirect('listar_turmas') # redireciona o usuario logado para a pagina inicial
+            else:
+                return HttpResponseRedirect('index') # redireciona o usuario logado para a pagina inicial
         else:
             return render(request, "registration/login.html", {'err': True})
     
@@ -29,7 +39,7 @@ def login(request):
     return render(request, "registration/login.html", {})
 
 
-@login_required
+@login_required()
 def index(request):
     if request.method == 'GET':
         username = request.user.username
@@ -39,11 +49,16 @@ def index(request):
         try:
             Paciente.objects.get(pk=cpf_p)
             request.session['cpf_p'] = cpf_p
-
             return HttpResponseRedirect(reverse('sistema_fichas:menu_paciente'))
         except Paciente.DoesNotExist:
             return render(request, 'sistema_fichas/paciente_nao_encontrado.html',  {'cpf': cpf_p})
-            
+
+@user_passes_test(usuario_prof)
+def listar_turmas(request):
+    prof = Professor.objects.get(usuario=request.user)
+    turmas = TAP.objects.filter(cod_prof=prof.codigo)
+    return render(request, 'sistema_fichas/listar_turmas.html',
+                  {'turmas' : turmas})            
 
 @login_required
 def menu_paciente(request):
@@ -68,16 +83,19 @@ def cadastrar_paciente(request):
     
     return render(request, 'sistema_fichas/cadastrar_paciente.html', {'form': formPaciente})
 
+@login_required
 def detalhar_paciente(request):
     cpf_p = request.session['cpf_p']
     paciente = Paciente.objects.get(pk=cpf_p)
     formPaciente = PacienteForm(instance=paciente)
     return render(request, 'sistema_fichas/detalhes_paciente.html', {'form': formPaciente})
 
+@login_required
 def listar_procedimentos(request):
     list_proc = Procedimento.objects.filter(cpf_p = request.session['cpf_p'])
     return render(request, 'sistema_fichas/listar_procedimentos.html', {'procedimentos':list_proc})
 
+@login_required
 def cadastrar_procedimento(request):
     if request.method == 'GET':
         formProcedimento = ProcedimentoForm()
@@ -112,6 +130,7 @@ def cadastrar_procedimento(request):
             return HttpResponseRedirect(reverse('sistema_fichas:listar_procedimentos'))
     return render(request, 'sistema_fichas/cadastrar_procedimento.html', {'form': formProcedimento, 'err_upload': False})
 
+@login_required
 def opcoes_ficha(request, slug):
     materias = {
         'EstágioI':('Periodontia', 'Dentistica', 'PPR', 'Odontograma'),
@@ -205,6 +224,7 @@ def detalhar_ficha(request,slug,pk):
         ficha_form = Ficha_DentisticaForm(instance = ficha)
     return render(request, 'sistema_fichas/detalhar_ficha.html', {'ficha': ficha_form,})
 
+@login_required
 def listar_exames(request):
     cpf_p = request.session['cpf_p']
     paciente = Paciente.objects.get(cpf = cpf_p)
@@ -216,6 +236,7 @@ def listar_exames(request):
     return render(request, 'sistema_fichas/listar_exames.html', 
                   {'exames': exames, 'termo': termo})
 
+@login_required
 def cadastrar_planejamento(request):
     if request.method == 'GET':
         formPlan = PlanejamentoForm()
@@ -229,6 +250,7 @@ def cadastrar_planejamento(request):
             return HttpResponseRedirect(reverse('sistema_fichas:listar_planejamentos'))
     return render(request, 'sistema_fichas/cadastrar_planejamento.html', {'form': formPlan})
 
+@login_required
 def listar_planejamentos(request):
     planejamentos = Planejamento.objects.filter(cpf_p = request.session['cpf_p'])
     return render(request, 'sistema_fichas/listar_planejamentos.html', {'planejamentos': planejamentos})
@@ -328,12 +350,6 @@ def user_logout(request):
                   {'user_form': user_form,
                    'aluno_form': aluno_form})'''
 
-@login_required
-def listar_turmas(request):
-    aluno = Aluno.objects.filter(usuario=request.user)
-    turmas = Turma.objects.filter(alunos=aluno)
-    return render(request, 'sistema_fichas/listar_turmas.html',
-                  {'turmas' : turmas})
 
 @login_required
 def detalhar_turma(request, pk):
