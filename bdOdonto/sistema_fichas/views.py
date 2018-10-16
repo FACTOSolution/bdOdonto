@@ -258,6 +258,11 @@ def detalhar_procedimento(request,pk):
     formProcedimento = ProcedimentoForm(instance=procedimento)
     return render(request, 'sistema_fichas/detalhar_procedimento.html', {'ficha': formProcedimento})
 
+def detalhar_planejamento(request,pk):
+    planejamento = get_object_or_404(Planejamento, pk = pk)
+    formPlan = PlanejamentoForm(instance=planejamento)
+    return render(request, 'sistema_fichas/detalhar_planejamento.html', {'ficha': formPlan})
+
 @login_required
 def urgencia(request):
     if request.method == 'POST':
