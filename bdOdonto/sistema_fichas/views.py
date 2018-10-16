@@ -150,6 +150,8 @@ def opcoes_ficha(request, slug):
             return redirect('sistema_fichas:ppr')
         elif nome_ficha == "Dentistica":
             return redirect('sistema_fichas:dentistica')
+        elif nome_ficha == "Odontograma":
+            return redirect('sistema_fichas:odontograma')
         else:
             return redirect('sistema_fichas:atendimento_opcoes')
 
@@ -280,7 +282,7 @@ def odontograma(request):
     if request.method == 'POST':
         ficha_form = OdontogramaForm(request.POST)
         return redirect('sistema_fichas:atendimento_opcoes')
-    return render(request, 'sistema_fichas/odontograma.html')
+    return render(request, 'sistema_fichas/odontograma2.html')
 
 @login_required
 def lista_fichas_aluno(request):
