@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/atendimento.css">
+    <link rel="stylesheet" href="/static/css/detalhar.css">
 </head>
 <div id="div_atendimento">
-    <h2>Detalhes da Ficha</h2>
+    <h1>Detalhes da Ficha</h1>
 	<div id="form_atendimento">
         {{ficha.as_p}}
     </div>
+    <a href="{% url 'sistema_fichas:listar_fichas' %}"><button class="back">Voltar</button></a>
 </div>
 {% endblock %}

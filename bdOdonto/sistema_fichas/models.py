@@ -520,9 +520,6 @@ class Ficha_Urgencia(models.Model):
     def __str__(self):
         return "Urgência"
 
-    def __str__(self):
-        return "urgencia"
-
 class Ficha_Endodontia(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     ESCS = (('Sim','Sim'),('NÃ£o','NÃ£o'),('NÃ£o sei','NÃ£o sei'))

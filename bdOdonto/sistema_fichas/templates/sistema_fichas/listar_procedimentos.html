@@ -15,7 +15,7 @@
           </tr>
           {% for proc in procedimentos %}
           <tr>
-            <td>{{proc.data}}</td>
+            <td><a href="{% url 'sistema_fichas:detalhar_procedimento' proc.id%}">{{proc.data}}</a></td>
             <td>{{proc.tap.aluno}}</td> 
             <td>{{proc.tap.turma}}</td>
           </tr>

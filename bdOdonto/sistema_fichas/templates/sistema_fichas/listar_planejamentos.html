@@ -13,11 +13,11 @@
             <th>Responsável</th> 
             <th>Turma</th>
           </tr>
-          {% for proc in procedimentos %}
+          {% for plan in planejamentos %}
           <tr>
-            <td>{{proc.data}}</td>
-            <td>{{proc.tap.aluno}}</td> 
-            <td>{{proc.tap.turma}}</td>
+            <td>{{plan.data}}</td>
+            <td>{{plan.tap.aluno}}</td> 
+            <td>{{plan.tap.turma}}</td>
           </tr>
           {% endfor %}
         </table>
