@@ -156,7 +156,6 @@ class Procedimento (models.Model):
 
 
 #TODAS AS FICHAS PEGAM CHAVE ESTRANGEIRA DE PROCEDIMENTO.
-
 class Odontograma(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
     pontos = models.TextField(blank=True)
@@ -424,8 +423,8 @@ class Ficha_Periodontia(models.Model):
 
     ESCS = (
         ('Sim','Sim'),
-        ('NÃ£o','NÃ£o'),
-        ('NÃ£o sei','NÃ£o sei')
+        ('Não','Não'),
+        ('Não sei','Não sei')
         )
 
     sangramento_gengiva = models.CharField(max_length=10,choices= ESCS)
@@ -505,9 +504,9 @@ class Ficha_Urgencia(models.Model):
     prescricoes = models.CharField(max_length=60,blank=True,null=True)
     ESCS = (
         ('Endodontia','Endodontia'),
-        ('PrÃ³tese','PrÃ³tese'),
+        ('Prótese','Prótese'),
         ('Periodontia','Periodontia'),
-        ('DentÃ­stica','DentÃ­stica'),
+        ('Dentística','Dentística'),
         ('Cirurgia','Cirurgia'),
         ('Outro','Outro')
         )
