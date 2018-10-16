@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^listar_exames/$', views.listar_exames, name='listar_exames'),
     url(r'^listar_fichas/$', views.buscar_fichas_paciente, name='listar_fichas'),
     url(r'^detalhar_ficha/(?P<slug>[-\w]+)-(?P<pk>\d+)/$', views.detalhar_ficha, name='detalhar_ficha'),
+    url(r'^detalhar_procedimento/(?P<pk>\d+)/$', views.detalhar_procedimento, name='detalhar_procedimento'),
     url(r'^listar_planejamentos/$', views.listar_planejamentos, name='listar_planejamentos'),
     url(r'^cadastrar_planejamento/$', views.cadastrar_planejamento, name='cadastrar_planejamento'),
     url(r'^logout/$', views.user_logout, name='logout'),
