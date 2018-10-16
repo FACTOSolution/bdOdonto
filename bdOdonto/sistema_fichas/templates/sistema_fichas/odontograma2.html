@@ -1048,6 +1048,7 @@
 	</div>
 	<div>
 		<form id="ficha_odon" method="post" action="{% url 'sistema_fichas:odontograma' %}" enctype="multipart/form-data" >
+		    {% csrf_token %}
 			<input type="hidden" id="odontovalue" value="" />
 			<input type="submit" value="Cadastrar Odontograma" />
 		</form>

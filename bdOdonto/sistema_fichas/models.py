@@ -64,7 +64,7 @@ class TAP(models.Model):
         self.save()
 
     def __str__(self):
-        string = "Turma: " + self.turma + ", Aluno: " + self.aluno + ", Professor: " + self.prof
+        string = self.turma + "," + self.aluno + "," + self.prof
         return string
 
 #RELAÇÃO COM TURMA TEM QUE SER SUBSTITUIDA POR TAP
@@ -149,7 +149,7 @@ class Planejamento(models.Model):
 class Procedimento (models.Model):
     tap = models.ForeignKey(TAP, on_delete=models.CASCADE)
     cpf_p = models.ForeignKey(Paciente,on_delete=models.CASCADE)
-    descricao = models.CharField(blank = True, null = True, max_length = 2000)
+    descricao = models.TextField()
     data = models.DateField(auto_now=True)
     ficha_ou_procedimento = models.BooleanField() #Se o procedimento for cadastrado juntamente com uma ficha, é tipo "Cadastro de ficha" - 1. Se for cadastrado sem ficha, é "Cadastro de procedimento" - 0
     exame = models.BooleanField() 
@@ -504,6 +504,9 @@ class Ficha_Urgencia(models.Model):
 
     def publish(self):
         self.save()
+
+    def __str__(self):
+        return "urgencia"
 
 class Ficha_Endodontia(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)

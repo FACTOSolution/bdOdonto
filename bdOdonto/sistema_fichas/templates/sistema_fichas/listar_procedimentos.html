@@ -7,12 +7,19 @@
 <div id="div_atendimento">
     <h2>Prontuário do Paciente - Procedimentos</h2>
 	<div class="table">
-		<table>
-            {% for proc in procedimentos %}
-                <tr>
-                    <td>{{proc}}</td>
-                </tr>
-            {% endfor %}
+        <table id="tabela">
+          <tr>
+            <th>Data</th>
+            <th>Responsável</th> 
+            <th>Turma</th>
+          </tr>
+          {% for proc in procedimentos %}
+          <tr>
+            <td>{{proc.data}}</td>
+            <td>{{proc.tap.aluno}}</td> 
+            <td>{{proc.tap.turma}}</td>
+          </tr>
+          {% endfor %}
         </table>
 	</div>
 	<div class="but">

@@ -303,7 +303,7 @@ def dentistica(request):
 def odontograma(request):
     if request.method == 'POST':
         ficha_form = OdontogramaForm(request.POST)
-        return redirect('sistema_fichas:atendimento_opcoes')
+        return redirect('sistema_fichas:listar_procedimentos')
     return render(request, 'sistema_fichas/odontograma2.html')
 
 @login_required

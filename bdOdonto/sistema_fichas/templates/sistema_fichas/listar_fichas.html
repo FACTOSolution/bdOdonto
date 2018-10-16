@@ -7,13 +7,23 @@
 <div id="div_atendimento">
     <h2>Prontuário do Paciente - Fichas</h2>
 	<div class="table">
-		<table>
-            {% for ficha in fichas %}
-                <tr>
-                    <td>{{ficha}}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        <table id="tabela">
+              <tr>
+                    <th>Ficha</th>
+                    <th>Data</th>
+                    <th>Responsável</th> 
+                    <th>Turma</th>
+                  </tr>
+                    {% for ficha in fichas %}
+                  
+                  <tr>
+                    <td><a href="{% url 'sistema_fichas:detalhar_ficha' ficha ficha.id%}">{{ficha}}</a></td>
+                    <td>{{ficha.procedimento.data}}</td>
+                    <td>{{ficha.procedimento.tap.aluno}}</td> 
+                    <td>{{ficha.procedimento.tap.turma}}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
 	</div>
 	<div class="but">
 		<a href="{% url 'sistema_fichas:menu_paciente' %}"><button class="back">Voltar</button></a>

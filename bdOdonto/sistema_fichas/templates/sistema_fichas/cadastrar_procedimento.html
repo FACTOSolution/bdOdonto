@@ -19,5 +19,13 @@
 		<input class="button" type="hidden" name="next" value="{% url 'sistema_fichas:logout' %}"/>
 	</form>	
 		<a href="{% url 'sistema_fichas:listar_procedimentos' %}"><button class="back">Cancelar</button></a>
+
+	<script>
+		var options = document.getElementsByTagName("option");
+		for (var j = 0; j<options.length ; j++){
+			console.log(options[j].text)
+			options[j].text=options[j].text.split(",")[0];
+		}	
+	</script>
 </div>
 {% endblock %}
