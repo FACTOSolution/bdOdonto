@@ -70,6 +70,7 @@ class AtendimentoForm(forms.ModelForm):
         exclude = ['turma_aluno', 'tipo_ficha', 'paciente']
 
 class ProcedimentoForm(forms.ModelForm):
+    '''
     materias = (
         ('Estágio I','Estágio I'),
         ('Estágio II','Estágio II'),
@@ -87,13 +88,14 @@ class ProcedimentoForm(forms.ModelForm):
         ('Cirurgia II','Cirurgia II'),
         ('Orto II','Orto II'),
         )
-    materia = forms.ChoiceField(choices=materias)
+    '''
+    #materia = forms.ChoiceField(choices=materias)
     exame_img = forms.ImageField(required=False)
     class Meta:
         model = Procedimento
-        fields = ['materia','descricao', 'ficha_ou_procedimento', 'exame', 'exame_img']
+        fields = ['tap','descricao', 'ficha_ou_procedimento', 'exame', 'exame_img']
         labels = {
-            'materia': 'Matéria',
+            'tap': 'Turma/Matéria',
             'descricao': 'Descrição',
             'ficha_ou_procedimento': 'Ficha',
             'exame': 'Exame',

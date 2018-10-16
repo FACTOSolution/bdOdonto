@@ -163,6 +163,9 @@ class Odontograma(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Odontograma"
 
 class Ficha_Diagnostico(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -290,6 +293,9 @@ class Ficha_Diagnostico(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Diagnóstico"
 
 class Ficha_Ortodontia(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -409,6 +415,9 @@ class Ficha_Ortodontia(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Ortodontia"
 
 class Ficha_Periodontia(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -465,6 +474,9 @@ class Ficha_Periodontia(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Periodontia"
 
 class Dados_Dentes(models.Model):
     ficha_periodontia = models.ForeignKey(Ficha_Periodontia)
@@ -504,6 +516,9 @@ class Ficha_Urgencia(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Urgência"
 
     def __str__(self):
         return "urgencia"
@@ -579,6 +594,9 @@ class Ficha_Endodontia(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Endodontia"
 
 class Ficha_Endodontia_Tabela(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -614,6 +632,9 @@ class Ficha_Endodontia_Tabela(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Endodontia-Tabela"
 
 class Ficha_PPR(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -630,6 +651,9 @@ class Ficha_PPR(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "PPR"
 
 class Ficha_Dentistica(models.Model):
     procedimento = models.ForeignKey(Procedimento, on_delete=models.CASCADE)
@@ -682,3 +706,6 @@ class Ficha_Dentistica(models.Model):
 
     def publish(self):
         self.save()
+    
+    def __str__(self):
+        return "Dentistica"

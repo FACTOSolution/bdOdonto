@@ -200,28 +200,28 @@ def buscar_fichas_paciente(request):
 
 @login_required
 def detalhar_ficha(request,slug,pk):
-    if slug == "diagnostico":
+    if slug == "Diagnóstico":
         ficha = get_object_or_404(Ficha_Diagnostico, pk=pk)
         ficha_form = Ficha_DiagnosticoForm(instance = ficha)
-    elif slug == "ortodontia":
+    elif slug == "Ortodontia":
         ficha = get_object_or_404(Ficha_Ortodontia, pk=pk)
         ficha_form = Ficha_OrtodontiaForm(instance = ficha)
-    elif slug == "periodontia":
+    elif slug == "Periodontia":
         ficha = get_object_or_404(Ficha_Periodontia, pk=pk)
         ficha_form = Ficha_PeriodontiaForm(instance = ficha)
-    elif slug == "urgencia":
+    elif slug == "Urgência":
         ficha = get_object_or_404(Ficha_Urgencia, pk=pk)
         ficha_form = Ficha_UrgenciaForm(instance = ficha)
-    elif slug == "endodontia":
+    elif slug == "Endodontia":
         ficha = get_object_or_404(Ficha_Endodontia, pk=pk)
         ficha_form = Ficha_EndodontiaForm(instance = ficha)
-    elif slug == "endodontia-tabela":
+    elif slug == "Endodontia-Tabela":
         ficha = get_object_or_404(Ficha_Endodontia_Tabela, pk=pk)
         ficha_form = Ficha_Endodontia_TabelaForm(instance = ficha)
-    elif slug == "ppr":
+    elif slug == "PPR":
         ficha = get_object_or_404(Ficha_PPR, pk=pk)
         ficha_form = Ficha_PPRForm(instance = ficha)
-    elif slug == "dentistica":
+    elif slug == "Dentistica":
         ficha = get_object_or_404(Ficha_Dentistica, pk=pk)
         ficha_form = Ficha_DentisticaForm(instance = ficha)
     return render(request, 'sistema_fichas/detalhar_ficha.html', {'ficha': ficha_form,})
@@ -256,6 +256,12 @@ def cadastrar_planejamento(request):
 def listar_planejamentos(request):
     planejamentos = Planejamento.objects.filter(cpf_p = request.session['cpf_p'])
     return render(request, 'sistema_fichas/listar_planejamentos.html', {'planejamentos': planejamentos})
+
+login_required
+def detalhar_procedimento(request,pk):
+    procedimento = get_object_or_404(Procedimento, pk = pk)
+    formProcedimento = ProcedimentoForm(instance=procedimento)
+    return render(request, 'sistema_fichas/detalhar_procedimento.html', {'ficha': formProcedimento})
 
 @login_required
 def urgencia(request):
@@ -570,9 +576,6 @@ def buscar_paciente(request):
         form = BuscarPaciente()
     return render(request, 'sistema_fichas/buscar_paciente.html', 
                   {'form': form})
-
-
-
 
 #Histórico da ficha específica na turma selecionada
 #Fluxo: detalhar_turma
