@@ -6,8 +6,15 @@
 </head>
 <div id="div_atendimento">
     <h2>Detalhes do Paciente</h2>
-	<div id="form_atendimento">
-        {{form.as_p}}
-    </div>
+    <div class="table">
+            <table id="tabela">
+              {% for field in form %}
+              <tr>
+                <td>{{ field.label_tag }}</td>
+                <td> {{ field.value }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+    </div>    
 </div>
 {% endblock %}
