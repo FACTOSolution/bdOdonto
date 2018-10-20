@@ -309,8 +309,13 @@ def dentistica(request):
 def odontograma(request):
     if request.method == 'POST':
         ficha_form = OdontogramaForm(request.POST)
-        return redirect('sistema_fichas:listar_procedimentos')
-    return render(request, 'sistema_fichas/odontograma2.html')
+        if ficha_form.is_valid():
+            ficha = ficha_form.save(commit=False)
+            ficha.procedimento = Procedimento.objects.get(pk=request.session['procedimento'])
+            ficha.save()
+            return redirect('sistema_fichas:listar_procedimentos')
+    else:
+        return render(request, 'sistema_fichas/odontograma2.html')
 
 @login_required
 def lista_fichas_aluno(request):
