@@ -8,11 +8,11 @@
     <div class="this">
         <div class="data">
             <h3>Ficha do Paciente</h3>
-            <p>Nome: {{nome_p}}</p>
-            <p>CPF: {{cpf_p}}</p>
+            <p>Nome: {{paciente.nome}}</p>
+            <p>CPF: {{paciente.cpf}}</p>
             <p>Quantidade de procedimentos realizados: {{qt_procedimentos}}</p>
             <a href="{% url 'sistema_fichas:detalhar_paciente' %}"><button >Mais Informações</button></a>
-            <a href="{% url 'sistema_fichas:index' %}"><button id="back">Voltar</button></a>
+            <a href="{% url 'sistema_fichas:buscar_paciente' %}"><button id="back">Voltar</button></a>
         </div>
         <div class="options">
             <a href="{% url 'sistema_fichas:listar_fichas' %}"><button >Consultar Fichas</button></a>
